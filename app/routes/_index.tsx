@@ -1,15 +1,20 @@
 import type { MetaFunction } from "@remix-run/node";
+import NavBar from "~/components/navbar";
 
 export const meta: MetaFunction = () => {
   return [
-    { title: "New Remix App" },
-    { name: "description", content: "Welcome to Remix!" },
+    { title: "Task Trek | Work Made Easy" },
+    {
+      name: "description",
+      content:
+        "Manage tasks and collaborate in real time with role-based access and smart analytics for enhanced productivity.",
+    },
   ];
 };
 
 export default function Index() {
   return (
-    <div className="flex h-screen items-center justify-center">
+    <div className="flex flex-col h-screen items-center justify-center">
       <div className="flex flex-col items-center gap-16">
         <header className="flex flex-col items-center gap-9">
           <h1 className="leading text-2xl font-bold text-gray-800 dark:text-gray-100">
