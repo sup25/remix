@@ -1,9 +1,9 @@
 import { IoIosSearch } from "react-icons/io";
-const SearchBar = () => {
+const SearchBarMobile = () => {
   return (
-    <div className="hidden  md:flex">
+    <div className="flex">
       <input
-        className="border-2 font-medium  transition-all duration-300 ease-in-out border-gray-300 rounded-l-md outline-none p-2 font-Arima"
+        className="border-2 w-full font-medium  transition-all duration-300 ease-in-out border-gray-300 rounded-l-md outline-none p-2 font-Arima"
         type=""
         placeholder="Search a prduct..."
       />
@@ -14,4 +14,4 @@ const SearchBar = () => {
   );
 };
 
-export default SearchBar;
+export default SearchBarMobile;

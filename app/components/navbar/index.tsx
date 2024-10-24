@@ -4,6 +4,8 @@ import { AllProducts } from "./components/allProducts";
 import SearchBar from "./components/searchBar";
 import Account from "./components/account";
 import NavCart from "./components/navCart";
+import MobileMenu from "./mobileMenu";
+import { DropdownMenuMobile } from "./components/dropdownMenu/mobile";
 
 const NavBar = () => {
   return (
@@ -17,10 +19,11 @@ const NavBar = () => {
               <AllProducts />
             </div>
           </div>
-          <div className=" flex items-center gap-4 ">
+          <div className=" flex items-center md:gap-4 gap-2 ">
             <SearchBar />
             <Account />
             <NavCart />
+            <MobileMenu />
           </div>
         </div>
       </div>

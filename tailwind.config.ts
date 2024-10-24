@@ -45,6 +45,9 @@ export default {
           ".section": {
             padding: "0 30px",
           },
+          ".none": {
+            display: "none",
+          },
         },
         ".container": {
           maxWidth: theme("maxWidth.container"),
@@ -55,6 +58,7 @@ export default {
           fontWeight: "600",
           lineHeight: "1.75rem",
         },
+        "@media screen and (max-width: 768px)": {},
       });
     }),
   ],
