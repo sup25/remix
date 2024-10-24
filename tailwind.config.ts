@@ -1,7 +1,11 @@
 import type { Config } from "tailwindcss";
 import plugin from "tailwindcss/plugin";
+
 export default {
-  content: ["./app/**/{**,.client,.server}/**/*.{js,jsx,ts,tsx}"],
+  content: [
+    "./app/**/{**,.client,.server}/**/*.{js,jsx,ts,tsx}",
+    "./node_modules/@nextui-org/theme/dist/components/(accordion|divider).js",
+  ],
   theme: {
     extend: {
       fontFamily: {
@@ -21,6 +25,7 @@ export default {
           "system-ui",
           "sans-serif",
         ],
+        Arima: ['"Arima"', "system-ui"],
       },
       maxWidth: {
         container: "1280px",
@@ -43,6 +48,12 @@ export default {
         },
         ".container": {
           maxWidth: theme("maxWidth.container"),
+        },
+        ".font-heading-nav": {
+          marginBottom: "0",
+          fontSize: "1.25rem",
+          fontWeight: "600",
+          lineHeight: "1.75rem",
         },
       });
     }),
