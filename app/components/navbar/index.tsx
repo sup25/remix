@@ -1,31 +1,64 @@
-import Logo from "./logo";
+import { useState } from "react";
+import { Link } from "@remix-run/react";
+import { FiMenu, FiX } from "react-icons/fi";
+import { SearchBar } from "./components/searchBar";
 import { DropdownMenu } from "./components/dropdownMenu";
-import { AllProducts } from "./components/allProducts";
-import SearchBar from "./components/searchBar";
+import Logo from "./logo";
 import Account from "./components/account";
 import NavCart from "./components/navCart";
-import MobileMenu from "./mobileMenu";
-import { DropdownMenuMobile } from "./components/dropdownMenu/mobile";
+import { AllProducts } from "./components/allProducts";
 
-const NavBar = () => {
+export const NavBar = () => {
+  const [isDrawerOpen, setDrawerOpen] = useState(false);
+
+  const toggleDrawer = () => {
+    setDrawerOpen(!isDrawerOpen);
+  };
+
+  const closeDrawer = () => {
+    setDrawerOpen(false);
+  };
+
   return (
-    <nav className="w-full bg-white border-b border-gray-100">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16">
-          <div className="flex items-center ">
-            <Logo />
-            <div className="flex gap-2 items-center ml-10">
-              <DropdownMenu />
-              <AllProducts />
-            </div>
-          </div>
-          <div className=" flex items-center md:gap-4 gap-2 ">
+    <nav className="bg-white fixed top-0 left-0 w-full flex justify-center shadow-md z-50">
+      {/* Main Navbar */}
+      <div className="container">
+        <div className="flex w-full items-center justify-between px-6 py-4">
+          <Logo />
+
+          <div className="hidden show gap-4 ">
+            <DropdownMenu />
+            <AllProducts />
             <SearchBar />
-            <Account />
-            <NavCart />
-            <MobileMenu />
+          </div>
+
+          <div className="flex items-center space-x-4">
+            <div className="flex items-center gap-2">
+              <Account />
+              <NavCart />
+            </div>
+            <button
+              className="text-2xl lg:hidden "
+              onClick={toggleDrawer}
+              aria-label="Toggle menu"
+            >
+              {isDrawerOpen ? <FiX /> : <FiMenu />}
+            </button>
           </div>
         </div>
+      </div>
+
+      {/* Mobile Drawer */}
+      <div
+        className={`fixed top-[4rem] space-y-4 left-0 z-40 w-full h-[calc(100vh-4rem)] bg-gray-50 p-4 transform transition-transform duration-300 ease-out ${
+          isDrawerOpen
+            ? "translate-x-0 opacity-100"
+            : "-translate-x-full opacity-0"
+        }`}
+      >
+        <DropdownMenu isMobile />
+        <AllProducts />
+        <SearchBar />
       </div>
     </nav>
   );
