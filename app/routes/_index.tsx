@@ -4,6 +4,7 @@ import { RootState } from "~/context/store";
 import { useSelector } from "react-redux";
 import Hero from "~/components/(root)/hero";
 import Slider from "~/components/(root)/slider";
+import Highlights from "~/components/(root)/highlights";
 export const meta: MetaFunction = () => {
   return [
     { title: "Task Trek | Work Made Easy" },
@@ -24,6 +25,7 @@ export default function Index() {
     <div className=" flex flex-col ">
       <Hero />
       <Slider />
+      <Highlights />
     </div>
   );
 }
