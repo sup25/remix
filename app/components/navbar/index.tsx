@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "@remix-run/react";
+
 import { FiMenu, FiX } from "react-icons/fi";
 import { SearchBar } from "./components/searchBar";
 import { DropdownMenu } from "./components/dropdownMenu";
@@ -20,10 +20,10 @@ export const NavBar = () => {
   };
 
   return (
-    <nav className="bg-white fixed top-0 left-0 w-full flex justify-center shadow-md z-50">
+    <nav className="bg-white z-[9999] section  fixed top-0 left-0 w-full flex justify-center shadow-sm ">
       {/* Main Navbar */}
       <div className="container">
-        <div className="flex w-full items-center justify-between px-6 py-4">
+        <div className="flex w-full items-center justify-between  py-4">
           <Logo />
 
           <div className="hidden show gap-4 ">

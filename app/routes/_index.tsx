@@ -2,6 +2,8 @@ import type { MetaFunction } from "@remix-run/node";
 
 import { RootState } from "~/context/store";
 import { useSelector } from "react-redux";
+import Hero from "~/components/(root)/hero";
+import Slider from "~/components/(root)/slider";
 export const meta: MetaFunction = () => {
   return [
     { title: "Task Trek | Work Made Easy" },
@@ -15,22 +17,13 @@ export const meta: MetaFunction = () => {
 
 export default function Index() {
   const user = useSelector((state: RootState) => state.user.user);
-  const isAuthenticated = useSelector(
+  /*  const isAuthenticated = useSelector(
     (state: RootState) => state.user.isAuthenticated
-  );
+  ); */
   return (
-    <div className="flex flex-col h-screen items-center justify-center">
-      <div>
-        <h1>Welcome to the Home Page</h1>
-        {isAuthenticated ? (
-          <div>
-            <h2>Hello, {user.name}!</h2>
-            <p>Your email: {user.email}</p>
-          </div>
-        ) : (
-          <p>Please log in to see your information.</p>
-        )}
-      </div>
+    <div className=" flex flex-col ">
+      <Hero />
+      <Slider />
     </div>
   );
 }

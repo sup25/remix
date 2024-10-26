@@ -26,7 +26,7 @@ export const links: LinksFunction = () => [
 
   {
     rel: "stylesheet",
-    href: "https://fonts.googleapis.com/css2?family=Arima:wght@100..700&family=Bricolage+Grotesque:opsz,wght@12..96,200..800&display=swap",
+    href: "https://fonts.googleapis.com/css2?family=Arima:wght@100..700&family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap",
   },
 ];
 
@@ -39,9 +39,11 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Meta />
         <Links />
       </head>
-      <body>
+      <body className="bg-[#fafafa]">
         <Provider store={store}>
-          <NavBar />
+          <div className="mb-20">
+            <NavBar />
+          </div>
           {children}
           <ScrollRestoration />
           <Scripts />

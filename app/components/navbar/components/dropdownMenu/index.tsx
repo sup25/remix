@@ -82,7 +82,7 @@ export const DropdownMenu = ({ isMobile = false }: { isMobile?: boolean }) => {
                   : "text-gray-700 hover:text-black hover:bg-gray-200"
               } transform hover:scale-105 active:scale-95`}
           >
-            <span className="mr-2 mt-2 font-heading-nav font-Arima text-base">
+            <span className="mr-2 py-1  font-heading-nav  text-base">
               {menuItem.title}
             </span>
             <FiChevronDown
