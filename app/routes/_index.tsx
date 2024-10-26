@@ -5,6 +5,8 @@ import { useSelector } from "react-redux";
 import Hero from "~/components/(root)/hero";
 import Slider from "~/components/(root)/slider";
 import Highlights from "~/components/(root)/highlights";
+import MarqueeBanner from "~/components/(root)/marqueebanner";
+
 export const meta: MetaFunction = () => {
   return [
     { title: "Task Trek | Work Made Easy" },
@@ -26,6 +28,7 @@ export default function Index() {
       <Hero />
       <Slider />
       <Highlights />
+      <MarqueeBanner />
     </div>
   );
 }
