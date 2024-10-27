@@ -27,7 +27,7 @@ const Highlights = () => {
   return (
     <div className="section">
       <div className="container ">
-        <div className="flex w-full gap-5 py-20 md:flex-nowrap flex-wrap">
+        <div className="flex w-full gap-5  md:flex-nowrap flex-wrap">
           {infos.map((info) => (
             <div
               key={info.title}

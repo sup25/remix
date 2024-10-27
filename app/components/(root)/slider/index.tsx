@@ -71,7 +71,7 @@ const Slider = () => {
 
   return (
     <div className="w-full flex items-center justify-center">
-      <div className="relative w-full max-w-screen-2xl h-fit bg-gray-50 py-20 px-4 md:px-8">
+      <div className="relative w-full max-w-screen-2xl h-fit bg-gray-50 pb-20 px-4 md:px-8">
         <Swiper
           {...swiperParams}
           key={isMobile ? "mobile" : "desktop"}
@@ -111,7 +111,7 @@ const Slider = () => {
           )}
         </Swiper>
         {/* Slide Counter with line icons */}
-        <div className="absolute flex bottom-0 left-1/2 -translate-x-1/2 text-white/70 font-light px-3 py-1 rounded-full">
+        <div className="absolute flex  left-1/2 -translate-x-1/2 text-white/70  font-light px-3 py-2 rounded-full">
           {slides.map((_, index) => (
             <AiOutlineLine
               key={index}
