@@ -6,6 +6,7 @@ import Hero from "~/components/(root)/hero";
 import Slider from "~/components/(root)/slider";
 import Highlights from "~/components/(root)/highlights";
 import MarqueeBanner from "~/components/(root)/marqueebanner";
+import FeatureProducts from "~/components/(root)/featureProducts";
 
 export const meta: MetaFunction = () => {
   return [
@@ -24,11 +25,12 @@ export default function Index() {
     (state: RootState) => state.user.isAuthenticated
   ); */
   return (
-    <div className=" flex flex-col ">
+    <div className=" flex flex-col gap-20 ">
       <Hero />
       <Slider />
       <Highlights />
       <MarqueeBanner />
+      <FeatureProducts />
     </div>
   );
 }

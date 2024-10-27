@@ -6,7 +6,7 @@ const Hero = () => {
   return (
     <div className="section">
       <div className="container">
-        <div className="flex py-20 justify-between items-center gap-10 flex-wrap">
+        <div className="flex justify-between pt-20 items-center gap-10 flex-wrap">
           <div className="flex flex-col gap-4 ">
             <h2 className="text-sm w-fit text-red-400 p-1 font-Arima font-semibold border border-gray-200 bg-white">
               Selected iconic design

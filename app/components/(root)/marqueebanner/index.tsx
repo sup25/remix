@@ -110,17 +110,21 @@ const Marquee = ({
 
 const MarqueeBanner = () => {
   return (
-    <div className="w-full  mx-auto py-10">
-      <Marquee
-        speed={50}
-        pauseOnHover={false}
-        className="text-lg font-medium py-10"
-      >
-        <div className="flex items-center text-6xl px-8">
-          Designed in{" "}
-          <span className="font-bold font-bricolage ml-2 text-7xl">Remix</span>
-        </div>
-      </Marquee>
+    <div className="flex items-center">
+      <div className="w-full max-w-screen-2xl mx-auto ">
+        <Marquee
+          speed={50}
+          pauseOnHover={false}
+          className="text-lg font-medium py-10"
+        >
+          <div className="flex items-center text-6xl px-8">
+            Designed in{" "}
+            <span className="font-bold font-bricolage ml-2 text-7xl">
+              Remix
+            </span>
+          </div>
+        </Marquee>
+      </div>
     </div>
   );
 };
