@@ -38,7 +38,7 @@ export default function Login() {
   };
 
   return (
-    <div>
+    <div className="flex flex-col py-10 bg-white">
       <h1>Login</h1>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div>

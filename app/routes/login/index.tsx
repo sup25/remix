@@ -1,4 +1,4 @@
-import { authenticator } from "~/services/auth.server";
+import { authenticator } from "~/.server/auth.server";
 import { ActionFunctionArgs } from "@remix-run/node";
 import Login from "~/components/auth/login";
 

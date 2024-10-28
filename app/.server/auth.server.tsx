@@ -2,7 +2,7 @@ import { Authenticator } from "remix-auth";
 import { FormStrategy } from "remix-auth-form";
 import bcrypt from "bcryptjs";
 import prisma from "~/_lib/db";
-import { sessionStorage } from "./session.server";
+import { sessionStorage } from "../services/session.server";
 
 let authenticator = new Authenticator(sessionStorage, {
   sessionKey: "user",

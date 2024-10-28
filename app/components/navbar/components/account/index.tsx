@@ -1,16 +1,38 @@
-import { authenticator } from "~/services/auth.server";
-import { LoaderFunction, json } from "@remix-run/node";
+import { useEffect } from "react";
 import { HiUser } from "react-icons/hi2";
-/* export const loader: LoaderFunction = async ({ request }) => {
-    let user = await authenticator.isAuthenticated(request, {
-      failureRedirect: "/login",
-    });
-    return json({ user });
-  }; */
+import { useFetcher, useNavigate } from "@remix-run/react";
+
+interface User {
+  id: string;
+  name: string;
+  email: string;
+}
+
+interface LoaderData {
+  user: User | null;
+}
 
 const Account = () => {
+  const fetcher = useFetcher<LoaderData>();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    fetcher.load("/account");
+  }, [fetcher]);
+
+  const user = fetcher.data?.user ?? null;
+
+  const handleAccountClick = () => {
+    if (!user) {
+      navigate("/login");
+    }
+  };
+
   return (
-    <div className=" cursor-pointer rounded-md p-2 transition-all duration-300 ease-in-out hover:bg-gray-200">
+    <div
+      onClick={handleAccountClick}
+      className="cursor-pointer rounded-md p-2 transition-all duration-300 ease-in-out hover:bg-gray-200"
+    >
       <HiUser size={25} />
     </div>
   );
