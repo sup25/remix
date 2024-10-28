@@ -1,6 +1,6 @@
 import { LoaderFunction, json } from "@remix-run/node";
-import { useLoaderData } from "@remix-run/react";
-import { authenticator } from "~/services/auth.server";
+import { useLoaderData, useNavigate } from "@remix-run/react";
+import { authenticator } from "~/.server/auth.server";
 
 export const loader: LoaderFunction = async ({ request }) => {
   let user = await authenticator.isAuthenticated(request, {
@@ -11,6 +11,11 @@ export const loader: LoaderFunction = async ({ request }) => {
 
 export default function Dashboard() {
   const { user } = useLoaderData<{ user: { email: string; name: string } }>();
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    navigate("/logout");
+  };
 
   return (
     <div>
@@ -20,6 +25,10 @@ export default function Dashboard() {
           <h2>User Information</h2>
           <p>Name: {user.name}</p>
           <p>Email: {user.email}</p>
+
+          <button onClick={handleLogout} className="btn">
+            Logout
+          </button>
         </div>
       ) : (
         <p>No user information available.</p>
