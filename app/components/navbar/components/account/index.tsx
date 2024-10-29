@@ -18,7 +18,7 @@ const Account = () => {
 
   useEffect(() => {
     fetcher.load("/account");
-  }, [fetcher]);
+  }, []);
 
   const user = fetcher.data?.user ?? null;
 
