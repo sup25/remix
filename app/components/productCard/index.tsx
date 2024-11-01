@@ -1,10 +1,11 @@
+import { Link } from "@remix-run/react";
 import { BsCart2 } from "react-icons/bs";
 
 interface ProductCardProps {
   product: {
     title: string;
     brand: string;
-
+    slug: string;
     price: number;
     stock: number;
     images: string[];
@@ -12,9 +13,12 @@ interface ProductCardProps {
   };
 }
 
-const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
+const ProductCard = ({ product }: ProductCardProps) => {
   return (
-    <div className="w-80 bg-white rounded-lg overflow-hidden hover:shadow-lg transition-shadow duration-300">
+    <Link
+      to={`/products/${product.slug}`}
+      className="w-80 bg-white rounded-lg overflow-hidden hover:shadow-lg transition-shadow duration-300 cursor-pointer"
+    >
       {/* Image Container */}
       <div className="relative">
         {/* Discount Tag */}
@@ -61,11 +65,14 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
       </div>
 
       {/* Add to Cart Button */}
-      <button className="w-full bg-black text-white py-3 flex items-center justify-center gap-2 hover:bg-gray-800 transition-colors duration-300">
+      <button
+        onClick={(e) => e.preventDefault()} // Prevents navigation when clicking the button
+        className="w-full bg-black text-white py-3 flex items-center justify-center gap-2 hover:bg-gray-800 transition-colors duration-300"
+      >
         <BsCart2 className="w-5 h-5" />
         Add to cart
       </button>
-    </div>
+    </Link>
   );
 };
 
