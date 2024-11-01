@@ -1,6 +1,32 @@
+import { useEffect, useState } from "react";
+import { getFeaturedProducts } from "~/components/(root)/api";
 import ProductCard from "~/components/productCard";
 
 const FeatureProducts = () => {
+  const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+  useEffect(() => {
+    const loadFeaturedProducts = async () => {
+      try {
+        const products = await getFeaturedProducts();
+        setProducts(products);
+      } catch (err) {
+        if (err instanceof Error) {
+          setError(err.message);
+        } else {
+          setError("An unexpected error occurred");
+        }
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadFeaturedProducts();
+  }, []);
+
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div>Error: {error}</div>;
   return (
     <div className="section">
       <div className="container">
@@ -8,7 +34,19 @@ const FeatureProducts = () => {
           <h2 className="text-sm w-fit text-red-400 p-1 font-Arima font-semibold border border-gray-200 bg-white">
             Feature Products
           </h2>
-          <ProductCard />
+          {products.map((product: any) => (
+            <ProductCard
+              key={product.id}
+              product={{
+                title: product.title,
+                brand: product.brand,
+                price: product.price,
+                stock: product.stock,
+                images: product.images,
+                discountTag: product.discountTag,
+              }}
+            />
+          ))}
         </div>
       </div>
     </div>
