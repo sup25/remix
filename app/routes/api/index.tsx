@@ -1,7 +1,18 @@
 import { json, LoaderFunction } from "@remix-run/node";
-import { getPosts } from "~/services/post";
+import { getProductBySlug } from "~/services/products";
 
-export const loadPosts: LoaderFunction = async () => {
-  const posts = await getPosts();
-  return json(posts);
+export const getProduct: LoaderFunction = async ({ params }) => {
+  const { slug } = params;
+
+  if (!slug) {
+    throw new Response("Not Found", { status: 404 });
+  }
+
+  const product = await getProductBySlug(slug);
+
+  if (!product) {
+    throw new Response("Product not found", { status: 404 });
+  }
+
+  return json(product);
 };

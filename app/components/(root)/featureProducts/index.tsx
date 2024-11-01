@@ -40,6 +40,7 @@ const FeatureProducts = () => {
               product={{
                 title: product.title,
                 brand: product.brand,
+                slug: product.slug,
                 price: product.price,
                 stock: product.stock,
                 images: product.images,
