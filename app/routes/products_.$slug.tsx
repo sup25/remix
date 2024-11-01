@@ -1,5 +1,6 @@
 import { useLoaderData } from "@remix-run/react";
 import { getProduct as loader } from "./api";
+import SingleProduct from "~/components/singleProduct";
 
 export { loader };
 interface Product {
@@ -20,9 +21,7 @@ export default function ProductPage() {
 
   return (
     <div>
-      <h1>{product?.title ?? "Product not found"}</h1>
-      <p>{product?.description ?? "No description available"}</p>
-      <p>Price: ${product?.price ?? "N/A"}</p>
+      <SingleProduct product={product} />
     </div>
   );
 }
