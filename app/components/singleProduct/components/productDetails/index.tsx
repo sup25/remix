@@ -10,7 +10,13 @@ const ProductDetails = ({ product }: ProductDetailsProps) => {
     product.price,
     product.discountTag
   );
-  const savings = Number((originalPrice - product.price).toFixed(2));
+  const savings = Math.floor(originalPrice - product.price);
+
+  const formattedPrice =
+    "रु " + Math.floor(product.price).toLocaleString("en-NP");
+  const formattedOriginalPrice =
+    "रु " + Math.floor(originalPrice).toLocaleString("en-NP");
+  const formattedSavings = "रु " + savings.toLocaleString("en-NP");
 
   return (
     <div className="space-y-6">
@@ -26,19 +32,17 @@ const ProductDetails = ({ product }: ProductDetailsProps) => {
           {product.discountTag && product.discountTag > 0 ? (
             <>
               <span className="text-3xl font-bold text-red-600">
-                ${product.price.toFixed(2)}
+                {formattedPrice}
               </span>
               <span className="text-lg text-gray-500 line-through">
-                ${originalPrice.toFixed(2)}
+                {formattedOriginalPrice}
               </span>
               <span className="text-sm font-medium text-red-600">
-                Save ${savings.toFixed(2)}
+                Save {formattedSavings}
               </span>
             </>
           ) : (
-            <span className="text-3xl font-bold">
-              ${product.price.toFixed(2)}
-            </span>
+            <span className="text-3xl font-bold">{formattedPrice}</span>
           )}
         </div>
 

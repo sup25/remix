@@ -1,9 +1,9 @@
-import { CgHeart, CgShare, CgShoppingCart } from "react-icons/cg";
-
+import { CgHeart, CgShare } from "react-icons/cg";
+import { BsCart2 } from "react-icons/bs";
 const ProductActions = () => (
   <div className="flex gap-4">
-    <button className="flex-1 bg-blue-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-blue-700 transition-colors flex items-center justify-center gap-2">
-      <CgShoppingCart className="h-5 w-5" />
+    <button className="flex-1 bg-black text-white px-6 py-3 rounded-lg font-medium hover:bg-gray-700 transition-colors flex items-center justify-center gap-2">
+      <BsCart2 className="h-5 w-5" />
       Add to Cart
     </button>
 
