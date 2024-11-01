@@ -52,7 +52,9 @@ const ProductCard = ({ product }: ProductCardProps) => {
         <p className="text-sm text-gray-600 mb-2">{product.brand}</p>
         <div className="flex items-center justify-between mb-4">
           <div className="flex items-baseline gap-2">
-            <span className="text-lg font-medium">${product.price}</span>
+            <span className="text-lg text-red-500 font-medium">
+              रु {product.price}
+            </span>
           </div>
           <span
             className={`text-sm ${
@@ -66,7 +68,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
 
       {/* Add to Cart Button */}
       <button
-        onClick={(e) => e.preventDefault()} // Prevents navigation when clicking the button
+        onClick={(e) => e.preventDefault()}
         className="w-full bg-black text-white py-3 flex items-center justify-center gap-2 hover:bg-gray-800 transition-colors duration-300"
       >
         <BsCart2 className="w-5 h-5" />
