@@ -1,5 +1,5 @@
 import { json, LoaderFunction } from "@remix-run/node";
-import { getProductBySlug } from "~/services/products";
+import { getProductByCategory, getProductBySlug } from "~/services/products";
 
 export const getProduct: LoaderFunction = async ({ params }) => {
   const { slug } = params;
@@ -15,4 +15,18 @@ export const getProduct: LoaderFunction = async ({ params }) => {
   }
 
   return json(product);
+};
+export const GetProductByCategory: LoaderFunction = async ({ params }) => {
+  const { category } = params;
+  if (!category) {
+    throw new Response("Not Found", { status: 404 });
+  }
+  const categoryArray = category.split(",");
+  const products = await getProductByCategory(categoryArray);
+
+  if (!products || products.length === 0) {
+    throw new Response("Products not found", { status: 404 });
+  }
+
+  return json(products);
 };

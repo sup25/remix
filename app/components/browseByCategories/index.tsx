@@ -43,7 +43,7 @@ const BrowseByCategories = ({ hideCategories }: Props) => {
             {CATEGORIES.map((category) => (
               <Link
                 key={category.value}
-                to={`/products/${category.value}`}
+                to={`/collection/${category.value}`}
                 onClick={hideCategories}
                 className="group relative flex flex-col rounded-lg border border-gray-200 bg-white p-6 transition-all hover:shadow-lg"
               >
