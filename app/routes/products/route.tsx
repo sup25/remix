@@ -1,5 +1,3 @@
-// routes/products.tsx
-
 import { json, LoaderFunction } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 import prisma from "~/_lib/db";
@@ -21,6 +19,7 @@ export default function ProductsPage() {
           <ProductCard
             key={product.id}
             product={{
+              slug: product.slug,
               title: product.title,
               brand: product.brand,
               price: product.price,

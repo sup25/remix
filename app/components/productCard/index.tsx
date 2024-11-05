@@ -53,7 +53,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
         <div className="flex items-center justify-between mb-4">
           <div className="flex items-baseline gap-2">
             <span className="text-lg text-red-500 font-medium">
-              रु {product.price}
+              रु {product.price.toLocaleString("ne-NP")}
             </span>
           </div>
           <span

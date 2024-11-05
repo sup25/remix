@@ -14,18 +14,6 @@ model User {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   password  String
-  posts     Post[]
-}
-
-model Post {
-  id        Int      @id @default(autoincrement())
-  title     String
-  content   String
-  published Boolean  @default(false)
-  authorId  Int
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  author    User     @relation(fields: [authorId], references: [id])
 }
 
 model Product {
@@ -40,4 +28,5 @@ model Product {
   createdAt   DateTime @default(now())
   updatedAt   DateTime
   slug        String   @unique
+  categories  String[]
 }

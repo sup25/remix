@@ -3,6 +3,8 @@ import ProductImage from "./components/productImage";
 import ProductDetails from "./components/productDetails";
 import ProductActions from "./components/productActions";
 import EsewaPayment from "../esewaPayment";
+import ProductSku from "./components/productSku";
+import ProductCategories from "./components/productCategories";
 
 const SingleProduct = ({ product }: { product: Product }) => {
   if (!product) {
@@ -22,18 +24,11 @@ const SingleProduct = ({ product }: { product: Product }) => {
             discountTag={product.discountTag}
             title={product.title ?? "Product Image"}
           />
-
           <div className="space-y-6">
             <ProductDetails product={product} />
+            <ProductSku product={product} />
             <ProductActions />
-
-            <div className="bg-white rounded-lg p-4 space-y-2 border border-gray-200">
-              <p className="text-sm flex items-center gap-2">
-                <span className="font-medium">SKU:</span>
-                <span className="text-gray-600">{product.slug}</span>
-              </p>
-            </div>
-
+            <ProductCategories product={product} />
             <EsewaPayment amount={product.price} productName={product.title} />
           </div>
         </div>
