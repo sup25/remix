@@ -1,6 +1,6 @@
 import { useState } from "react";
-import BrowseByBrands from "~/components/browseByBrands";
-import BrowseByCategories from "~/components/browseByCategories";
+import BrowseByBrands from "~/components/browseItems/browseByBrands";
+import BrowseByCategories from "~/components/browseItems/browseByCategories";
 import HeroHeader from "./components/heroHeader";
 import BrowseLinks from "./components/browseLinks";
 
