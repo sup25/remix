@@ -1,4 +1,4 @@
-import BrowseItems from "../browseItems";
+import BrowseItems from "..";
 const Brands = [
   { value: "evercove", label: "EverCove", count: 120 },
   { value: "brightnest", label: "BrightNest", count: 85 },
