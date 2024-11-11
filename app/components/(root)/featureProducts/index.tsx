@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { getFeaturedProducts } from "~/components/(root)/api";
 import ProductCard from "~/components/productCard";
+import { Product } from "../../types";
 
 const FeatureProducts = () => {
   const [products, setProducts] = useState([]);
@@ -34,7 +35,7 @@ const FeatureProducts = () => {
           <h2 className="text-sm w-fit text-red-400 p-1 font-Arima font-semibold border border-gray-200 bg-white">
             Feature Products
           </h2>
-          {products.map((product: any) => (
+          {products.map((product: Product) => (
             <ProductCard
               key={product.id}
               product={{
@@ -45,6 +46,10 @@ const FeatureProducts = () => {
                 stock: product.stock,
                 images: product.images,
                 discountTag: product.discountTag,
+                categories: product.categories,
+                id: product.id,
+                createdAt: product.createdAt,
+                updatedAt: product.updatedAt,
               }}
             />
           ))}
