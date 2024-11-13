@@ -18,12 +18,12 @@ const ProductCard = ({ product }: { product: Product }) => {
         )}
 
         {/* Product Image */}
-        <div className="h-64 bg-gray-50">
+        <div className="h-64  bg-gray-50">
           {product.images.length > 0 ? (
             <img
               src={product.images[0]}
               alt={product.title}
-              className="w-full h-full object-cover"
+              className="w-full h-full"
             />
           ) : (
             <div className="w-full h-full bg-gray-200 flex items-center justify-center">
