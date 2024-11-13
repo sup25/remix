@@ -35,24 +35,26 @@ const FeatureProducts = () => {
           <h2 className="text-sm w-fit text-red-400 p-1 font-Arima font-semibold border border-gray-200 bg-white">
             Feature Products
           </h2>
-          {products.map((product: Product) => (
-            <ProductCard
-              key={product.id}
-              product={{
-                title: product.title,
-                brand: product.brand,
-                slug: product.slug,
-                price: product.price,
-                stock: product.stock,
-                images: product.images,
-                discountTag: product.discountTag,
-                categories: product.categories,
-                id: product.id,
-                createdAt: product.createdAt,
-                updatedAt: product.updatedAt,
-              }}
-            />
-          ))}
+          <div className="w-full flex md:flex-nowrap flex-wrap  gap-5">
+            {products.map((product: Product) => (
+              <ProductCard
+                key={product.id}
+                product={{
+                  title: product.title,
+                  brand: product.brand,
+                  slug: product.slug,
+                  price: product.price,
+                  stock: product.stock,
+                  images: product.images,
+                  discountTag: product.discountTag,
+                  categories: product.categories,
+                  id: product.id,
+                  createdAt: product.createdAt,
+                  updatedAt: product.updatedAt,
+                }}
+              />
+            ))}
+          </div>
         </div>
       </div>
     </div>
