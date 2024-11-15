@@ -6,7 +6,7 @@ const ProductCard = ({ product }: { product: Product }) => {
   return (
     <Link
       to={`/products/${product.slug}`}
-      className="w-80 bg-white rounded-lg overflow-hidden hover:shadow-lg transition-shadow duration-300 cursor-pointer"
+      className="w-72 bg-white rounded-lg overflow-hidden hover:shadow-lg transition-shadow duration-300 cursor-pointer"
     >
       {/* Image Container */}
       <div className="relative">
