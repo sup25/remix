@@ -15,7 +15,7 @@ const ProductImage: React.FC<ProductImageProps> = ({
     <img
       src={imageUrl || "/api/placeholder/600/600"}
       alt={title || "Product Image"}
-      className="w-full h-full object-cover"
+      className="w-full h-full object-cover object-center"
     />
     {discountTag && discountTag > 0 && (
       <span className="absolute top-4 left-4 bg-red-500 text-white px-3 py-1 rounded-full text-sm font-medium">
