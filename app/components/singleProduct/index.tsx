@@ -3,7 +3,6 @@ import ProductImage from "./components/productImage";
 import ProductDetails from "./components/productDetails";
 import ProductActions from "./components/productActions";
 import EsewaPayment from "../esewaPayment";
-import ProductSku from "./components/productSku";
 import ProductCategories from "./components/productCategories";
 
 const SingleProduct = ({ product }: { product: Product }) => {
@@ -26,9 +25,9 @@ const SingleProduct = ({ product }: { product: Product }) => {
           />
           <div className="space-y-6">
             <ProductDetails product={product} />
-            <ProductSku product={product} />
-            <ProductActions />
+
             <ProductCategories product={product} />
+            <ProductActions />
             <EsewaPayment amount={product.price} productName={product.title} />
           </div>
         </div>
