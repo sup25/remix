@@ -1,9 +1,12 @@
 import React, { useState, ChangeEvent } from "react";
 import { FiMinus, FiPlus } from "react-icons/fi";
-import { ProductProp } from "~/components/types";
+import { Product } from "~/components/types";
 
+interface ProductProps {
+  product: Product;
+}
 interface QuantityPickerProps {
-  product: ProductProp;
+  product: Product;
   min?: number;
   max?: number;
   initialValue?: number;
