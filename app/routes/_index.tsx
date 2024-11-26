@@ -6,7 +6,7 @@ import Hero from "~/components/(root)/hero";
 import Slider from "~/components/(root)/slider";
 import Highlights from "~/components/(root)/highlights";
 import MarqueeBanner from "~/components/(root)/marqueebanner";
-import FeatureProducts from "~/components/(root)/featureProducts";
+import FeatureProducts from "~/modules/featureProducts";
 import Footer from "~/components/(root)/footer";
 import BrandFeatures from "~/components/(root)/brandFeatures";
 
