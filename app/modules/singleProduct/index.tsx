@@ -1,12 +1,12 @@
-import { Product } from "../types";
+import { ProductProp } from "~/components/types";
 import ProductImage from "./components/productImage";
 import ProductDetails from "./components/productDetails";
 import ProductActions from "./components/productActions";
-import EsewaPayment from "../esewaPayment";
+import EsewaPayment from "~/components/esewaPayment";
 import ProductCategories from "./components/productCategories";
 import QuantityPicker from "./components/quantityPicker";
 
-const SingleProduct = ({ product }: { product: Product }) => {
+const SingleProduct = ({ product }: { product: ProductProp }) => {
   if (!product) {
     return (
       <div className="min-h-screen flex items-center justify-center">
@@ -26,7 +26,6 @@ const SingleProduct = ({ product }: { product: Product }) => {
           />
           <div className="space-y-6">
             <ProductDetails product={product} />
-
             <ProductCategories product={product} />
             <QuantityPicker product={product} />
             <ProductActions />
