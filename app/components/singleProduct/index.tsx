@@ -4,6 +4,7 @@ import ProductDetails from "./components/productDetails";
 import ProductActions from "./components/productActions";
 import EsewaPayment from "../esewaPayment";
 import ProductCategories from "./components/productCategories";
+import QuantityPicker from "./components/quantityPicker";
 
 const SingleProduct = ({ product }: { product: Product }) => {
   if (!product) {
@@ -15,8 +16,8 @@ const SingleProduct = ({ product }: { product: Product }) => {
   }
 
   return (
-    <section className="py-12 bg-gray-50">
-      <div className="max-w-7xl mx-auto px-4">
+    <section className="py-12 section bg-gray-50">
+      <div className="container ">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           <ProductImage
             imageUrl={product.images?.[0] ?? ""}
@@ -27,6 +28,7 @@ const SingleProduct = ({ product }: { product: Product }) => {
             <ProductDetails product={product} />
 
             <ProductCategories product={product} />
+            <QuantityPicker product={product} />
             <ProductActions />
             <EsewaPayment amount={product.price} productName={product.title} />
           </div>
