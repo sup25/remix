@@ -11,6 +11,7 @@ import "./tailwind.css";
 import NavBar from "./components/navbar";
 import { Provider } from "react-redux";
 import store from "./context/store";
+import Footer from "./components/footer";
 
 export const links: LinksFunction = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -45,6 +46,9 @@ export function Layout({ children }: { children: React.ReactNode }) {
             <NavBar />
           </div>
           {children}
+          <div className="mt-32">
+            <Footer />
+          </div>
           <ScrollRestoration />
           <Scripts />
         </Provider>
