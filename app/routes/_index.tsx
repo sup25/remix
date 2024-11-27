@@ -2,13 +2,13 @@ import type { MetaFunction } from "@remix-run/node";
 
 import { RootState } from "~/context/store";
 import { useSelector } from "react-redux";
-import Hero from "~/components/(root)/hero";
-import Slider from "~/components/(root)/slider";
-import Highlights from "~/components/(root)/highlights";
-import MarqueeBanner from "~/components/(root)/marqueebanner";
-import FeatureProducts from "~/components/(root)/featureProducts";
-import Footer from "~/components/(root)/footer";
-import BrandFeatures from "~/components/(root)/brandFeatures";
+import Hero from "~/modules/home/hero";
+import Slider from "~/modules/home/slider";
+import Highlights from "~/modules/home/highlights";
+import MarqueeBanner from "~/modules/home/marqueebanner";
+import FeaturedProducts from "~/modules/home/featuredProducts";
+
+import BrandFeatures from "~/modules/home/brandFeatures";
 
 export const meta: MetaFunction = () => {
   return [
@@ -32,9 +32,8 @@ export default function Index() {
       <Slider />
       <Highlights />
       <MarqueeBanner />
-      <FeatureProducts />
+      <FeaturedProducts />
       <BrandFeatures />
-      <Footer />
     </div>
   );
 }
