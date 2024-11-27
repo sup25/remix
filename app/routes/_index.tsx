@@ -5,10 +5,10 @@ import { useSelector } from "react-redux";
 import Hero from "~/components/(root)/hero";
 import Slider from "~/components/(root)/slider";
 import Highlights from "~/components/(root)/highlights";
-import MarqueeBanner from "~/components/(root)/marqueebanner";
-import FeatureProducts from "~/components/(root)/featureProducts";
+import MarqueeBanner from "~/modules/home/marqueebanner";
+import FeaturedProducts from "~/modules/home/featuredProducts";
 import Footer from "~/components/(root)/footer";
-import BrandFeatures from "~/components/(root)/brandFeatures";
+import BrandFeatures from "~/modules/home/brandFeatures";
 
 export const meta: MetaFunction = () => {
   return [
@@ -32,7 +32,7 @@ export default function Index() {
       <Slider />
       <Highlights />
       <MarqueeBanner />
-      <FeatureProducts />
+      <FeaturedProducts />
       <BrandFeatures />
       <Footer />
     </div>

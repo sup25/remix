@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import { getFeaturedProducts } from "~/components/(root)/api";
+import { getFeaturedProducts } from "~/modules/home/api";
 import ProductCard from "~/components/productCard";
-import { Product } from "../../types";
+import { Product } from "../../../components/types";
 
-const FeatureProducts = () => {
+const FeaturedProducts = () => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -33,7 +33,7 @@ const FeatureProducts = () => {
       <div className="container">
         <div className="flex flex-col  justify-between flex-start gap-10">
           <h2 className="text-sm w-fit text-red-400 p-1 font-Arima font-semibold border border-gray-200 bg-white">
-            Feature Products
+            Featured Products
           </h2>
           <div className="w-full  flex flex-wrap gap-9">
             {products.map((product: Product) => (
@@ -61,4 +61,4 @@ const FeatureProducts = () => {
   );
 };
 
-export default FeatureProducts;
+export default FeaturedProducts;
