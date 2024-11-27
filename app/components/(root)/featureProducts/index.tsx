@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import { getFeaturedProducts } from "./api";
+import { getFeaturedProducts } from "~/components/(root)/api";
 import ProductCard from "~/components/productCard";
-import { ProductProp } from "~/components/types";
+import { Product } from "../../types";
 
 const FeatureProducts = () => {
   const [products, setProducts] = useState([]);
@@ -36,7 +36,7 @@ const FeatureProducts = () => {
             Feature Products
           </h2>
           <div className="w-full  flex flex-wrap gap-9">
-            {products.map((product: ProductProp) => (
+            {products.map((product: Product) => (
               <ProductCard
                 key={product.id}
                 product={{

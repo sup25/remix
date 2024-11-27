@@ -1,8 +1,8 @@
 import { Link } from "@remix-run/react";
 import { BsCart2 } from "react-icons/bs";
-import { ProductProp } from "../types";
+import { Product } from "../types";
 
-const ProductCard = ({ product }: { product: ProductProp }) => {
+const ProductCard = ({ product }: { product: Product }) => {
   return (
     <Link
       to={`/products/${product.slug}`}
