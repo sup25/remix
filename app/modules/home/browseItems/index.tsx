@@ -1,26 +1,13 @@
 import { Link } from "@remix-run/react";
 import { BiPackage, BiX } from "react-icons/bi";
 import { BsArrowRight } from "react-icons/bs";
-
-interface Product {
-  value: string;
-  label: string;
-  count: number;
-}
-
-interface BrowseItemsProps {
-  heading: string;
-  products: Product[];
-  handler: () => void;
-  link: string;
-}
-
+import { IBrowseItemsProps } from "./types";
 const BrowseItems = ({
   heading,
   products,
   handler,
   link,
-}: BrowseItemsProps) => {
+}: IBrowseItemsProps) => {
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
       <div className="relative h-screen w-full overflow-y-auto bg-white">
