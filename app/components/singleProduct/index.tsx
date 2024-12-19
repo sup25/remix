@@ -1,4 +1,4 @@
-import { Product } from "../types";
+import { Product } from "../schema/Proudct.schema";
 import ProductImage from "./components/productImage";
 import ProductDetails from "./components/productDetails";
 import ProductActions from "./components/productActions";

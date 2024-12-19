@@ -1,5 +1,5 @@
 import { BiCategory } from "react-icons/bi";
-import { Product } from "~/components/types";
+import { Product } from "~/components/schema/Proudct.schema";
 interface ProductProps {
   product: Product;
 }

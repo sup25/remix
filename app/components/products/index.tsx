@@ -1,4 +1,4 @@
-import { Product } from "../../components/types";
+import { Product } from "../schema/Proudct.schema";
 import ProductCard from "../productCard";
 const Products = ({ products }: { products: Product[] }) => {
   return (

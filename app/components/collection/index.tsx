@@ -1,7 +1,11 @@
 import ProductCard from "../productCard";
-import { Product } from "../types";
+import { TProduct } from "../schema/types";
 
-const CollectionPage = ({ collectionData }: { collectionData: Product[] }) => {
+type Props = {
+  collectionData: TProduct[];
+};
+
+const CollectionPage = ({ collectionData }: Props) => {
   console.log(collectionData);
 
   return (

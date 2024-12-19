@@ -1,6 +1,6 @@
 import { Link } from "@remix-run/react";
 import { BsCart2 } from "react-icons/bs";
-import { Product } from "../types";
+import { Product } from "../schema/Proudct.schema";
 
 const ProductCard = ({ product }: { product: Product }) => {
   return (

@@ -1,6 +1,6 @@
 import React, { useState, ChangeEvent } from "react";
 import { FiMinus, FiPlus } from "react-icons/fi";
-import { Product } from "~/components/types";
+import { Product } from "~/components/schema/Proudct.schema";
 
 interface ProductProps {
   product: Product;
