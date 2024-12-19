@@ -1,5 +1,5 @@
 export const getFeaturedProducts = async () => {
-  const response = await fetch("/featuredProduct");
+  const response = await fetch("/featured-products");
   if (!response.ok) {
     throw new Error("Failed to fetch products");
   }
