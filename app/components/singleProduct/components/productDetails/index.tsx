@@ -1,4 +1,4 @@
-import { Product } from "../../../types";
+import { Product } from "../../../schema/Proudct.schema";
 import { calculateOriginalPrice } from "../../utils";
 
 interface ProductDetailsProps {

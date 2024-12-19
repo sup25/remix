@@ -1,6 +1,6 @@
 import { LoaderFunction } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
-import { Product } from "../../components/types";
+import { Product } from "../../components/schema/Proudct.schema";
 import Products from "~/components/products";
 import { LoadProducts } from "~/.server/loader/productsLoader";
 

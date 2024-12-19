@@ -1,5 +1,5 @@
 import React from "react";
-import { Product } from "~/components/types";
+import { Product } from "~/components/schema/Proudct.schema";
 interface ProductProps {
   product: Product;
 }
