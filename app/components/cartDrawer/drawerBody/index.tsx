@@ -17,7 +17,7 @@ const DrawerBody = () => {
   const total = subtotal + shipping;
 
   return (
-    <div className="flex flex-col h-screen bg-gray-50">
+    <div className="flex  h-[65%] w-full flex-col  bg-gray-50">
       <div className="flex-1 p-6 overflow-y-auto">
         <div className="space-y-4">
           {cartItems.map((item) => (
