@@ -1,13 +1,22 @@
 import React from "react";
 import { BiChevronRight } from "react-icons/bi";
+import { IProduct } from "~/components/schema/Proudct.schema";
 
-const DrawerFooter = () => {
+const DrawerFooter = ({ product }: { product?: IProduct }) => {
+  if (!product) return null;
+  const subtotal = product.price;
   return (
     <div className="p-4 pb-4  fixed bottom-0 w-full  bg-white border-t border-gray-200">
       <div className="space-y-3">
         <div className="flex justify-between">
           <span className="text-gray-600">Subtotal</span>
-          <span>${/* subtotal.toFixed(2) */}</span>
+          <span>
+            रु
+            {subtotal.toLocaleString("ne-NP", {
+              minimumFractionDigits: 2,
+              maximumFractionDigits: 2,
+            })}
+          </span>
         </div>
         <div className="flex justify-between">
           <span className="text-gray-600">Shipping</span>

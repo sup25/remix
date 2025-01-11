@@ -1,13 +1,14 @@
 import { motion } from "framer-motion";
 import DrawerNav from "./drawerNav";
-import { DrawerNavProps } from "./type";
+import { DrawerProps } from "./type";
 import DrawerBody from "./drawerBody";
 import DrawerFooter from "./drawerFooter";
 
-const CartDrawer = ({ onClose }: DrawerNavProps) => {
+const CartDrawer = ({ onClose, cart }: DrawerProps) => {
   const handleBackgroundClick = () => {
     onClose();
   };
+
   return (
     <motion.div
       id="background"
@@ -26,10 +27,11 @@ const CartDrawer = ({ onClose }: DrawerNavProps) => {
         transition={{ duration: 0.3 }}
         onClick={(e) => e.stopPropagation()}
       >
-        <DrawerNav onClose={onClose} />
-        <DrawerBody />
+        {/* Pass cart to DrawerBody and DrawerFooter */}
+        <DrawerNav onClose={onClose} cart={cart} />
+        {/*  <DrawerBody cart={cart}  */}
 
-        <DrawerFooter />
+        {/* <DrawerFooter cart={cart} />   */}
       </motion.div>
     </motion.div>
   );

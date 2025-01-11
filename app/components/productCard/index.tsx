@@ -6,13 +6,25 @@ import CartDrawer from "../cartDrawer";
 
 const ProductCard = ({ product }: { product: IProduct }) => {
   const [showCart, setShowCart] = useState(false);
+  const [cart, setCart] = useState<{ product: IProduct; quantity: number }[]>(
+    []
+  );
 
-  // Open the cart drawer
-  const handleAddToCart = () => {
-    setShowCart(true); // Open the cart drawer
+  const handleAddToCart = (product: IProduct) => {
+    setShowCart(true);
+    setCart((prevCart) => {
+      const existing = prevCart.find((item) => item.product.id === product.id);
+      if (existing) {
+        return prevCart.map((item) =>
+          item.product.id === product.id
+            ? { ...item, quantity: item.quantity + 1 }
+            : item
+        );
+      }
+      return [...prevCart, { product, quantity: 1 }];
+    });
   };
 
-  // Close the cart drawer
   const handleCloseCart = () => {
     setShowCart(false);
   };
@@ -30,12 +42,12 @@ const ProductCard = ({ product }: { product: IProduct }) => {
           )}
 
           {/* Product Image */}
-          <div className="h-64  bg-gray-50">
+          <div className="h-64 bg-gray-50">
             {product.images.length > 0 ? (
               <img
                 src={product.images[0]}
                 alt={product.title}
-                className="w-full h-full"
+                className="w-full h-full object-cover"
               />
             ) : (
               <div className="w-full h-full bg-gray-200 flex items-center justify-center">
@@ -69,13 +81,13 @@ const ProductCard = ({ product }: { product: IProduct }) => {
       </Link>
       {/* Add to Cart Button */}
       <button
-        onClick={handleAddToCart}
+        onClick={() => handleAddToCart(product)}
         className="w-full bg-black text-white py-3 flex items-center justify-center gap-2 hover:bg-gray-800 transition-colors duration-300"
       >
         <BsCart2 className="w-5 h-5" />
         Add to cart
       </button>
-      {showCart && <CartDrawer onClose={handleCloseCart} />}
+      {showCart && <CartDrawer onClose={handleCloseCart} cart={cart} />}
     </div>
   );
 };
