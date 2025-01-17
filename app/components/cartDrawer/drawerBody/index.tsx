@@ -2,34 +2,28 @@ import { BiPackage } from "react-icons/bi";
 import { BsBag } from "react-icons/bs";
 import { IProduct } from "~/components/schema/Proudct.schema";
 
-const DrawerBody = ({ product }: { product?: IProduct }) => {
-  const cartItems = product
-    ? [
-        {
-          id: product.id,
-          name: product.title,
-          price: product.price,
-          quantity: 1,
-          image: product.images?.[0],
-        },
-      ]
-    : [];
+interface DrawerBodyProps {
+  cart: { product: IProduct; quantity: number }[];
+}
+
+const DrawerBody = ({ cart = [] }: DrawerBodyProps) => {
+  const hasItems = cart && cart.length > 0;
 
   return (
     <div className="flex h-[65%] w-full flex-col bg-gray-50">
       <div className="flex-1 p-6 overflow-y-auto">
-        {cartItems.length > 0 ? (
+        {hasItems ? (
           <div className="space-y-4">
-            {cartItems.map((item) => (
+            {cart.map((item, index) => (
               <div
-                key={item.id}
+                key={index}
                 className="flex items-center gap-4 p-4 bg-white rounded-lg shadow-sm"
               >
                 <div className="w-16 h-16 bg-gray-100 rounded-md flex items-center justify-center">
-                  {item.image ? (
+                  {item.product.images?.[0] ? (
                     <img
-                      src={item.image}
-                      alt={item.name}
+                      src={item.product.images[0]}
+                      alt={item.product.title}
                       className="w-full h-full object-cover rounded-md"
                     />
                   ) : (
@@ -37,17 +31,20 @@ const DrawerBody = ({ product }: { product?: IProduct }) => {
                   )}
                 </div>
                 <div className="flex-1">
-                  <h3 className="font-medium">{item.name}</h3>
+                  <h3 className="font-medium">{item.product.title}</h3>
                   <p className="text-sm text-gray-500">
                     Quantity: {item.quantity}
                   </p>
                 </div>
                 <div className="text-right">
                   <p className="font-medium">
-                    रु {(item.price * item.quantity).toLocaleString("ne-NP")}
+                    रु{" "}
+                    {(item.product.price * item.quantity).toLocaleString(
+                      "ne-NP"
+                    )}
                   </p>
                   <p className="text-sm text-gray-500">
-                    रु {item.price.toLocaleString("ne-NP")} each
+                    रु {item.product.price.toLocaleString("ne-NP")} each
                   </p>
                 </div>
               </div>
