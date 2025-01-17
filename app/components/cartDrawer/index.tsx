@@ -29,9 +29,7 @@ const CartDrawer = ({ onClose, cart }: DrawerProps) => {
       >
         {/* Pass cart to DrawerBody and DrawerFooter */}
         <DrawerNav onClose={onClose} cart={cart} />
-        {/*  <DrawerBody cart={cart}  */}
-
-        {/* <DrawerFooter cart={cart} />   */}
+        <DrawerBody cart={cart} />
       </motion.div>
     </motion.div>
   );
