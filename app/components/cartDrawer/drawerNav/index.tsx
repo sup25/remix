@@ -1,13 +1,17 @@
-import { RxCross1, RxHamburgerMenu } from "react-icons/rx";
+import { RxCross1 } from "react-icons/rx";
 import { DrawerProps } from "../type";
 import { CgShoppingCart } from "react-icons/cg";
 
-const DrawerNav = ({ onClose, cart }: DrawerProps) => {
+const DrawerNav = ({ onClose, cart = [] }: DrawerProps) => {
+  const itemCount = cart?.length || 0;
+
   return (
     <div className="min-h-6 p-2 bg-black flex items-center justify-between">
-      <div className="flex items-center gap-2 ">
+      <div className="flex items-center gap-2">
         <CgShoppingCart className="w-5 h-5 text-white" />
-        <span className="font-medium text-white">({cart.length} items)</span>
+        <span className="font-medium text-white">
+          ({itemCount} {itemCount === 1 ? "item" : "items"})
+        </span>
       </div>
       <p className="text-white font-Arima font-semibold">Remix</p>
 
