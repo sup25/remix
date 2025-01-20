@@ -1,10 +1,16 @@
-import React from "react";
 import { BiChevronRight } from "react-icons/bi";
-import { IProduct } from "~/components/schema/Proudct.schema";
 
-const DrawerFooter = ({ product }: { product?: IProduct }) => {
-  if (!product) return null;
-  const subtotal = product.price;
+import { DrawerProps } from "../type";
+import { useCart } from "~/context/shoppingCart";
+
+const DrawerFooter = () => {
+  const { cart, totalItems } = useCart();
+  const items = cart;
+  const subtotal = items.reduce((acc, item) => {
+    return acc + item.product.price * item.quantity;
+  }, 0);
+  const shipping = subtotal ? 100 : 0;
+  const total = subtotal + shipping;
   return (
     <div className="p-4 pb-4  fixed bottom-0 w-full  bg-white border-t border-gray-200">
       <div className="space-y-3">
@@ -20,12 +26,24 @@ const DrawerFooter = ({ product }: { product?: IProduct }) => {
         </div>
         <div className="flex justify-between">
           <span className="text-gray-600">Shipping</span>
-          <span>${/* shipping.toFixed(2) */}</span>
+          <span>
+            रु
+            {shipping.toLocaleString("ne-NP", {
+              minimumFractionDigits: 2,
+              maximumFractionDigits: 2,
+            })}
+          </span>
         </div>
         <hr className="border-gray-200" />
         <div className="flex justify-between font-medium">
           <span>Total</span>
-          <span>${/* total.toFixed(2) */}</span>
+          <span>
+            रु
+            {total.toLocaleString("ne-NP", {
+              minimumFractionDigits: 2,
+              maximumFractionDigits: 2,
+            })}
+          </span>
         </div>
       </div>
 

@@ -1,11 +1,9 @@
 import { CgHeart, CgShare } from "react-icons/cg";
-import { BsCart2 } from "react-icons/bs";
-const ProductActions = () => (
+import AddToCartButton from "~/components/navbar/components/addtocart";
+import { IProduct } from "~/components/schema/Proudct.schema";
+const ProductActions = ({ product }: { product: IProduct }) => (
   <div className="flex gap-4">
-    <button className="flex-1 bg-black text-white px-6 py-3 rounded-lg font-medium hover:bg-gray-700 transition-colors flex items-center justify-center gap-2">
-      <BsCart2 className="h-5 w-5" />
-      Add to Cart
-    </button>
+    <AddToCartButton product={product} />
 
     <button
       className="p-3 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors"

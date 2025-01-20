@@ -1,32 +1,16 @@
 import { Link } from "@remix-run/react";
 import { BsCart2 } from "react-icons/bs";
 import { IProduct } from "../schema/Proudct.schema";
-import { useState } from "react";
-import CartDrawer from "../cartDrawer";
+import { useCart } from "~/context/shoppingCart";
+import AddToCartButton from "../navbar/components/addtocart";
 
 const ProductCard = ({ product }: { product: IProduct }) => {
-  const [showCart, setShowCart] = useState(false);
-  const [cart, setCart] = useState<{ product: IProduct; quantity: number }[]>(
-    []
-  );
+  const { addToCart, isCartOpen, setIsCartOpen } = useCart();
 
-  const handleAddToCart = (product: IProduct) => {
-    setShowCart(true);
-    setCart((prevCart) => {
-      const existing = prevCart.find((item) => item.product.id === product.id);
-      if (existing) {
-        return prevCart.map((item) =>
-          item.product.id === product.id
-            ? { ...item, quantity: item.quantity + 1 }
-            : item
-        );
-      }
-      return [...prevCart, { product, quantity: 1 }];
-    });
-  };
-
-  const handleCloseCart = () => {
-    setShowCart(false);
+  const handleAddToCart = (e: React.MouseEvent, product: IProduct) => {
+    e.preventDefault();
+    addToCart(product);
+    setIsCartOpen(true);
   };
 
   return (
@@ -34,14 +18,12 @@ const ProductCard = ({ product }: { product: IProduct }) => {
       <Link to={`/products/${product.slug}`}>
         {/* Image Container */}
         <div className="relative">
-          {/* Discount Tag */}
           {product.discountTag && (
             <div className="absolute top-3 left-3 bg-red-500 text-white text-xs px-2 py-1 rounded">
               {product.discountTag}% OFF
             </div>
           )}
 
-          {/* Product Image */}
           <div className="h-64 bg-gray-50">
             {product.images.length > 0 ? (
               <img
@@ -57,7 +39,6 @@ const ProductCard = ({ product }: { product: IProduct }) => {
           </div>
         </div>
 
-        {/* Product Info */}
         <div className="p-4">
           <h3 className="text-base font-normal text-gray-900 mb-1">
             {product.title}
@@ -79,15 +60,8 @@ const ProductCard = ({ product }: { product: IProduct }) => {
           </div>
         </div>
       </Link>
-      {/* Add to Cart Button */}
-      <button
-        onClick={() => handleAddToCart(product)}
-        className="w-full bg-black text-white py-3 flex items-center justify-center gap-2 hover:bg-gray-800 transition-colors duration-300"
-      >
-        <BsCart2 className="w-5 h-5" />
-        Add to cart
-      </button>
-      {showCart && <CartDrawer onClose={handleCloseCart} cart={cart} />}
+
+      <AddToCartButton product={product} />
     </div>
   );
 };

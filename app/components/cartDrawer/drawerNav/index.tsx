@@ -1,9 +1,11 @@
 import { RxCross1 } from "react-icons/rx";
 import { DrawerProps } from "../type";
 import { CgShoppingCart } from "react-icons/cg";
+import { useCart } from "~/context/shoppingCart";
 
-const DrawerNav = ({ onClose, cart = [] }: DrawerProps) => {
-  const itemCount = cart?.length || 0;
+const DrawerNav = ({ onClose }: DrawerProps) => {
+  const { totalItems } = useCart();
+  const itemCount = totalItems || 0;
 
   return (
     <div className="min-h-6 p-2 bg-black flex items-center justify-between">
