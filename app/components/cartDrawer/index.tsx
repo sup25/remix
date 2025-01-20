@@ -3,16 +3,21 @@ import DrawerNav from "./drawerNav";
 import { DrawerProps } from "./type";
 import DrawerBody from "./drawerBody";
 import DrawerFooter from "./drawerFooter";
+import { useCart } from "~/context/shoppingCart";
 
-const CartDrawer = ({ onClose, cart }: DrawerProps) => {
+const CartDrawer = ({ onClose }: DrawerProps) => {
+  const { cart, setIsCartOpen } = useCart();
   const handleBackgroundClick = () => {
-    onClose();
+    if (onClose) {
+      onClose();
+      setIsCartOpen(false);
+    }
   };
 
   return (
     <motion.div
       id="background"
-      className="fixed top-0 left-0 bg-black/50 w-full h-screen z-[9999] flex justify-end"
+      className="fixed top-0 left-0 bg-black/10 backdrop-blur-sm  w-full h-screen z-[9999] flex justify-end"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
@@ -27,9 +32,9 @@ const CartDrawer = ({ onClose, cart }: DrawerProps) => {
         transition={{ duration: 0.3 }}
         onClick={(e) => e.stopPropagation()}
       >
-        {/* Pass cart to DrawerBody and DrawerFooter */}
-        <DrawerNav onClose={onClose} cart={cart} />
-        <DrawerBody cart={cart} />
+        <DrawerNav onClose={onClose} />
+        <DrawerBody />
+        <DrawerFooter />
       </motion.div>
     </motion.div>
   );

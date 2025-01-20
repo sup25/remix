@@ -12,6 +12,7 @@ import NavBar from "./components/navbar";
 import { Provider } from "react-redux";
 import store from "./context/store";
 import Footer from "./components/footer";
+import { CartProvider } from "./context/shoppingCart";
 
 export const links: LinksFunction = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -42,15 +43,17 @@ export function Layout({ children }: { children: React.ReactNode }) {
       </head>
       <body className="bg-[#fafafa]">
         <Provider store={store}>
-          <div className="mb-20">
-            <NavBar />
-          </div>
-          {children}
-          <div className="mt-32">
-            <Footer />
-          </div>
-          <ScrollRestoration />
-          <Scripts />
+          <CartProvider>
+            <div className="mb-20">
+              <NavBar />
+            </div>
+            {children}
+            <div className="mt-32">
+              <Footer />
+            </div>
+            <ScrollRestoration />
+            <Scripts />
+          </CartProvider>
         </Provider>
       </body>
     </html>

@@ -1,12 +1,10 @@
 import { BiPackage } from "react-icons/bi";
 import { BsBag } from "react-icons/bs";
-import { IProduct } from "~/components/schema/Proudct.schema";
+import { FiTrash2 } from "react-icons/fi";
+import { useCart } from "~/context/shoppingCart";
 
-interface DrawerBodyProps {
-  cart: { product: IProduct; quantity: number }[];
-}
-
-const DrawerBody = ({ cart = [] }: DrawerBodyProps) => {
+const DrawerBody = () => {
+  const { cart, removeFromCart, clearCart } = useCart();
   const hasItems = cart && cart.length > 0;
 
   return (
@@ -47,8 +45,22 @@ const DrawerBody = ({ cart = [] }: DrawerBodyProps) => {
                     रु {item.product.price.toLocaleString("ne-NP")} each
                   </p>
                 </div>
+                <button
+                  onClick={() => removeFromCart(item.product.id)}
+                  className="p-2 text-gray-400 hover:text-red-500 transition-colors"
+                >
+                  <FiTrash2 className="w-5 h-5" />
+                </button>
               </div>
             ))}
+            <div className="mt-4">
+              <button
+                onClick={clearCart}
+                className="w-full px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-500 transition-colors"
+              >
+                Clear Cart
+              </button>
+            </div>
           </div>
         ) : (
           <div className="h-full flex flex-col items-center justify-center text-center">

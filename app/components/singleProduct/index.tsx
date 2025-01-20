@@ -1,4 +1,4 @@
-import { Product } from "../schema/Proudct.schema";
+import { IProduct } from "../schema/Proudct.schema";
 import ProductImage from "./components/productImage";
 import ProductDetails from "./components/productDetails";
 import ProductActions from "./components/productActions";
@@ -6,7 +6,7 @@ import EsewaPayment from "../esewaPayment";
 import ProductCategories from "./components/productCategories";
 import QuantityPicker from "./components/quantityPicker";
 
-const SingleProduct = ({ product }: { product: Product }) => {
+const SingleProduct = ({ product }: { product: IProduct }) => {
   if (!product) {
     return (
       <div className="min-h-screen flex items-center justify-center">
@@ -29,7 +29,7 @@ const SingleProduct = ({ product }: { product: Product }) => {
 
             <ProductCategories product={product} />
             <QuantityPicker product={product} />
-            <ProductActions />
+            <ProductActions product={product} />
             <EsewaPayment amount={product.price} productName={product.title} />
           </div>
         </div>
