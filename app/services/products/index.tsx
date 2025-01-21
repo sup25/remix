@@ -19,3 +19,14 @@ export const getProductByCategory = async (selectedCategories: string[]) => {
 
   return products;
 };
+
+export const LoadSerchBarProducts = async (searchOption: string) => {
+  const products = await prisma.product.findMany({
+    where: {
+      categories: {
+        has: searchOption.toLowerCase(),
+      },
+    },
+  });
+  return products;
+};

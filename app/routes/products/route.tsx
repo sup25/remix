@@ -1,12 +1,12 @@
 import { LoaderFunction } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
-import { Product } from "../../components/schema/Proudct.schema";
+import { IProduct } from "../../components/schema/Proudct.schema";
 import Products from "~/components/products";
 import { LoadProducts } from "~/.server/loader/productsLoader";
 
 export const loader: LoaderFunction = LoadProducts;
 
 export default function ProductsPage() {
-  const { products } = useLoaderData<{ products: Product[] }>();
+  const { products } = useLoaderData<{ products: IProduct[] }>();
   return <Products products={products} />;
 }

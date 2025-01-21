@@ -6,8 +6,6 @@ type Props = {
 };
 
 const CollectionPage = ({ collectionData }: Props) => {
-  console.log(collectionData);
-
   return (
     <div className="section">
       <div className="container">
