@@ -1,6 +1,62 @@
-# Welcome to Remix!
+# ECommerce App with Remix
 
-- 📖 [Remix docs](https://remix.run/docs)
+An eCommerce platform built using [Remix](https://remix.run/) that provides a seamless shopping experience with modern web development techniques. This app includes features like product listings, user authentication, a shopping cart, order management etc.
+
+## Features
+
+- User authentication (Sign-up, Login, Logout)
+- Product catalog with categories and filters
+- Shopping cart and checkout process
+- Responsive design for mobile and desktop
+- SEO-friendly with server-side rendering (SSR)
+
+## Tech Stack
+
+- **Framework**: [Remix](https://remix.run/)
+- **Frontend**: React, Tailwind CSS
+- **Backend**: Node.js, Remix Loaders/Actions
+- **Database**: PostgreSQL (via Prisma)
+- **Payment Gateway**: eSewa
+- **Deployment**: (Planned) Vercel, AWS, or Fly.io
+
+## Installation
+
+Clone the repository:
+
+```bash
+git clone https://github.com/sup25/remix.git
+cd remix
+```
+
+## Install dependencies:
+
+```bash
+npm install
+```
+
+## Configure environment variables: Create a .env file in the root directory and add the following:
+
+```bash
+DATABASE_URL= your_database_url
+```
+
+## Run database migrations (if using Prisma):
+
+```bash
+npx prisma migrate dev
+```
+
+## Start the development server:
+
+```bash
+npm run dev
+```
+
+## Open the app in your browser:
+
+```bash
+http://localhost:5173
+```
 
 ## Development
 
