@@ -1,5 +1,10 @@
 import { json, LoaderFunction } from "@remix-run/node";
-import { getProductByCategory, getProductBySlug } from "~/services/products";
+
+import {
+  getProductByCategory,
+  getProductBySlug,
+  LoadSerchBarProducts,
+} from "~/services/products";
 
 export const getProduct: LoaderFunction = async ({ params }) => {
   const { slug } = params;
@@ -29,4 +34,16 @@ export const GetProductByCategory: LoaderFunction = async ({ params }) => {
   }
 
   return json(products);
+};
+
+export const ShowProductInSearchBar: LoaderFunction = async ({ request }) => {
+  try {
+    const url = new URL(request.url);
+    const searchQuery = url.searchParams.get("query") || "";
+    const products = await LoadSerchBarProducts(searchQuery);
+    return products;
+  } catch (error) {
+    console.error("Error loading products:", error);
+    return json({ products: [] }, { status: 500 });
+  }
 };
