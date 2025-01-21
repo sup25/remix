@@ -1,8 +1,8 @@
-import { Product } from "../../../schema/Proudct.schema";
+import { IProduct } from "~/components/schema/Proudct.schema";
 import { calculateOriginalPrice } from "../../utils";
 
 interface ProductDetailsProps {
-  product: Product;
+  product: IProduct;
 }
 
 const ProductDetails = ({ product }: ProductDetailsProps) => {

@@ -1,7 +1,7 @@
 import React from "react";
-import { Product } from "~/components/schema/Proudct.schema";
+import { IProduct } from "~/components/schema/Proudct.schema";
 interface ProductProps {
-  product: Product;
+  product: IProduct;
 }
 const ProductSku = ({ product }: ProductProps) => {
   return (

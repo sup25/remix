@@ -1,10 +1,11 @@
-import { IProduct } from "../schema/Proudct.schema";
 import ProductImage from "./components/productImage";
 import ProductDetails from "./components/productDetails";
 import ProductActions from "./components/productActions";
-import EsewaPayment from "../esewaPayment";
+
 import ProductCategories from "./components/productCategories";
 import QuantityPicker from "./components/quantityPicker";
+import { IProduct } from "~/components/schema/Proudct.schema";
+import EsewaPayment from "~/components/esewaPayment";
 
 const SingleProduct = ({ product }: { product: IProduct }) => {
   if (!product) {

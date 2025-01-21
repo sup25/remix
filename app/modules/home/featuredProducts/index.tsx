@@ -27,7 +27,7 @@ const FeaturedProducts = () => {
   }, []);
 
   if (loading) return <div>Loading...</div>;
-  if (error) return <div>Error: {error}</div>;
+  if (error) return <div>Something went wrong please try again later</div>;
   return (
     <div className="section">
       <div className="container">

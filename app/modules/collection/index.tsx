@@ -1,11 +1,11 @@
-import ProductCard from "../productCard";
-import { TProduct } from "../schema/types";
+import ProductCard from "~/components/productCard";
+import { TProduct } from "~/components/schema/types";
 
 type Props = {
   collectionData: TProduct[];
 };
 
-const CollectionPage = ({ collectionData }: Props) => {
+const Collection = ({ collectionData }: Props) => {
   return (
     <div className="section">
       <div className="container">
@@ -19,4 +19,4 @@ const CollectionPage = ({ collectionData }: Props) => {
   );
 };
 
-export default CollectionPage;
+export default Collection;
