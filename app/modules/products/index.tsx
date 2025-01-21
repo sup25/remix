@@ -1,5 +1,5 @@
-import { IProduct } from "../schema/Proudct.schema";
-import ProductCard from "../productCard";
+import { IProduct } from "../../components/schema/Proudct.schema";
+import ProductCard from "../../components/productCard";
 const Products = ({ products }: { products: IProduct[] }) => {
   return (
     <div className="section">

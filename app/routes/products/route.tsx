@@ -1,7 +1,7 @@
 import { LoaderFunction } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 import { IProduct } from "../../components/schema/Proudct.schema";
-import Products from "~/components/products";
+import Products from "~/modules/products";
 import { LoadProducts } from "~/.server/loader/productsLoader";
 
 export const loader: LoaderFunction = LoadProducts;
