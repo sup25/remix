@@ -27,13 +27,15 @@ const CartContext = createContext<CartContextType | undefined>(undefined);
 
 export function CartProvider({ children }: { children: ReactNode }) {
   const [cart, setCart] = useState<CartItem[]>(() => {
-    try {
-      const savedCart = localStorage.getItem("shopping-cart");
-      return savedCart ? JSON.parse(savedCart) : [];
-    } catch (error) {
-      console.error("Error loading cart:", error);
-      return [];
+    if (typeof window !== "undefined") {
+      try {
+        const savedCart = localStorage.getItem("shopping-cart");
+        return savedCart ? JSON.parse(savedCart) : [];
+      } catch (error) {
+        console.error("Error loading cart:", error);
+      }
     }
+    return [];
   });
 
   const [isCartOpen, setIsCartOpen] = useState(false);

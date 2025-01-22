@@ -45,13 +45,12 @@ const Marquee = ({
     width: "100%",
   };
 
-  const contentStyle: ContentStyle = {
+  const contentStyle: CSSProperties = {
     display: "inline-block",
     whiteSpace: "nowrap",
     animation: `marquee ${contentWidth / speed}s linear infinite ${
-      isPaused ? "paused" : "running"
-    }`,
-    animationDirection: direction === "right" ? "reverse" : "normal",
+      direction === "right" ? "reverse" : "normal"
+    } ${isPaused ? "paused" : "running"}`,
   };
 
   const handleMouseEnter = (): void => {
