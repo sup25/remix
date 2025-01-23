@@ -2,6 +2,7 @@ import { BiPackage } from "react-icons/bi";
 import { BsBag } from "react-icons/bs";
 import { FiTrash2 } from "react-icons/fi";
 import { useCart } from "~/context/shoppingCart";
+import QuantityPicker from "~/components/quantityPicker";
 
 const DrawerBody = () => {
   const { cart, removeFromCart, clearCart } = useCart();
@@ -9,13 +10,13 @@ const DrawerBody = () => {
 
   return (
     <div className="flex h-[65%] w-full flex-col bg-gray-50">
-      <div className="flex-1 p-6 overflow-y-auto">
+      <div className="flex-1 py-6 px-2 overflow-y-auto">
         {hasItems ? (
           <div className="space-y-4">
             {cart.map((item, index) => (
               <div
                 key={index}
-                className="flex items-center gap-4 p-4 bg-white rounded-lg shadow-sm"
+                className="flex items-center justify-between gap-2 p-2 bg-white rounded-lg shadow-sm"
               >
                 <div className="w-16 h-16 bg-gray-100 rounded-md flex items-center justify-center">
                   {item.product.images?.[0] ? (
@@ -28,11 +29,23 @@ const DrawerBody = () => {
                     <BiPackage className="w-8 h-8 text-gray-400" />
                   )}
                 </div>
-                <div className="flex-1">
-                  <h3 className="font-medium">{item.product.title}</h3>
+                <div className="flex flex-col">
+                  <div className="flex ">
+                    <h3 className="font-medium">{item.product.title}</h3>
+                  </div>
                   <p className="text-sm text-gray-500">
                     Quantity: {item.quantity}
                   </p>
+
+                  <div className="flex mt-1">
+                    <QuantityPicker product={item.product} />
+                    <button
+                      onClick={() => removeFromCart(item.product.id)}
+                      className="p-2 text-gray-400 hover:text-red-500 transition-colors"
+                    >
+                      <FiTrash2 size={25} />
+                    </button>
+                  </div>
                 </div>
                 <div className="text-right">
                   <p className="font-medium">
@@ -42,15 +55,9 @@ const DrawerBody = () => {
                     )}
                   </p>
                   <p className="text-sm text-gray-500">
-                    रु {item.product.price.toLocaleString("ne-NP")} each
+                    रु {item.product.price.toLocaleString("ne-NP")}
                   </p>
                 </div>
-                <button
-                  onClick={() => removeFromCart(item.product.id)}
-                  className="p-2 text-gray-400 hover:text-red-500 transition-colors"
-                >
-                  <FiTrash2 className="w-5 h-5" />
-                </button>
               </div>
             ))}
             <div className="mt-4">
