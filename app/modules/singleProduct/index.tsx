@@ -9,7 +9,7 @@ import EsewaPayment from "~/components/esewaPayment";
 import { useState } from "react";
 
 const SingleProduct = ({ product }: { product: IProduct }) => {
-  const [localQuantity, setLocalQuantity] = useState(1);
+  const [localQuantity, setLocalQuantity] = useState(0);
   if (!product) {
     return (
       <div className="min-h-screen flex items-center justify-center">
@@ -37,7 +37,11 @@ const SingleProduct = ({ product }: { product: IProduct }) => {
               setQuantity={setLocalQuantity}
               isSingleProduct={true}
             />
-            <ProductActions product={product} />
+            <ProductActions
+              product={product}
+              quantity={localQuantity}
+              setQuantity={setLocalQuantity}
+            />
             <EsewaPayment amount={product.price} productName={product.title} />
           </div>
         </div>

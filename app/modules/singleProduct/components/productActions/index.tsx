@@ -1,9 +1,22 @@
 import { CgHeart, CgShare } from "react-icons/cg";
 import AddToCartButton from "~/components/navbar/components/addtocart";
 import { IProduct } from "~/components/schema/Proudct.schema";
-const ProductActions = ({ product }: { product: IProduct }) => (
+interface ProductActionsProps {
+  product: IProduct;
+  quantity?: number;
+  setQuantity?: React.Dispatch<React.SetStateAction<number>>;
+}
+const ProductActions = ({
+  product,
+  quantity,
+  setQuantity,
+}: ProductActionsProps) => (
   <div className="flex gap-4">
-    <AddToCartButton product={product} />
+    <AddToCartButton
+      product={product}
+      quantity={quantity}
+      setQuantity={setQuantity}
+    />
 
     <button
       className="p-3 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors"
