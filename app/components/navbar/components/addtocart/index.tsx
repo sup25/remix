@@ -3,6 +3,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import { useCart } from "~/context/shoppingCart";
 import { IProduct } from "~/components/schema/Proudct.schema";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 interface AddToCartButtonProps {
   product: IProduct;
@@ -24,7 +26,7 @@ const AddToCartButton = ({
     e.preventDefault();
     if (isAdding) return;
     if (quantity! <= 0) {
-      alert("Quantity must be greater than 0 to add to the cart.");
+      toast.error("Quantity must be greater than 0");
       return;
     }
     if (quantity !== undefined) {
