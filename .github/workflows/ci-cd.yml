@@ -11,6 +11,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    environment: secrets
 
     steps:
       # Checkout the repository code
@@ -20,21 +21,6 @@ jobs:
       # Set up Docker
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
-
-      # Debug secrets access
-      - name: Debug secrets access
-        run: |
-          if [ -z "${{ secrets.DOCKER_USERNAME }}" ]; then
-            echo "DOCKER_USERNAME is empty or not accessible."
-          else
-            echo "DOCKER_USERNAME is accessible."
-          fi
-
-          if [ -z "${{ secrets.DOCKER_PASSWORD }}" ]; then
-            echo "DOCKER_PASSWORD is empty or not accessible."
-          else
-            echo "DOCKER_PASSWORD is accessible."
-          fi
 
       # Log in to Docker Hub
       - name: Log in to Docker Hub
