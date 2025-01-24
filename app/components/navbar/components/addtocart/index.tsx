@@ -1,29 +1,47 @@
 import { BsCart2, BsCheckLg } from "react-icons/bs";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
-
 import { useCart } from "~/context/shoppingCart";
 import { IProduct } from "~/components/schema/Proudct.schema";
 
 interface AddToCartButtonProps {
   product: IProduct;
   className?: string;
+  quantity?: number;
+  setQuantity?: React.Dispatch<React.SetStateAction<number>>;
 }
 
-const AddToCartButton = ({ product, className = "" }: AddToCartButtonProps) => {
+const AddToCartButton = ({
+  product,
+  quantity,
+  setQuantity,
+  className = "",
+}: AddToCartButtonProps) => {
   const { addToCart, setIsCartOpen } = useCart();
   const [isAdding, setIsAdding] = useState(false);
-
+  console.log(quantity);
   const handleAddToCart = async (e: React.MouseEvent) => {
     e.preventDefault();
     if (isAdding) return;
-
+    if (quantity! <= 0) {
+      alert("Quantity must be greater than 0 to add to the cart.");
+      return;
+    }
+    if (quantity !== undefined) {
+      const multipliedProducts = Array(quantity).fill(product);
+      multipliedProducts.forEach((prod) => addToCart(prod));
+      console.log("Products added to cart:", multipliedProducts);
+    } else {
+      addToCart(product);
+    }
     setIsAdding(true);
-    addToCart(product);
 
     await new Promise((resolve) => setTimeout(resolve, 1000));
     setIsAdding(false);
     setIsCartOpen(true);
+    if (setQuantity) {
+      setQuantity(0);
+    }
   };
 
   return (
