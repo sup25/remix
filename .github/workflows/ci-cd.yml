@@ -1,0 +1,58 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - main # This will trigger the pipeline when you push to the `main` branch
+  pull_request:
+    branches:
+      - main # This will trigger the pipeline for pull requests to `main`
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    environment: secrets
+
+    steps:
+      # Checkout the repository code
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      # Set up Docker
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+
+      # Log in to Docker Hub
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }} # Set in GitHub Secrets
+          password: ${{ secrets.DOCKER_PASSWORD }} # Set in GitHub Secrets
+
+      # Build the Docker image
+      - name: Build Docker image
+        run: |
+          docker build -t supgg/remix-app:latest .
+
+      # Push the Docker image to Docker Hub
+      - name: Push Docker image
+        run: |
+          docker push supgg/remix-app:latest
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build # Wait for the build job to finish
+
+    steps:
+      - name: SSH into EC2 instance and deploy the app
+        uses: appleboy/ssh-action@v0.1.4
+        with:
+          host: ${{ secrets.EC2_HOST }} # Your EC2 host
+          username: ${{ secrets.EC2_USER }} # Your EC2 username (typically ec2-user or ubuntu)
+          key: ${{ secrets.EC2_PRIVATE_KEY }} # Add your EC2 private key to GitHub Secrets
+          port: 22
+          script: |
+            docker pull supgg/remix-app:latest
+            docker stop remix-app || true
+            docker rm remix-app || true
+            docker run -d --name remix-app -p 3000:3000 supgg/remix-app:latest
