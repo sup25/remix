@@ -13,6 +13,7 @@ import { Provider } from "react-redux";
 import store from "./context/store";
 import Footer from "./components/footer";
 import { CartProvider } from "./context/shoppingCart";
+import { ToastContainer, Zoom } from "react-toastify";
 
 export const links: LinksFunction = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -43,6 +44,13 @@ export function Layout({ children }: { children: React.ReactNode }) {
       </head>
       <body className="bg-[#fafafa]">
         <Provider store={store}>
+          <ToastContainer
+            position="bottom-right"
+            autoClose={2000}
+            theme="light"
+            transition={Zoom}
+            stacked={true}
+          />
           <CartProvider>
             <div className="mb-20">
               <NavBar />

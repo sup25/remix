@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { getFeaturedProducts } from "~/modules/home/api";
 import ProductCard from "~/components/productCard";
 import { TProduct } from "~/components/schema/types";
+import { Loading } from "~/components/loading";
+import { SomethingWentWrong } from "~/components/somethingWentWrong";
 
 const FeaturedProducts = () => {
   const [products, setProducts] = useState([]);
@@ -26,8 +28,8 @@ const FeaturedProducts = () => {
     loadFeaturedProducts();
   }, []);
 
-  if (loading) return <div>Loading...</div>;
-  if (error) return <div>Something went wrong please try again later</div>;
+  if (loading) return <Loading />;
+  if (error) return <SomethingWentWrong />;
   return (
     <div className="section">
       <div className="container">
