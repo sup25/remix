@@ -41,18 +41,13 @@ jobs:
 
   deploy:
     runs-on: ubuntu-latest
-    needs: build # Wait for the build job to finish
-
     steps:
-      - name: SSH into EC2 instance and deploy the app
-        uses: appleboy/ssh-action@v0.1.3
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Deploy via SSH
+        uses: appleboy/ssh-action@v0.1.5
         with:
-          host: ${{ secrets.EC2_HOST }} # Your EC2 host
-          username: ${{ secrets.EC2_USER }} # Your EC2 username (typically ec2-user or ubuntu)
-          key: ${{ secrets.EC2_PRIVATE_KEY }} # Add your EC2 private key to GitHub Secrets
-          port: 22
-          script: |
-            docker pull supgg/remix-app:latest
-            docker stop remix-app || true
-            docker rm remix-app || true
-            docker run -d --name remix-app -p 3000:3000 supgg/remix-app:latest
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.SSH_KEY }}
+          script: whoami
