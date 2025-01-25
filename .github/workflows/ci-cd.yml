@@ -44,8 +44,10 @@ jobs:
     needs: build # Wait for the build job to finish
 
     steps:
+      - name: Checkout the repository
+        uses: actions/checkout@v2
       - name: SSH into EC2 instance and deploy the app
-        uses: appleboy/ssh-action@master.
+        uses: appleboy/ssh-action@v0.1.5
         with:
           host: ${{ secrets.EC2_HOST }}
           username: ${{ secrets.EC2_USER }}
