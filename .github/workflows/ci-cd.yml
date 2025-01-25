@@ -57,4 +57,6 @@ jobs:
             docker pull supgg/remix-app:latest
             docker stop remix-app || true
             docker rm remix-app || true
+            # Kill any process using port 3000
+            sudo fuser -k 3000/tcp || true
             docker run -d --name remix-app -p 3000:3000 supgg/remix-app:latest
