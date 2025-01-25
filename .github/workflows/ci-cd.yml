@@ -42,6 +42,7 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     needs: build # Wait for the build job to finish
+    environment: secrets
 
     steps:
       - name: SSH into EC2 instance and deploy the app
