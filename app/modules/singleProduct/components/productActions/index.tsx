@@ -1,5 +1,5 @@
 import { CgHeart, CgShare } from "react-icons/cg";
-import AddToCartButton from "~/components/navbar/components/addtocart";
+import AddToCartButton from "~/components/addtocart";
 import { IProduct } from "~/components/schema/Proudct.schema";
 interface ProductActionsProps {
   product: IProduct;

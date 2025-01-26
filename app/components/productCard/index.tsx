@@ -2,7 +2,7 @@ import { Link } from "@remix-run/react";
 import { BsCart2 } from "react-icons/bs";
 import { IProduct } from "../schema/Proudct.schema";
 import { useCart } from "~/context/shoppingCart";
-import AddToCartButton from "../navbar/components/addtocart";
+import AddToCartButton from "../addtocart";
 
 const ProductCard = ({ product }: { product: IProduct }) => {
   const { addToCart, isCartOpen, setIsCartOpen } = useCart();
