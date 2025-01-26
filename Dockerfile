@@ -22,6 +22,7 @@ COPY . .
 
 # Set environment variable for build memory limits
 ENV NODE_OPTIONS="--max-old-space-size=4096"
+ENV DATABASE_URL=${DATABASE_URL}
 
 
 # Build the Remix app
