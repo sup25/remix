@@ -22,7 +22,7 @@ COPY . .
 
 # Set environment variable for build memory limits
 ENV NODE_OPTIONS="--max-old-space-size=4096"
-ENV DATABASE_URL="postgresql://neondb_owner:WnFd40eGwxDz@ep-billowing-haze-a8329nf6.eastus2.azure.neon.tech/neondb?sslmode=require"
+
 
 # Build the Remix app
 RUN npm run build
