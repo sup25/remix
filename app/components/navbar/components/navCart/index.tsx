@@ -38,7 +38,7 @@ const NavCart = () => {
           size={24}
           className="transition-transform group-hover:scale-105"
         />
-        <div className="rounded-full text-sm font-normal font-Arima px-2 py-1 border border-gray-300 bg-white transition-colors group-hover:border-gray-400">
+        <div className="rounded-full text-sm h-7 w-7 flex items-center justify-center font-normal font-Arima px-2 py-1 border border-gray-300 bg-white transition-colors group-hover:border-gray-400">
           {isHydrated ? itemCount : ""}
         </div>
       </div>

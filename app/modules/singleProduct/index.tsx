@@ -10,6 +10,8 @@ import { useState } from "react";
 
 const SingleProduct = ({ product }: { product: IProduct }) => {
   const [localQuantity, setLocalQuantity] = useState(0);
+  const multipliedProducts = localQuantity * product.price;
+  console.log(product);
   if (!product) {
     return (
       <div className="min-h-screen flex items-center justify-center">
@@ -42,7 +44,7 @@ const SingleProduct = ({ product }: { product: IProduct }) => {
               quantity={localQuantity}
               setQuantity={setLocalQuantity}
             />
-            <EsewaPayment amount={product.price} productName={product.title} />
+            <EsewaPayment amount={Number(multipliedProducts)} />
           </div>
         </div>
       </div>
