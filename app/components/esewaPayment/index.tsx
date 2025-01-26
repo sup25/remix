@@ -1,7 +1,8 @@
 import { useEffect, useState, FormEvent } from "react";
 import { useFetcher } from "@remix-run/react";
 import { v4 as uuidv4 } from "uuid";
-
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 interface FetcherData {
   signature?: string;
   error?: string;
@@ -17,13 +18,12 @@ interface FetcherData {
 
 interface EsewaPaymentProps {
   amount: number;
-  productName: string;
+
   productCode?: string;
 }
 
 export default function EsewaPayment({
   amount,
-  productName,
   productCode = "EPAYTEST",
 }: EsewaPaymentProps) {
   const fetcher = useFetcher<FetcherData>();
@@ -32,7 +32,7 @@ export default function EsewaPayment({
   const [baseUrl, setBaseUrl] = useState<string>("");
   const [isSignatureReady, setIsSignatureReady] = useState(false);
 
-  const taxAmount = Math.round(amount * 0.13); // 13% VAT
+  const taxAmount = Math.round(amount * 0); // 13% VAT
   const totalAmount = amount + taxAmount;
 
   useEffect(() => {
@@ -47,6 +47,10 @@ export default function EsewaPayment({
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    if (totalAmount === 0) {
+      toast.error("Please select quantity to proceed with payment");
+      return;
+    }
 
     // Generate a new UUID for each transaction
     const newTransactionUUID = generateNewTransactionUUID();
@@ -105,6 +109,7 @@ export default function EsewaPayment({
           name="total_amount"
           value={totalAmount.toString()}
         />
+
         <input type="hidden" name="tax_amount" value={taxAmount.toString()} />
         <input type="hidden" name="product_code" value={productCode} />
         <input type="hidden" name="product_service_charge" value="0" />
@@ -135,7 +140,7 @@ export default function EsewaPayment({
             className="mr-2 w-[150px] h-auto text-white"
           />
           <span className="text-black my-2 font-bold">
-            (रु {totalAmount.toLocaleString("en-NP")}) with 13% VAT
+            (रु {totalAmount.toLocaleString("en-NP")})
           </span>
         </button>
       </form>

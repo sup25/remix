@@ -12,11 +12,15 @@ export const action: ActionFunction = async ({ request }) => {
   const transactionUuid = formData.get("transaction_uuid");
   const productCode = formData.get("product_code");
   const secret = formData.get("secret");
+  const productImage = formData.get("product_image");
+  const productName = formData.get("product_name");
 
   console.log("Received form data:", {
     totalAmount,
     transactionUuid,
     productCode,
+    productImage,
+    productName,
   });
 
   if (
@@ -42,6 +46,8 @@ export const action: ActionFunction = async ({ request }) => {
       debug: {
         dataString,
         inputValues: {
+          productName,
+          productImage,
           totalAmount,
           transactionUuid,
           productCode,

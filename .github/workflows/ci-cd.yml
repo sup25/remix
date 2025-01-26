@@ -46,6 +46,7 @@ jobs:
     steps:
       - name: Checkout the repository
         uses: actions/checkout@v2
+
       - name: SSH into EC2 instance and deploy the app
         uses: appleboy/ssh-action@v0.1.5
         with:
@@ -54,9 +55,29 @@ jobs:
           key: ${{ secrets.EC2_PRIVATE_KEY }}
           port: 22
           script: |
+            # Pull the latest image
             docker pull supgg/remix-app:latest
+
+            # Save the old version tag (in case we need to rollback)
+            docker tag supgg/remix-app:latest supgg/remix-app:previous
+
+            # Stop and remove any existing containers
             docker stop remix-app || true
             docker rm remix-app || true
+
             # Kill any process using port 3000
             sudo fuser -k 3000/tcp || true
+
+            # Run the new container
             docker run -d --name remix-app -p 3000:3000 supgg/remix-app:latest
+
+            # Check if the new container is healthy (e.g., checking the app's health endpoint)
+            if ! curl -f http://localhost:3000/health; then
+              echo "New deployment failed, rolling back to previous version"
+              
+              # Rollback to previous version if the new deployment fails
+              docker stop remix-app || true
+              docker rm remix-app || true
+              docker run -d --name remix-app -p 3000:3000 supgg/remix-app:previous
+              exit 1
+            fi
