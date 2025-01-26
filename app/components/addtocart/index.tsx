@@ -21,7 +21,7 @@ const AddToCartButton = ({
 }: AddToCartButtonProps) => {
   const { addToCart, setIsCartOpen } = useCart();
   const [isAdding, setIsAdding] = useState(false);
-  console.log(quantity);
+
   const handleAddToCart = async (e: React.MouseEvent) => {
     e.preventDefault();
     if (isAdding) return;
@@ -32,7 +32,6 @@ const AddToCartButton = ({
     if (quantity !== undefined) {
       const multipliedProducts = Array(quantity).fill(product);
       multipliedProducts.forEach((prod) => addToCart(prod));
-      console.log("Products added to cart:", multipliedProducts);
     } else {
       addToCart(product);
     }

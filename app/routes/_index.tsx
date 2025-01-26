@@ -7,16 +7,15 @@ import Slider from "~/modules/home/slider";
 import Highlights from "~/modules/home/highlights";
 import MarqueeBanner from "~/modules/home/marqueebanner";
 import FeaturedProducts from "~/modules/home/featuredProducts";
-
 import BrandFeatures from "~/modules/home/brandFeatures";
 
 export const meta: MetaFunction = () => {
   return [
-    { title: "Task Trek | Work Made Easy" },
+    { title: "Remix | Shopping Made Easy" },
     {
       name: "description",
       content:
-        "Manage tasks and collaborate in real time with role-based access and smart analytics for enhanced productivity.",
+        "Discover a seamless shopping experience with Remix. Enjoy intuitive navigation, real-time product updates, and personalized recommendations, all designed to make your shopping fast, convenient, and hassle-free.",
     },
   ];
 };
