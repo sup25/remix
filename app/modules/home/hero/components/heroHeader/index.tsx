@@ -10,7 +10,7 @@ const HeroHeader: React.FC = () => (
     <h1 className="md:text-3xl font-Arima text-2xl font-bold text-black">
       Iconic products. Luxury furniture.
     </h1>
-    <p className="w-full max-w-[600px]">
+    <p className="w-full max-w-[600px] text-black">
       Discover iconic, luxury furniture designed to elevate every space. Crafted
       with exceptional quality and timeless elegance, our collection combines
       modern sophistication with classic beauty, perfect for those who seek

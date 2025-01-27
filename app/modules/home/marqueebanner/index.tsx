@@ -116,9 +116,9 @@ const MarqueeBanner = () => {
           pauseOnHover={false}
           className="text-lg font-medium py-10"
         >
-          <div className="flex items-center text-6xl px-8">
+          <div className="flex text-black items-center text-6xl px-8">
             Designed in{" "}
-            <span className="font-bold font-bricolage ml-2 text-7xl">
+            <span className="font-bold text-black  font-bricolage ml-2 text-7xl">
               Remix
             </span>
           </div>
