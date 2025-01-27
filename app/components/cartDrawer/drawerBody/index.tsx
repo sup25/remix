@@ -48,15 +48,15 @@ const DrawerBody = () => {
                   </div>
                 </div>
                 <div className="text-right">
-                  <p className="font-medium">
+                  <div className="font-medium">
                     रु{" "}
                     {(item.product.price * item.quantity).toLocaleString(
                       "ne-NP"
                     )}
-                  </p>
-                  <p className="text-sm text-gray-500">
+                  </div>
+                  <div className="text-sm text-gray-500">
                     रु {item.product.price.toLocaleString("ne-NP")}
-                  </p>
+                  </div>
                 </div>
               </div>
             ))}

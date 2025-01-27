@@ -17,9 +17,9 @@ const Footer = () => {
       <div className="bg-gray-900 text-white py-8">
         <div className="container mx-auto flex flex-col items-center text-center">
           <span className="text-4xl font-Arima font-bold uppercase">Remix</span>
-          <p className="text-sm">
+          <div className="text-sm">
             © {new Date().getFullYear()} All Rights Reserved.
-          </p>
+          </div>
         </div>
       </div>
     </footer>
