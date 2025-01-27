@@ -15,14 +15,6 @@ export const action: ActionFunction = async ({ request }) => {
   const productImage = formData.get("product_image");
   const productName = formData.get("product_name");
 
-  console.log("Received form data:", {
-    totalAmount,
-    transactionUuid,
-    productCode,
-    productImage,
-    productName,
-  });
-
   if (
     typeof totalAmount !== "string" ||
     typeof transactionUuid !== "string" ||
@@ -34,12 +26,9 @@ export const action: ActionFunction = async ({ request }) => {
 
   try {
     const dataString = `total_amount=${totalAmount},transaction_uuid=${transactionUuid},product_code=${productCode}`;
-    console.log("Data string:", dataString);
 
     const hash = CryptoJS.HmacSHA256(dataString, secret);
     const hashInBase64 = CryptoJS.enc.Base64.stringify(hash);
-
-    console.log("Generated signature:", hashInBase64);
 
     return json({
       signature: hashInBase64,
@@ -55,7 +44,6 @@ export const action: ActionFunction = async ({ request }) => {
       },
     });
   } catch (error) {
-    console.error("Error generating signature:", error);
     return json({ error: "Signature generation failed" }, { status: 500 });
   }
 };

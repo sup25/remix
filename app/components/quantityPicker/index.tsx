@@ -1,4 +1,4 @@
-import React, { ChangeEvent } from "react";
+import React, { ChangeEvent, useEffect, useState } from "react";
 import { FiMinus, FiPlus } from "react-icons/fi";
 import { IProduct } from "~/components/schema/Proudct.schema";
 import { useCart } from "~/context/shoppingCart";
@@ -23,10 +23,19 @@ const QuantityPicker: React.FC<QuantityPickerProps> = ({
   setQuantity,
 }) => {
   const { cart, updateQuantity } = useCart();
+  const [currentQuantity, setCurrentQuantity] = useState(
+    isSingleProduct ? quantity : 0
+  );
 
-  const currentQuantity = isSingleProduct
-    ? quantity
-    : cart.find((item) => item.product.id === product.id)?.quantity || 0;
+  useEffect(() => {
+    if (!isSingleProduct) {
+      const cartQuantity =
+        cart.find((item) => item.product.id === product.id)?.quantity || 0;
+      setCurrentQuantity(cartQuantity);
+    } else {
+      setCurrentQuantity(quantity);
+    }
+  }, [cart, product.id, isSingleProduct, quantity]);
 
   const handleIncrement = (): void => {
     if (isSingleProduct) {
