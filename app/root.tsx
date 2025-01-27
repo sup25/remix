@@ -44,7 +44,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Meta />
         <Links />
       </head>
-      <body className="bg-[#fafafa]">
+      <body>
         <Provider store={store}>
           <ToastContainer
             position="bottom-right"
