@@ -34,6 +34,9 @@ export const links: LinksFunction = () => [
     href: "https://fonts.googleapis.com/css2?family=Arima:wght@100..700&family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap",
   },
 ];
+export const meta: MetaFunction = () => {
+  return [{ title: "Remix" }];
+};
 
 export function Layout({ children }: { children: React.ReactNode }) {
   return (
@@ -42,7 +45,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Meta />
         <Links />
       </head>
-      <body>
+      <body className="min-h-screen flex flex-col bg-[#f7f7f7]">
         <Provider store={store}>
           <ToastContainer
             position="bottom-right"
