@@ -84,11 +84,11 @@ export function ErrorBoundary() {
   return (
     <div className="error-page">
       <Custom404 />
-      {error instanceof Error && <p>{error.message}</p>}
+      {error instanceof Error && <div>{error.message}</div>}
       {isRouteErrorResponse(error) && (
-        <p>
+        <div>
           {error.status} {error.statusText}
-        </p>
+        </div>
       )}
     </div>
   );
