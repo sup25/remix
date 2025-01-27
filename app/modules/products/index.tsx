@@ -4,7 +4,7 @@ const Products = ({ products }: { products: IProduct[] }) => {
   return (
     <div className="section">
       <div className="container">
-        <div className="flex flex-col ">
+        <div className="flex flex-col h-screen">
           <h1 className="md:text-3xl font-Arima text-2xl font-bold text-black my-10">
             Proudcts
           </h1>
