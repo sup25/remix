@@ -31,12 +31,14 @@ const Highlights = () => {
           {infos.map((info) => (
             <div
               key={info.title}
-              className="flex border w-full max-w-[450px]  border-gray-200 p-5"
+              className="flex border w-full max-w-[450px] text-gray-800 border-gray-200 p-5"
             >
               <div className="flex flex-col gap-3">
                 {info.icon}
-                <h2 className="font-bold text-lg text-black">{info.title}</h2>
-                <p className="font-semibold w-full max-w-[400px] text-black text-base">
+                <h2 className="font-bold text-lg text-gray-800">
+                  {info.title}
+                </h2>
+                <p className="font-semibold w-full max-w-[400px] text-gray-600 text-base">
                   {info.description}
                 </p>
               </div>
