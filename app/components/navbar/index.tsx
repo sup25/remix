@@ -15,10 +15,6 @@ export const NavBar = () => {
     setDrawerOpen(!isDrawerOpen);
   };
 
-  const closeDrawer = () => {
-    setDrawerOpen(false);
-  };
-
   return (
     <nav className="bg-white z-[9999] section  fixed top-0 left-0 w-full flex justify-center shadow-sm ">
       {/* Main Navbar */}
