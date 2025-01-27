@@ -19,7 +19,7 @@ export const NavBar = () => {
     <nav className="bg-white z-[9999] section  fixed top-0 left-0 w-full flex justify-center shadow-sm ">
       {/* Main Navbar */}
       <div className="container">
-        <div className="flex w-full bg-white  items-center justify-between  py-4">
+        <div className="flex w-full bg-red-200  items-center justify-between  py-4">
           <Logo />
 
           <div className="hidden show gap-4 ">
