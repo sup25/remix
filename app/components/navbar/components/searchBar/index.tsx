@@ -1,10 +1,16 @@
 import { IoIosSearch } from "react-icons/io";
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { useNavigate, useSearchParams } from "react-router-dom";
 
 export const SearchBar = () => {
+  const [searchParams] = useSearchParams();
   const [query, setQuery] = useState("");
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const initialQuery = searchParams.get("query") || "";
+    setQuery(initialQuery);
+  }, [searchParams]);
 
   const handleSearch = () => {
     if (query.trim()) {
