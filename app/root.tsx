@@ -77,16 +77,19 @@ export default function App() {
 export function ErrorBoundary() {
   const error = useRouteError();
 
+  if (isRouteErrorResponse(error) && error.status === 404) {
+    return <Custom404 />;
+  }
+
   return (
     <div className="error-page">
       <Custom404 />
-      <p>
-        {isRouteErrorResponse(error)
-          ? `${error.status} ${error.statusText}`
-          : error instanceof Error
-          ? error.message
-          : "Unknown Error"}
-      </p>
+      {error instanceof Error && <p>{error.message}</p>}
+      {isRouteErrorResponse(error) && (
+        <p>
+          {error.status} {error.statusText}
+        </p>
+      )}
     </div>
   );
 }
