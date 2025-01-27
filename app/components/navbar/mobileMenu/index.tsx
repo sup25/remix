@@ -1,6 +1,4 @@
 import { useState } from "react";
-import Logo from "../logo";
-import { DropdownMenuMobile } from "../components/dropdownMenu/mobile";
 import { AllProducts } from "../components/allProducts";
 import { SearchBar } from "../components/searchBar";
 
@@ -13,7 +11,6 @@ const MobileMenu = () => {
 
   const handleLinkClick = (e: any) => {
     e.preventDefault();
-    console.log("Navigating to:", e.target.href);
     setIsOpen(false);
   };
 
@@ -65,11 +62,6 @@ const MobileMenu = () => {
             {/* All Products */}
             <div className="py-2 border-b border-gray-100">
               <AllProducts />
-            </div>
-
-            {/* Dropdown Menu */}
-            <div className="py-2 border-b border-gray-100">
-              <DropdownMenuMobile />
             </div>
           </nav>
         </div>
