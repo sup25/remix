@@ -1,5 +1,4 @@
 import type { MetaFunction } from "@remix-run/node";
-
 import { RootState } from "~/context/store";
 import { useSelector } from "react-redux";
 import Hero from "~/modules/home/hero";
@@ -13,9 +12,8 @@ export const meta: MetaFunction = () => {
   return [
     { title: "Remix | Shopping Made Easy" },
     {
-      name: "description",
       content:
-        "Discover a seamless shopping experience with Remix. Enjoy intuitive navigation, real-time product updates, and personalized recommendations, all designed to make your shopping fast, convenient, and hassle-free.",
+        "Discover a seamless shopping experience with Remix. Enjoy intuitive navigation, real-time product updates, and personalized recommendations.",
     },
   ];
 };
