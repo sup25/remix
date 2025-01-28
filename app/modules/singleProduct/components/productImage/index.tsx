@@ -15,11 +15,11 @@ const ProductImage: React.FC<ProductImageProps> = ({
 }) => (
   <Swiper className="w-full" spaceBetween={50} slidesPerView={1}>
     <SwiperSlide>
-      <div className=" w-[600px] h-full">
+      <div className=" md:w-[600px] md:h-[600px]  ">
         <img
           src={imageUrl || "/api/placeholder/600/600"}
           alt={title || "Product Image"}
-          className="w-full h-full  object-center"
+          className="w-full md:h-full h-[400px] object-center"
         />
         {discountTag && discountTag > 0 && (
           <span className="absolute top-4 left-4 bg-red-500 text-white px-3 py-1 rounded-full text-sm font-medium">

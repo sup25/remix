@@ -33,7 +33,7 @@ const Account = () => {
       onClick={handleAccountClick}
       className="cursor-pointer rounded-md p-2 transition-all duration-300 ease-in-out hover:bg-gray-200"
     >
-      <HiUser size={25} />
+      <HiUser size={25} className="text-black" />
     </div>
   );
 };

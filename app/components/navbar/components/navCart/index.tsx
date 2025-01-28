@@ -36,7 +36,7 @@ const NavCart = () => {
       >
         <BsFillHandbagFill
           size={24}
-          className="transition-transform group-hover:scale-105"
+          className="transition-transform group-hover:scale-105 text-black "
         />
         <div className="rounded-full text-black text-sm h-7 w-7 flex items-center justify-center font-normal font-Arima px-2 py-1 border border-gray-300 bg-white transition-colors group-hover:border-gray-400">
           {isHydrated ? itemCount : ""}

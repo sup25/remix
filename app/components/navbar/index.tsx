@@ -38,7 +38,11 @@ export const NavBar = () => {
               onClick={toggleDrawer}
               aria-label="Toggle menu"
             >
-              {isDrawerOpen ? <FiX /> : <FiMenu />}
+              {isDrawerOpen ? (
+                <FiX className="text-black" />
+              ) : (
+                <FiMenu className="text-black" />
+              )}
             </button>
           </div>
         </div>
