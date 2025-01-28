@@ -44,7 +44,7 @@ const FeaturedProducts = () => {
           <h2 className="text-sm w-fit text-red-400 p-1 font-Arima font-semibold border border-gray-200 bg-white">
             Featured Products
           </h2>
-          <div className="w-full flex flex-wrap gap-9">
+          <div className="w-full md:justify-start justify-center flex flex-wrap gap-9">
             {randomProducts.map((product) => (
               <ProductCard
                 key={product.id}
