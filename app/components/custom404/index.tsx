@@ -3,9 +3,9 @@ import { FaHome, FaExclamationTriangle } from "react-icons/fa";
 
 export default function Custom404() {
   return (
-    <div className="section">
+    <div className="section min-h-screen ">
       <div className="container">
-        <div className="min-h-screen flex items-center justify-center bg-[#fafafa]">
+        <div className=" flex items-center mt-20 justify-center bg-[#f7f7f7]">
           <div className="text-center">
             <div className="flex justify-center">
               <FaExclamationTriangle className="text-9xl text-yellow-500 mb-6" />

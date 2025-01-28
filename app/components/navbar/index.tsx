@@ -56,8 +56,8 @@ export const NavBar = () => {
             : "-translate-x-full opacity-0"
         }`}
       >
-        <DropdownMenu isMobile />
-        <AllProducts />
+        {/* <DropdownMenu isMobile />
+        <AllProducts /> */}
         <SearchBar />
       </div>
     </nav>

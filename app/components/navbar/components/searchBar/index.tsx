@@ -2,9 +2,9 @@ import { IoIosSearch } from "react-icons/io";
 import { useState, useEffect } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 
-export const SearchBar: React.FC = () => {
+export const SearchBar = () => {
   const [searchParams] = useSearchParams();
-  const [query, setQuery] = useState<string>("");
+  const [query, setQuery] = useState("");
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -12,7 +12,7 @@ export const SearchBar: React.FC = () => {
     setQuery(initialQuery);
   }, [searchParams]);
 
-  const handleSearch = (): void => {
+  const handleSearch = () => {
     if (query.trim()) {
       navigate(`/searchProduct?query=${query}`);
     }
@@ -25,22 +25,28 @@ export const SearchBar: React.FC = () => {
   };
 
   return (
-    <div className=" relative  md:w-[600px] w-full">
-      <input
-        className="w-full border-2 font-medium transition-all duration-300 ease-in-out border-gray-300 rounded-md outline-none p-2 pl-5"
-        type="text"
-        value={query}
-        onChange={(e) => setQuery(e.target.value)}
-        onKeyDown={handleKeyDown}
-        placeholder="Search a product..."
-      />
-      <div className="absolute left-[94%] top-[2%] p-2 bg-gray-800 rounded-r-md">
-        <IoIosSearch
-          size={25}
-          className="    text-gray-300 cursor-pointer"
-          onClick={handleSearch}
+    <div className="w-full">
+      <div className="relative flex items-center">
+        <input
+          className="w-full bg-gray-100 md:w-[600px] border-2 font-medium transition-all duration-300 ease-in-out  rounded-md outline-none p-2 pl-5 pr-10"
+          type="text"
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+          onKeyDown={handleKeyDown}
+          placeholder="Search a product..."
         />
+        <div
+          className="absolute right-0 bg-gray-500 p-2 rounded-r-md cursor-pointer"
+          onClick={handleSearch}
+        >
+          <IoIosSearch
+            size={24}
+            className="text-gray-300 hover:text-black transition-colors"
+          />
+        </div>
       </div>
     </div>
   );
 };
+
+export default SearchBar;
