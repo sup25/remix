@@ -25,7 +25,7 @@ const CartDrawer = ({ onClose }: DrawerProps) => {
       onClick={handleBackgroundClick}
     >
       <motion.div
-        className="bg-white w-[400px] h-screen shadow-lg"
+        className="bg-white md:w-[400px] w-full h-screen shadow-lg"
         initial={{ x: 400 }}
         animate={{ x: 0 }}
         exit={{ x: 400 }}

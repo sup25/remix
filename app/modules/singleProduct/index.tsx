@@ -21,17 +21,17 @@ const SingleProduct = ({ product }: { product: IProduct }) => {
   }
 
   return (
-    <section className="py-12 section bg-gray-50">
+    <section className="py-12   section bg-gray-50">
       <div className="container">
-        <div className="h-screen grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           <ProductImage
             imageUrl={product.images?.[0] ?? ""}
             discountTag={product.discountTag}
             title={product.title ?? "Product Image"}
           />
+
           <div className="space-y-6">
             <ProductDetails product={product} />
-
             <ProductCategories product={product} />
             <QuantityPicker
               product={product}

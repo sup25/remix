@@ -2,7 +2,11 @@ import type { Config } from "tailwindcss";
 import plugin from "tailwindcss/plugin";
 
 export default {
-  content: ["./app/**/{**,.client,.server}/**/*.{js,jsx,ts,tsx}"],
+  content: [
+    "./app/**/*.{js,jsx,ts,tsx}",
+    "./app/**/*.client.{js,jsx,ts,tsx}",
+    "./app/**/*.server.{js,jsx,ts,tsx}",
+  ],
   theme: {
     extend: {
       fontFamily: {
@@ -56,6 +60,11 @@ export default {
         "@media screen and (min-width: 1024px)": {
           ".show": {
             display: "flex !important",
+          },
+        },
+        "@media screen and (max-width: 1024px)": {
+          ".cover": {
+            objectFit: "cover",
           },
         },
       });
