@@ -31,6 +31,8 @@ jobs:
 
       # Build and push Docker image
       - name: Build and Push Docker Image
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
         run: |
           docker build -t supgg/remix-app:${{ github.sha }} -t supgg/remix-app:latest .
           docker push supgg/remix-app:${{ github.sha }}
