@@ -22,14 +22,14 @@ const ProductActions = ({
       className="p-3 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors"
       aria-label="Add to wishlist"
     >
-      <CgHeart className="h-5 w-5" />
+      <CgHeart className="h-5 w-5 text-black" />
     </button>
 
     <button
-      className="p-3 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors"
+      className="p-3 border border-gray-300 rounded-lg  hover:bg-gray-50 transition-colors"
       aria-label="Share product"
     >
-      <CgShare className="h-5 w-5" />
+      <CgShare className="h-5 w-5 text-black" />
     </button>
   </div>
 );

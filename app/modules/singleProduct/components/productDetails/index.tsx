@@ -24,7 +24,9 @@ const ProductDetails = ({ product }: ProductDetailsProps) => {
         <p className="text-sm text-gray-500 uppercase tracking-wide">
           {product.brand}
         </p>
-        <h1 className="text-3xl font-bold mt-2">{product.title}</h1>
+        <h1 className="text-3xl text-gray-800  font-bold mt-2">
+          {product.title}
+        </h1>
       </div>
 
       <div className="space-y-4">
@@ -51,7 +53,7 @@ const ProductDetails = ({ product }: ProductDetailsProps) => {
         </p>
 
         <div className="flex items-center gap-2">
-          <span className="px-3 py-1 border border-gray-300 rounded-full text-sm">
+          <span className="px-3 py-1 border text-gray-500 border-gray-300 rounded-full text-sm">
             Stock: {product.stock} units
           </span>
           {product.stock < 10 && (
