@@ -23,8 +23,8 @@ export const NavBar = () => {
           <Logo />
 
           <div className="hidden show gap-4 ">
-            <DropdownMenu />
-            <AllProducts />
+            {/* <DropdownMenu />
+            <AllProducts /> */}
             <SearchBar />
           </div>
 

@@ -2,9 +2,9 @@ import { IoIosSearch } from "react-icons/io";
 import { useState, useEffect } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 
-export const SearchBar = () => {
+export const SearchBar: React.FC = () => {
   const [searchParams] = useSearchParams();
-  const [query, setQuery] = useState("");
+  const [query, setQuery] = useState<string>("");
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -12,26 +12,34 @@ export const SearchBar = () => {
     setQuery(initialQuery);
   }, [searchParams]);
 
-  const handleSearch = () => {
+  const handleSearch = (): void => {
     if (query.trim()) {
       navigate(`/searchProduct?query=${query}`);
     }
   };
 
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>): void => {
+    if (e.key === "Enter") {
+      handleSearch();
+    }
+  };
+
   return (
-    <div className="flex">
+    <div className=" relative  md:w-[600px] w-full">
       <input
-        className="border-2 w-full min-w-screen-md font-medium transition-all duration-300 ease-in-out border-gray-300 rounded-l-md outline-none p-2"
+        className="w-full border-2 font-medium transition-all duration-300 ease-in-out border-gray-300 rounded-md outline-none p-2 pl-5"
         type="text"
         value={query}
         onChange={(e) => setQuery(e.target.value)}
+        onKeyDown={handleKeyDown}
         placeholder="Search a product..."
       />
-      <div
-        className="cursor-pointer p-2 bg-gray-200 hover:bg-gray-300 flex items-center rounded-r-md"
-        onClick={handleSearch}
-      >
-        <IoIosSearch size={25} />
+      <div className="absolute left-[94%] top-[2%] p-2 bg-gray-800 rounded-r-md">
+        <IoIosSearch
+          size={25}
+          className="    text-gray-300 cursor-pointer"
+          onClick={handleSearch}
+        />
       </div>
     </div>
   );

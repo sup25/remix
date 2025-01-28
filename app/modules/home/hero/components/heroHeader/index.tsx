@@ -4,7 +4,7 @@ import { FaAngleRight } from "react-icons/fa6";
 
 const HeroHeader: React.FC = () => (
   <div className="flex flex-col gap-4">
-    <h2 className="text-sm w-fit text-red-400 p-1 font-Arima font-semibold border border-gray-200 bg-white">
+    <h2 className="text-sm w-fit text-red-400 p-1 whitespace-nowrap font-Arima font-semibold border border-gray-200 bg-white">
       Selected iconic design
     </h2>
     <h1 className="md:text-3xl font-Arima text-2xl font-bold text-black">
@@ -18,7 +18,7 @@ const HeroHeader: React.FC = () => (
     </p>
     <Link
       to="/products"
-      className="group text-base w-fit font-semibold flex items-center"
+      className="group text-base w-fit text-black whitespace-nowrap font-semibold flex items-center"
     >
       Browse all products
       <div className="group-hover:translate-x-2 transition-all duration-300 ease-in-out">
