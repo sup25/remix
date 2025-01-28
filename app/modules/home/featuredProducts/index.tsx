@@ -6,9 +6,10 @@ import { Loading } from "~/components/loading";
 import { SomethingWentWrong } from "~/components/somethingWentWrong";
 
 const FeaturedProducts = () => {
-  const [products, setProducts] = useState([]);
+  const [products, setProducts] = useState<TProduct[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+
   useEffect(() => {
     const loadFeaturedProducts = async () => {
       try {
@@ -30,15 +31,21 @@ const FeaturedProducts = () => {
 
   if (loading) return <Loading />;
   if (error) return <SomethingWentWrong />;
+
+  const randomProducts = products
+    .slice()
+    .sort(() => Math.random() - 0.5)
+    .slice(0, 4);
+
   return (
     <div className="section">
       <div className="container">
-        <div className="flex flex-col  justify-between flex-start gap-10">
+        <div className="flex flex-col justify-between flex-start gap-10">
           <h2 className="text-sm w-fit text-red-400 p-1 font-Arima font-semibold border border-gray-200 bg-white">
             Featured Products
           </h2>
-          <div className="w-full  flex flex-wrap gap-9">
-            {products.map((product: TProduct) => (
+          <div className="w-full flex flex-wrap gap-9">
+            {randomProducts.map((product) => (
               <ProductCard
                 key={product.id}
                 product={{
