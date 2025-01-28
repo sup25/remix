@@ -9,7 +9,7 @@ const Collection = ({ collectionData }: Props) => {
   return (
     <div className="section">
       <div className="container">
-        <div className="flex flex-wrap gap-4 py-10 h-screen">
+        <div className="flex flex-wrap gap-4 py-10 ">
           {collectionData.map((product) => (
             <ProductCard key={product.id} product={product} />
           ))}

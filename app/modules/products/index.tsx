@@ -1,10 +1,16 @@
 import { IProduct } from "../../components/schema/Proudct.schema";
 import ProductCard from "../../components/productCard";
-const Products = ({ products }: { products: IProduct[] }) => {
+import { SomethingWentWrong } from "~/components/somethingWentWrong";
+const Products = ({
+  products,
+}: {
+  products: IProduct[] | null | undefined;
+}) => {
+  if (!products || products.length === 0) return <SomethingWentWrong />;
   return (
-    <div className="section">
-      <div className="container">
-        <div className="flex flex-col h-screen">
+    <div className="section ">
+      <div className="container ">
+        <div className="flex flex-col">
           <h1 className="md:text-3xl font-Arima text-2xl font-bold text-black my-10">
             Proudcts
           </h1>
