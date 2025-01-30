@@ -1,7 +1,7 @@
 import React, { ChangeEvent, useEffect, useState } from "react";
 import { FiMinus, FiPlus } from "react-icons/fi";
 import { IProduct } from "~/components/schema/Proudct.schema";
-import { useCart } from "~/context/shoppingCart";
+import { useCart } from "~/hooks/useCart";
 
 interface QuantityPickerProps {
   product: IProduct;

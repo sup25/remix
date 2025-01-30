@@ -1,10 +1,9 @@
 import { BiChevronRight } from "react-icons/bi";
-
-import { DrawerProps } from "../type";
-import { useCart } from "~/context/shoppingCart";
+import { useCart } from "~/hooks/useCart";
 
 const DrawerFooter = () => {
-  const { cart, totalItems } = useCart();
+  const { cart } = useCart();
+
   const items = cart;
   const subtotal = items.reduce((acc, item) => {
     return acc + item.product.price * item.quantity;

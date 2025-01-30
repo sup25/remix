@@ -1,10 +1,10 @@
 import { BsCart2, BsCheckLg } from "react-icons/bs";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
-import { useCart } from "~/context/shoppingCart";
 import { IProduct } from "~/components/schema/Proudct.schema";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useCart } from "~/hooks/useCart";
 
 interface AddToCartButtonProps {
   product: IProduct;

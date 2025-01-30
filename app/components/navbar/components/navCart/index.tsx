@@ -2,7 +2,7 @@ import { AnimatePresence } from "framer-motion";
 import { useEffect, useState } from "react";
 import { BsFillHandbagFill } from "react-icons/bs";
 import CartDrawer from "~/components/cartDrawer";
-import { useCart } from "~/context/shoppingCart";
+import { useCart } from "~/hooks/useCart";
 
 const NavCart = () => {
   const [showCart, setShowCart] = useState(false);

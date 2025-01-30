@@ -1,8 +1,7 @@
 import { Link } from "@remix-run/react";
-import { BsCart2 } from "react-icons/bs";
 import { IProduct } from "../schema/Proudct.schema";
-import { useCart } from "~/context/shoppingCart";
 import AddToCartButton from "../addtocart";
+import { useCart } from "~/hooks/useCart";
 
 const ProductCard = ({ product }: { product: IProduct }) => {
   const { addToCart, isCartOpen, setIsCartOpen } = useCart();

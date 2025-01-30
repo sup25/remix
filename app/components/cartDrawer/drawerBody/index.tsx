@@ -1,11 +1,12 @@
 import { BiPackage } from "react-icons/bi";
 import { BsBag } from "react-icons/bs";
 import { FiTrash2 } from "react-icons/fi";
-import { useCart } from "~/context/shoppingCart";
 import QuantityPicker from "~/components/quantityPicker";
+import { useCart } from "~/hooks/useCart";
 
 const DrawerBody = () => {
   const { cart, removeFromCart, clearCart } = useCart();
+
   const hasItems = cart && cart.length > 0;
 
   return (

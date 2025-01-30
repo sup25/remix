@@ -1,4 +1,3 @@
-// app/routes/payment-success.tsx
 import { Link } from "@remix-run/react";
 import { FaCheckCircle } from "react-icons/fa";
 

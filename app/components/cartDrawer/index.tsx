@@ -3,10 +3,11 @@ import DrawerNav from "./drawerNav";
 import { DrawerProps } from "./type";
 import DrawerBody from "./drawerBody";
 import DrawerFooter from "./drawerFooter";
-import { useCart } from "~/context/shoppingCart";
+import { useCart } from "~/hooks/useCart";
 
 const CartDrawer = ({ onClose }: DrawerProps) => {
   const { cart, setIsCartOpen } = useCart();
+
   const handleBackgroundClick = () => {
     if (onClose) {
       onClose();
