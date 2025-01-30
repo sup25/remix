@@ -14,7 +14,6 @@ import NavBar from "./components/navbar";
 import { Provider } from "react-redux";
 import store from "./context/store";
 import Footer from "./components/footer";
-import { CartProvider } from "./context/shoppingCart";
 import { ToastContainer, Zoom } from "react-toastify";
 import Custom404 from "./components/custom404";
 
@@ -56,17 +55,15 @@ export function Layout({ children }: { children: React.ReactNode }) {
             transition={Zoom}
             stacked={true}
           />
-          <CartProvider>
-            <div className="mb-20">
-              <NavBar />
-            </div>
-            {children}
-            <div className="mt-32">
-              <Footer />
-            </div>
-            <ScrollRestoration />
-            <Scripts />
-          </CartProvider>
+          <div className="mb-20">
+            <NavBar />
+          </div>
+          {children}
+          <div className="mt-32">
+            <Footer />
+          </div>
+          <ScrollRestoration />
+          <Scripts />
         </Provider>
       </body>
     </html>

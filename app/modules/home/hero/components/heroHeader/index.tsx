@@ -1,4 +1,3 @@
-// components/HeroHeader.tsx
 import { Link } from "@remix-run/react";
 import { FaAngleRight } from "react-icons/fa6";
 

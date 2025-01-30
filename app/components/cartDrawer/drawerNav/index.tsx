@@ -1,7 +1,7 @@
 import { RxCross1 } from "react-icons/rx";
 import { DrawerProps } from "../type";
 import { CgShoppingCart } from "react-icons/cg";
-import { useCart } from "~/context/shoppingCart";
+import { useCart } from "~/hooks/useCart";
 
 const DrawerNav = ({ onClose }: DrawerProps) => {
   const { totalItems } = useCart();
