@@ -1,7 +1,60 @@
-import { Link } from "@remix-run/react";
+import { Link, useNavigate, useSearchParams } from "@remix-run/react";
+import { useEffect } from "react";
 import { FaCheckCircle } from "react-icons/fa";
 
 export default function PaymentSuccess() {
+  const [searchParams] = useSearchParams();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const encodedData = searchParams.get("data");
+    const productId = localStorage.getItem("productId");
+
+    if (encodedData) {
+      try {
+        const decodedString = atob(encodedData);
+        const parsedData = JSON.parse(decodedString);
+
+        console.log("Decoded Payment Data:", parsedData);
+
+        const { transaction_uuid, total_amount, product_code } = parsedData;
+
+        const storedTransaction = localStorage.getItem(
+          "processedTransactionUuid"
+        );
+        if (
+          transaction_uuid &&
+          total_amount &&
+          product_code &&
+          storedTransaction !== transaction_uuid
+        ) {
+          fetch("/webhook-esewa", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              transactionUuid: transaction_uuid,
+              totalAmount: total_amount,
+              productCode: product_code,
+              productId,
+            }),
+          })
+            .then((res) => res.json())
+            .then((data) => {
+              console.log("Webhook Response:", data);
+
+              localStorage.setItem(
+                "processedTransactionUuid",
+                transaction_uuid
+              );
+            })
+            .catch((error) => console.error("Error calling webhook:", error));
+        }
+      } catch (error) {
+        console.error("Error decoding or parsing payment data:", error);
+      }
+    }
+  }, [searchParams]);
+
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100 p-4">
       <div className="bg-white rounded-lg shadow-md p-8 max-w-md text-center animate-fadeIn">

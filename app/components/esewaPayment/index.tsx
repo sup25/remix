@@ -3,6 +3,7 @@ import { useFetcher } from "@remix-run/react";
 import { v4 as uuidv4 } from "uuid";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { IProduct } from "../schema/Proudct.schema";
 interface FetcherData {
   signature?: string;
   error?: string;
@@ -18,13 +19,14 @@ interface FetcherData {
 
 interface EsewaPaymentProps {
   amount: number;
-
+  product: IProduct;
   productCode?: string;
 }
 
 export default function EsewaPayment({
   amount,
   productCode = "EPAYTEST",
+  product,
 }: EsewaPaymentProps) {
   const fetcher = useFetcher<FetcherData>();
   const [transactionUUID, setTransactionUUID] = useState<string>("");
@@ -62,7 +64,7 @@ export default function EsewaPayment({
       transactionUUID: newTransactionUUID,
       productCode,
     });
-
+    localStorage.setItem("productId", product.id.toString());
     const formData = new FormData(event.currentTarget);
     formData.set("transaction_uuid", newTransactionUUID);
 
