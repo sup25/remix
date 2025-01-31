@@ -44,7 +44,10 @@ const SingleProduct = ({ product }: { product: IProduct }) => {
               quantity={localQuantity}
               setQuantity={setLocalQuantity}
             />
-            <EsewaPayment amount={Number(multipliedProducts)} />
+            <EsewaPayment
+              product={product}
+              amount={Number(multipliedProducts)}
+            />
           </div>
         </div>
       </div>
