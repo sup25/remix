@@ -29,4 +29,16 @@ model Product {
   updatedAt   DateTime
   slug        String   @unique
   categories  String[]
+  Order       Order[]
+}
+
+model Order {
+  id              Int      @id @default(autoincrement())
+  transactionUuid String   @unique // eSewa Transaction ID
+  productId       Int
+  product         Product  @relation(fields: [productId], references: [id])
+  totalAmount     Float
+  quantity        Int      @default(1)
+  status          String   @default("pending") // pending, completed, cancelled
+  createdAt       DateTime @default(now())
 }
