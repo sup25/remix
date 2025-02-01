@@ -4,11 +4,11 @@ import { FaCheckCircle } from "react-icons/fa";
 
 export default function PaymentSuccess() {
   const [searchParams] = useSearchParams();
-  const navigate = useNavigate();
 
   useEffect(() => {
     const encodedData = searchParams.get("data");
     const productId = localStorage.getItem("productId");
+    const quanity = localStorage.getItem("quantity");
 
     if (encodedData) {
       try {
@@ -36,6 +36,7 @@ export default function PaymentSuccess() {
               totalAmount: total_amount,
               productCode: product_code,
               productId,
+              quanity,
             }),
           })
             .then((res) => res.json())

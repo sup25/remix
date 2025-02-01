@@ -6,11 +6,17 @@ import ProductCategories from "./components/productCategories";
 import QuantityPicker from "../../components/quantityPicker";
 import { IProduct } from "~/components/schema/Proudct.schema";
 import EsewaPayment from "~/components/esewaPayment";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const SingleProduct = ({ product }: { product: IProduct }) => {
   const [localQuantity, setLocalQuantity] = useState(0);
   const multipliedProducts = localQuantity * product.price;
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      localStorage.setItem("quantity", localQuantity.toString());
+    }
+  }, [localQuantity]);
 
   if (!product) {
     return (
