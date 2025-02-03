@@ -53,6 +53,7 @@ const SingleProduct = ({ product }: { product: IProduct }) => {
             <EsewaPayment
               product={product}
               amount={Number(multipliedProducts)}
+              quantity={localQuantity}
             />
           </div>
         </div>
