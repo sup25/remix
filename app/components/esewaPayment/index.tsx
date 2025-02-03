@@ -21,12 +21,14 @@ interface EsewaPaymentProps {
   amount: number;
   product: IProduct;
   productCode?: string;
+  quantity: number;
 }
 
 export default function EsewaPayment({
   amount,
   productCode = "EPAYTEST",
   product,
+  quantity,
 }: EsewaPaymentProps) {
   const fetcher = useFetcher<FetcherData>();
   const [transactionUUID, setTransactionUUID] = useState<string>("");
@@ -47,31 +49,56 @@ export default function EsewaPayment({
     return uniqueUUID;
   };
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+
     if (totalAmount === 0) {
       toast.error("Please select quantity to proceed with payment");
       return;
     }
 
-    // Generate a new UUID for each transaction
-    const newTransactionUUID = generateNewTransactionUUID();
+    try {
+      const stockformData = new FormData();
+      stockformData.append("productId", product.id.toString());
+      stockformData.append("quantity", quantity.toString());
 
-    console.log("Submitting with values:", {
-      amount,
-      taxAmount,
-      totalAmount,
-      transactionUUID: newTransactionUUID,
-      productCode,
-    });
-    localStorage.setItem("productId", product.id.toString());
-    const formData = new FormData(event.currentTarget);
-    formData.set("transaction_uuid", newTransactionUUID);
+      const response = await fetch("/reserve-stock", {
+        method: "POST",
+        body: stockformData,
+      });
 
-    setSignature("");
-    setIsSignatureReady(false);
+      if (!response.ok) {
+        const errorText = await response.text();
+        console.error("Server Error Response:", errorText);
+        throw new Error("Failed to reserve stock");
+      }
 
-    fetcher.submit(formData, { method: "post", action: "/esewa" });
+      const data = await response.json();
+      console.log(data);
+
+      if (!data.success) {
+        toast.error(data.error || "Stock reservation failed.");
+        return;
+      }
+
+      // Proceed with eSewa payment if stock is reserved
+      const newTransactionUUID = generateNewTransactionUUID();
+      localStorage.setItem("productId", product.id.toString());
+
+      // Explicitly cast to HTMLFormElement
+      const formElement = event.target as HTMLFormElement;
+      const formData = new FormData(formElement);
+      console.log(formData);
+      formData.set("transaction_uuid", newTransactionUUID);
+
+      setSignature("");
+      setIsSignatureReady(false);
+
+      fetcher.submit(formData, { method: "post", action: "/esewa" });
+    } catch (error) {
+      console.log(error);
+      toast.error("Error reserving stock. Please try again.");
+    }
   };
 
   useEffect(() => {
