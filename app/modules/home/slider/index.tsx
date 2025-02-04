@@ -7,9 +7,10 @@ import { Navigation, Autoplay } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import { Link } from "@remix-run/react";
+import { slides } from "./slides";
 
 const Slider = () => {
-  const [isMobile, setIsMobile] = useState(false);
+  const [isMobile, setIsMobile] = useState<null | boolean>(null);
   const [activeIndex, setActiveIndex] = useState(0);
   const [iconSize, setIconSize] = useState(80);
 
@@ -41,37 +42,9 @@ const Slider = () => {
     },
   };
 
-  const slides = [
-    {
-      imageUrl:
-        "https://res.cloudinary.com/dmufwerzv/image/upload/v1676881600/samples/ecommerce/accessories-bag.jpg",
-      cat: "Accessories",
-    },
-    {
-      imageUrl:
-        "https://res.cloudinary.com/dmufwerzv/image/upload/v1676881591/samples/ecommerce/analog-classic.jpg",
-      cat: "Armchairs",
-    },
-    {
-      imageUrl:
-        "https://res.cloudinary.com/dmufwerzv/image/upload/v1676881600/samples/ecommerce/accessories-bag.jpg",
-      cat: "Bookshelves",
-    },
-    {
-      imageUrl:
-        "https://res.cloudinary.com/dmufwerzv/image/upload/v1676881600/samples/ecommerce/accessories-bag.jpg",
-      cat: "Cabinets",
-    },
-    {
-      imageUrl:
-        "https://res.cloudinary.com/dmufwerzv/image/upload/v1676881599/samples/ecommerce/leather-bag-gray.jpg",
-      cat: "chairs",
-    },
-  ];
-
   return (
-    <div className="w-full flex items-center justify-center">
-      <div className="relative w-full max-w-screen-2xl h-fit bg-gray-50 pb-20 px-4 md:px-8">
+    <div className="w-full  flex items-center justify-center">
+      <div className="relative w-full max-w-screen-xl h-fit bg-gray-50 pb-20  ">
         <Swiper
           {...swiperParams}
           key={isMobile ? "mobile" : "desktop"}
@@ -82,7 +55,7 @@ const Slider = () => {
             <SwiperSlide
               key={index}
               virtualIndex={index}
-              className="py-10 px-5 w-full flex flex-col"
+              className="py-10 px-3 lg:px-0 w-full flex flex-col"
             >
               <Link to={"/products"}>
                 <div className="relative w-full h-full   overflow-hidden rounded-xl bg-gray-800 shadow-lg">

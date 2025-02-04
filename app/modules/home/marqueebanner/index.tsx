@@ -14,11 +14,6 @@ interface MarqueeProps {
   className?: string;
 }
 
-interface ContentStyle extends CSSProperties {
-  animation: string;
-  animationDirection: "normal" | "reverse";
-}
-
 const Marquee = ({
   children,
   speed = 50,
@@ -86,22 +81,16 @@ const Marquee = ({
         `}
       </style>
       <div className="flex">
-        <div
-          ref={contentRef}
-          style={contentStyle}
-          className="inline-flex items-center"
-        >
-          {children}
-        </div>
-        <div style={contentStyle} className="inline-flex items-center">
-          {children}
-        </div>
-        <div style={contentStyle} className="inline-flex items-center">
-          {children}
-        </div>
-        <div style={contentStyle} className="inline-flex items-center">
-          {children}
-        </div>
+        {Array.from({ length: 4 }).map((_, index) => (
+          <div
+            key={index}
+            ref={index === 0 ? contentRef : null}
+            style={contentStyle}
+            className="inline-flex items-center"
+          >
+            {children}
+          </div>
+        ))}
       </div>
     </div>
   );
