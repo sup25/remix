@@ -1,5 +1,5 @@
 import { useLoaderData } from "@remix-run/react";
-import { ShowProductInSearchBar as loader } from "../api";
+import { ShowProductFromSearchBar as loader } from "../api";
 import { IProduct } from "~/components/schema/Proudct.schema";
 import ProductCard from "~/components/productCard";
 
