@@ -58,28 +58,28 @@ export default function EsewaPayment({
     }
 
     try {
-      const stockformData = new FormData();
+      /* const stockformData = new FormData();
       stockformData.append("productId", product.id.toString());
       stockformData.append("quantity", quantity.toString());
 
       const response = await fetch("/reserve-stock", {
         method: "POST",
         body: stockformData,
-      });
+      }); */
 
-      if (!response.ok) {
+      /* if (!response.ok) {
         const errorText = await response.text();
         console.error("Server Error Response:", errorText);
         throw new Error("Failed to reserve stock");
-      }
+      } */
 
-      const data = await response.json();
-      console.log(data);
+      /* const data = await response.json(); */
+      /*  console.log(data);
 
       if (!data.success) {
         toast.error(data.error || "Stock reservation failed.");
         return;
-      }
+      } */
 
       // Proceed with eSewa payment if stock is reserved
       const newTransactionUUID = generateNewTransactionUUID();
