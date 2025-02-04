@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { IProduct } from "~/components/schema/Proudct.schema";
 import { calculateOriginalPrice } from "../../utils";
 
@@ -12,11 +13,19 @@ const ProductDetails = ({ product }: ProductDetailsProps) => {
   );
   const savings = Math.floor(originalPrice - product.price);
 
-  const formattedPrice =
-    "रु " + Math.floor(product.price).toLocaleString("en-NP");
-  const formattedOriginalPrice =
-    "रु " + Math.floor(originalPrice).toLocaleString("en-NP");
-  const formattedSavings = "रु " + savings.toLocaleString("en-NP");
+  const [formattedPrice, setFormattedPrice] = useState("");
+  const [formattedOriginalPrice, setFormattedOriginalPrice] = useState("");
+  const [formattedSavings, setFormattedSavings] = useState("");
+
+  useEffect(() => {
+    setFormattedPrice(
+      "रु " + Math.floor(product.price).toLocaleString("en-NP")
+    );
+    setFormattedOriginalPrice(
+      "रु " + Math.floor(originalPrice).toLocaleString("en-NP")
+    );
+    setFormattedSavings("रु " + savings.toLocaleString("en-NP"));
+  }, [product.price, originalPrice, savings]);
 
   return (
     <div className="space-y-6">
@@ -24,7 +33,7 @@ const ProductDetails = ({ product }: ProductDetailsProps) => {
         <p className="text-sm text-gray-500 uppercase tracking-wide">
           {product.brand}
         </p>
-        <h1 className="text-3xl text-gray-800  font-bold mt-2">
+        <h1 className="text-3xl text-gray-800 font-bold mt-2">
           {product.title}
         </h1>
       </div>

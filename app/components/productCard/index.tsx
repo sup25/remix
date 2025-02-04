@@ -1,16 +1,14 @@
 import { Link } from "@remix-run/react";
 import { IProduct } from "../schema/Proudct.schema";
 import AddToCartButton from "../addtocart";
-import { useCart } from "~/hooks/useCart";
+
+import { useEffect, useState } from "react";
 
 const ProductCard = ({ product }: { product: IProduct }) => {
-  const { addToCart, isCartOpen, setIsCartOpen } = useCart();
-
-  const handleAddToCart = (e: React.MouseEvent, product: IProduct) => {
-    e.preventDefault();
-    addToCart(product);
-    setIsCartOpen(true);
-  };
+  const [currency, setCurrency] = useState<string | null>(null);
+  useEffect(() => {
+    setCurrency(product.price.toLocaleString("ne-NP"));
+  }, []);
 
   return (
     <div className="w-72 bg-white rounded-lg overflow-hidden hover:shadow-lg transition-shadow duration-300 cursor-pointer">
@@ -46,7 +44,7 @@ const ProductCard = ({ product }: { product: IProduct }) => {
           <div className="flex items-center justify-between mb-4">
             <div className="flex items-baseline gap-2">
               <span className="text-lg text-red-500 font-medium">
-                रु {product.price.toLocaleString("ne-NP")}
+                रु {currency}
               </span>
             </div>
             <span
@@ -59,7 +57,6 @@ const ProductCard = ({ product }: { product: IProduct }) => {
           </div>
         </div>
       </Link>
-
       <AddToCartButton product={product} />
     </div>
   );
