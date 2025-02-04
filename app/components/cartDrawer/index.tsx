@@ -6,7 +6,7 @@ import DrawerFooter from "./drawerFooter";
 import { useCart } from "~/hooks/useCart";
 
 const CartDrawer = ({ onClose }: DrawerProps) => {
-  const { cart, setIsCartOpen } = useCart();
+  const { setIsCartOpen } = useCart();
 
   const handleBackgroundClick = () => {
     if (onClose) {
@@ -34,7 +34,7 @@ const CartDrawer = ({ onClose }: DrawerProps) => {
         onClick={(e) => e.stopPropagation()}
       >
         <DrawerNav onClose={onClose} />
-        <DrawerBody />
+        <DrawerBody onClose={onClose} />
         <DrawerFooter />
       </motion.div>
     </motion.div>

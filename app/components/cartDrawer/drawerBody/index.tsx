@@ -1,11 +1,13 @@
+import { Link } from "@remix-run/react";
 import { BiPackage } from "react-icons/bi";
 import { BsBag } from "react-icons/bs";
 import { FiTrash2 } from "react-icons/fi";
 import QuantityPicker from "~/components/quantityPicker";
 import { useCart } from "~/hooks/useCart";
+import { DrawerProps } from "../type";
 
-const DrawerBody = () => {
-  const { cart, removeFromCart, clearCart } = useCart();
+const DrawerBody = ({ onClose }: DrawerProps) => {
+  const { cart, removeFromCart, clearCart, setIsCartOpen } = useCart();
 
   const hasItems = cart && cart.length > 0;
 
@@ -82,9 +84,13 @@ const DrawerBody = () => {
               Looks like you haven't added any items to your cart yet. Start
               shopping to fill it up!
             </p>
-            <button className="mt-6 px-4 py-2 bg-gray-900 text-white rounded-lg hover:bg-gray-800 transition-colors">
+            <Link
+              to="/products"
+              onClick={onClose}
+              className="mt-6 px-4 py-2 bg-gray-900 text-white rounded-lg hover:bg-gray-800 transition-colors"
+            >
               Browse Products
-            </button>
+            </Link>
           </div>
         )}
       </div>
