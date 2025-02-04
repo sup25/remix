@@ -9,7 +9,7 @@ export default function SearchProduct() {
   const searchData = useLoaderData<IProduct[]>();
 
   return (
-    <div className="section bg-gray-50">
+    <div className="section bg-gray-50 h-screen">
       <div className="container   py-8">
         <div className="space-y-8">
           <div className="border-b border-gray-200 pb-5">

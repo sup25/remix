@@ -79,7 +79,7 @@ export const NavBar = () => {
         >
           <DropdownMenu isMobile />
           <AllProducts />
-          <SearchBar />
+          <SearchBar setDrawerOpen={setDrawerOpen} />
         </div>
       )}
     </nav>
