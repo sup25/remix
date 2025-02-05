@@ -1,16 +1,17 @@
 import { createCookieSessionStorage } from "@remix-run/node";
 
+// Update the cookie settings for your domain and production environment
 export let sessionStorage = createCookieSessionStorage({
   cookie: {
     name: "_session",
-    sameSite: "lax", // this helps with CSRF
-    path: "/", // remember to add this so the cookie will work in all routes
-    httpOnly: true,
-    secrets: ["s3cr3t"], // replace this with an actual secret
-    /* secure: process.env.NODE_ENV === "production", */
-    secure: false,
+    sameSite: "lax", // helps with CSRF
+    path: "/", // cookie applies to all routes
+    httpOnly: true, // prevents JS from accessing the cookie
+    secrets: ["s3cr3t"], // replace with an actual secret
+    secure: process.env.NODE_ENV === "production", // ensure cookies are secure in production
+    domain: ".remixstore.duckdns.org", // set the domain (use the full domain for your production site)
   },
 });
 
-// you can also export the methods individually for your own usage
+// Export session management functions
 export let { getSession, commitSession, destroySession } = sessionStorage;
