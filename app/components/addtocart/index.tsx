@@ -19,27 +19,49 @@ const AddToCartButton = ({
   setQuantity,
   className = "",
 }: AddToCartButtonProps) => {
-  const { addToCart, setIsCartOpen } = useCart();
+  const { addToCart, setIsCartOpen, cart } = useCart();
   const [isAdding, setIsAdding] = useState(false);
+
+  const cartItem = cart.find((item) => item.product.id === product.id);
+  const cartQuantity = cartItem ? cartItem.quantity : 0;
+  const availableStock = product.stock - cartQuantity;
+
+  const requestedQuantity = quantity ?? 1;
 
   const handleAddToCart = async (e: React.MouseEvent) => {
     e.preventDefault();
     if (isAdding) return;
-    if (quantity! <= 0) {
+
+    // Prevent adding if stock is zero
+    if (product.stock <= 0) {
+      toast.error("Out of stock");
+      return;
+    }
+
+    // Ensure quantity is valid
+    if (requestedQuantity <= 0) {
       toast.error("Quantity must be greater than 0");
       return;
     }
-    if (quantity !== undefined) {
-      const multipliedProducts = Array(quantity).fill(product);
-      multipliedProducts.forEach((prod) => addToCart(prod));
-    } else {
+
+    // Check if requested quantity exceeds available stock
+    if (requestedQuantity > availableStock) {
+      toast.error(`Only ${availableStock} items available`);
+      return;
+    }
+
+    for (let i = 0; i < requestedQuantity; i++) {
       addToCart(product);
     }
+
     setIsAdding(true);
 
+    // Simulate adding to the cart
     await new Promise((resolve) => setTimeout(resolve, 1000));
     setIsAdding(false);
     setIsCartOpen(true);
+
+    // Reset quantity after adding to the cart
     if (setQuantity) {
       setQuantity(0);
     }
@@ -48,7 +70,7 @@ const AddToCartButton = ({
   return (
     <motion.button
       onClick={handleAddToCart}
-      disabled={product.stock <= 0 || isAdding}
+      disabled={availableStock <= 0 || isAdding}
       className={`w-full py-3 flex items-center justify-center gap-2 transition-colors duration-300 disabled:cursor-not-allowed ${className}`}
       style={{
         backgroundColor: isAdding ? "#22c55e" : "black",
