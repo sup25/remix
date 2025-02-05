@@ -69,11 +69,11 @@ jobs:
             docker stop remix-app || true
             docker rm remix-app || true
 
-            # Kill any process running on port 80
-            sudo fuser -k 80/tcp || true
+            # Kill any process running on port 8080
+            sudo fuser -k 8080/tcp || true
 
             # Run the new container
-            docker run -d --name remix-app -p 80:3000 -e DATABASE_URL=${{ secrets.DATABASE_URL }} supgg/remix-app:latest
+            docker run -d --name remix-app -p 8080:3000 -e DATABASE_URL=${{ secrets.DATABASE_URL }} supgg/remix-app:latest
 
             # Wait for the app to start and perform health check
             retries=5
@@ -87,7 +87,7 @@ jobs:
               echo "Health check failed. Rolling back to the previous version..."
               docker stop remix-app || true
               docker rm remix-app || true
-              docker run -d --name remix-app -p 80:3000 supgg/remix-app:previous
+              docker run -d --name remix-app -p 8080:3000 supgg/remix-app:previous
               exit 1
             fi
             # Immediately remove all unused images

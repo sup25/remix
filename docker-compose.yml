@@ -4,6 +4,6 @@ services:
     build:
       context: .
     ports:
-      - "80:3000"
+      - "8080:3000"
     environment:
       - DATABASE_URL=postgresql://neondb_owner:WnFd40eGwxDz@ep-billowing-haze-a8329nf6.eastus2.azure.neon.tech/neondb?sslmode=require
