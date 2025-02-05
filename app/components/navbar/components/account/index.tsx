@@ -23,7 +23,9 @@ const Account = () => {
   const user = fetcher.data?.user ?? null;
 
   const handleAccountClick = () => {
-    if (!user) {
+    if (user) {
+      navigate("/dashboard");
+    } else {
       navigate("/login");
     }
   };
@@ -33,7 +35,11 @@ const Account = () => {
       onClick={handleAccountClick}
       className="cursor-pointer rounded-md p-2 transition-all duration-300 ease-in-out hover:bg-gray-200"
     >
-      <HiUser size={25} className="text-black" />
+      {user ? (
+        <HiUser size={25} className="text-green-600 " />
+      ) : (
+        <HiUser size={25} className="text-black" />
+      )}
     </div>
   );
 };
