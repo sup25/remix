@@ -9,7 +9,10 @@ export let sessionStorage = createCookieSessionStorage({
     httpOnly: true, // prevents JS from accessing the cookie
     secrets: ["s3cr3t"], // replace with an actual secret
     secure: process.env.NODE_ENV === "production", // ensure cookies are secure in production
-    domain: ".remixstore.duckdns.org", // set the domain (use the full domain for your production site)
+    domain:
+      process.env.NODE_ENV === "production"
+        ? ".remixstore.duckdns.org"
+        : "localhost", // set the domain (use the full domain for your production site)
   },
 });
 
