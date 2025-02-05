@@ -1,5 +1,7 @@
 import { useForm } from "react-hook-form";
 import { useFetcher, Link } from "@remix-run/react";
+import { BsEye, BsEyeSlash } from "react-icons/bs";
+import { useState } from "react";
 
 interface LoginFormData {
   email: string;
@@ -37,6 +39,8 @@ export default function Login() {
     });
   };
 
+  const [showPassword, setShowPassword] = useState(false);
+
   return (
     <div className="min-h-[calc(100vh-5rem)] section flex items-center justify-center bg-gray-50">
       <div className="max-w-md w-full p-8 bg-white rounded-lg shadow">
@@ -65,17 +69,30 @@ export default function Login() {
 
           <div className="space-y-1">
             <label className="block text-sm font-medium">Password</label>
-            <input
-              type="password"
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-200"
-              {...register("password", {
-                required: "Password is required",
-                minLength: {
-                  value: 6,
-                  message: "Password must be at least 6 characters",
-                },
-              })}
-            />
+            <div className="relative">
+              <input
+                type={showPassword ? "text" : "password"}
+                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-200"
+                {...register("password", {
+                  required: "Password is required",
+                  minLength: {
+                    value: 6,
+                    message: "Password must be at least 6 characters",
+                  },
+                })}
+              />
+              <button
+                type="button"
+                className="absolute right-3 top-1/2 transform -translate-y-1/2"
+                onClick={() => setShowPassword(!showPassword)}
+              >
+                {showPassword ? (
+                  <BsEye className="w-5 h-5 text-gray-500" />
+                ) : (
+                  <BsEyeSlash className="w-5 h-5 text-gray-500" />
+                )}
+              </button>
+            </div>
             {errors.password && (
               <span className="text-sm text-red-500">
                 {errors.password.message}

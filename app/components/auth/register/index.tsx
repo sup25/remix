@@ -1,6 +1,7 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { useFetcher } from "@remix-run/react";
+import { Link, useFetcher } from "@remix-run/react";
+import { BsEye, BsEyeSlash } from "react-icons/bs";
 
 interface RegisterFormData {
   name: string;
@@ -20,6 +21,8 @@ export default function Register() {
   const fetcher = useFetcher();
 
   const password = watch("password");
+  const [passwordVisible, setPasswordVisible] = useState(false);
+  const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false);
 
   const onSubmit = (data: RegisterFormData) => {
     const formData = new FormData();
@@ -83,17 +86,30 @@ export default function Register() {
 
           <div className="space-y-1">
             <label className="block text-sm font-medium">Password</label>
-            <input
-              type="password"
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-200"
-              {...register("password", {
-                required: "Password is required",
-                minLength: {
-                  value: 6,
-                  message: "Password must be at least 6 characters",
-                },
-              })}
-            />
+            <div className="relative">
+              <input
+                type={passwordVisible ? "text" : "password"}
+                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-200"
+                {...register("password", {
+                  required: "Password is required",
+                  minLength: {
+                    value: 6,
+                    message: "Password must be at least 6 characters",
+                  },
+                })}
+              />
+              <button
+                type="button"
+                onClick={() => setPasswordVisible(!passwordVisible)}
+                className="absolute inset-y-0 right-3 flex items-center"
+              >
+                {passwordVisible ? (
+                  <BsEye className="w-5 h-5 text-gray-500" />
+                ) : (
+                  <BsEyeSlash className="w-5 h-5 text-gray-500" />
+                )}
+              </button>
+            </div>
             {errors.password && (
               <span className="text-sm text-red-500">
                 {errors.password.message}
@@ -105,15 +121,30 @@ export default function Register() {
             <label className="block text-sm font-medium">
               Confirm Password
             </label>
-            <input
-              type="password"
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-200"
-              {...register("confirmPassword", {
-                required: "Please confirm your password",
-                validate: (value) =>
-                  value === password || "The passwords do not match",
-              })}
-            />
+            <div className="relative">
+              <input
+                type={confirmPasswordVisible ? "text" : "password"}
+                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-200"
+                {...register("confirmPassword", {
+                  required: "Please confirm your password",
+                  validate: (value) =>
+                    value === password || "The passwords do not match",
+                })}
+              />
+              <button
+                type="button"
+                onClick={() =>
+                  setConfirmPasswordVisible(!confirmPasswordVisible)
+                }
+                className="absolute inset-y-0 right-3 flex items-center"
+              >
+                {confirmPasswordVisible ? (
+                  <BsEye className="w-5 h-5 text-gray-500" />
+                ) : (
+                  <BsEyeSlash className="w-5 h-5 text-gray-500" />
+                )}
+              </button>
+            </div>
             {errors.confirmPassword && (
               <span className="text-sm text-red-500">
                 {errors.confirmPassword.message}
@@ -128,6 +159,11 @@ export default function Register() {
             Register
           </button>
         </form>
+        <div className="mt-8 text-center">
+          <Link to="/login" className="text-sm hover:underline">
+            Already have an account? Login
+          </Link>
+        </div>
       </div>
     </div>
   );
