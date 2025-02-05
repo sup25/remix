@@ -10,22 +10,15 @@ export const action = async ({ request }: { request: Request }) => {
     const body = await request.json();
     console.log("Incoming eSewa Data:", body);
 
-    // Extract necessary fields
-    const { transactionUuid, totalAmount, productCode, productId, quanity } =
+    const { transactionUuid, totalAmount, productId, quantity, formattedCart } =
       body;
 
-    if (!transactionUuid || !productCode || !totalAmount || !productId) {
-      console.error("Validation failed:", {
-        transactionUuid,
-        totalAmount,
-        productCode,
-        productId,
-        quanity,
-      });
+    if (!transactionUuid || !totalAmount) {
+      console.error("Validation failed:", body);
       return json({ error: "Invalid request data" }, { status: 400 });
     }
 
-    // Check if the transaction already exists (to prevent duplicates)
+    // Prevent duplicate transactions
     const existingOrder = await prisma.order.findUnique({
       where: { transactionUuid },
     });
@@ -38,48 +31,124 @@ export const action = async ({ request }: { request: Request }) => {
       );
     }
 
-    // Check if the product exists and has enough stock before creating an order
-    const existingProduct = await prisma.product.findUnique({
-      where: { id: parseInt(productId) },
-      select: { id: true, stock: true },
-    });
+    if (
+      formattedCart &&
+      Array.isArray(formattedCart) &&
+      formattedCart.length > 0
+    ) {
+      // **Cart Drawer Purchase Handling**
+      const productIds = formattedCart.map((item) => parseInt(item.productId));
 
-    if (!existingProduct) {
-      console.error("Product not found:", productId);
-      return json({ error: "Product not found" }, { status: 404 });
-    }
-
-    if (existingProduct.stock <= 0) {
-      console.error("Stock unavailable for product:", productId);
-      return json({ error: "Product out of stock" }, { status: 400 });
-    }
-
-    // Start transaction: Update stock & create order (all in one transaction)
-    const [updatedProduct, newOrder] = await prisma.$transaction([
-      prisma.product.update({
-        where: { id: parseInt(productId) },
-        data: { stock: { decrement: parseInt(quanity) } },
+      // Fetch all products in one query
+      const existingProducts = await prisma.product.findMany({
+        where: { id: { in: productIds } },
         select: { id: true, stock: true },
-      }),
-      prisma.order.create({
-        data: {
-          transactionUuid,
-          productId: parseInt(productId),
-          totalAmount: parseFloat(totalAmount.replace(",", "")),
-          quantity: parseInt(quanity),
-          status: "completed",
-        },
-      }),
-    ]);
+      });
 
-    console.log("Order created:", newOrder);
-    console.log("Product stock updated:", updatedProduct);
+      const productStockMap = new Map(
+        existingProducts.map((p) => [p.id, p.stock])
+      );
 
-    return json({
-      message: "Order placed successfully",
-      order: newOrder,
-      updatedStock: updatedProduct.stock,
-    });
+      // Check stock availability for all products
+      for (const item of formattedCart) {
+        const productId = parseInt(item.productId);
+        const quantity = parseInt(item.quantity);
+        const availableStock = productStockMap.get(productId);
+
+        if (availableStock === undefined) {
+          console.error(`Product not found: ${productId}`);
+          return json(
+            { error: `Product not found: ${productId}` },
+            { status: 404 }
+          );
+        }
+
+        if (availableStock < quantity) {
+          console.error(`Stock unavailable for product: ${productId}`);
+          return json(
+            { error: `Product out of stock: ${productId}` },
+            { status: 400 }
+          );
+        }
+      }
+
+      // Start transaction for cart drawer purchase
+      await prisma.$transaction(async (tx) => {
+        const order = await tx.order.create({
+          data: {
+            transactionUuid,
+            totalAmount: parseFloat(totalAmount.replace(",", "")),
+            status: "completed",
+          },
+        });
+
+        for (const item of formattedCart) {
+          const productId = parseInt(item.productId);
+          const quantity = parseInt(item.quantity);
+
+          await tx.product.update({
+            where: { id: productId },
+            data: { stock: { decrement: quantity } },
+          });
+
+          await tx.orderItem.create({
+            data: {
+              orderId: order.id,
+              productId,
+              quantity,
+            },
+          });
+        }
+      });
+
+      console.log("Cart order placed and product stocks updated");
+    } else if (productId && quantity) {
+      // **Single Product Purchase Handling**
+      const existingProduct = await prisma.product.findUnique({
+        where: { id: parseInt(productId) },
+        select: { id: true, stock: true },
+      });
+
+      if (!existingProduct) {
+        console.error("Product not found:", productId);
+        return json({ error: "Product not found" }, { status: 404 });
+      }
+
+      if (existingProduct.stock < parseInt(quantity)) {
+        console.error("Stock unavailable for product:", productId);
+        return json({ error: "Product out of stock" }, { status: 400 });
+      }
+
+      // Start transaction for single product purchase
+      await prisma.$transaction(async (tx) => {
+        const order = await tx.order.create({
+          data: {
+            transactionUuid,
+            totalAmount: parseFloat(totalAmount.replace(",", "")),
+            status: "completed",
+          },
+        });
+
+        await tx.product.update({
+          where: { id: parseInt(productId) },
+          data: { stock: { decrement: parseInt(quantity) } },
+        });
+
+        await tx.orderItem.create({
+          data: {
+            orderId: order.id,
+            productId: parseInt(productId),
+            quantity: parseInt(quantity),
+          },
+        });
+      });
+
+      console.log("Single product order placed and stock updated");
+    } else {
+      return json({ error: "Invalid request data" }, { status: 400 });
+    }
+
+    return json({ message: "Order placed successfully" }, { status: 200 });
   } catch (error: unknown) {
     console.error("Webhook error:", error);
 

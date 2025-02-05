@@ -1,8 +1,10 @@
 import { BiChevronRight } from "react-icons/bi";
 import { useCart } from "~/hooks/useCart";
+import Checkout from "./checkoutBtn";
 
 const DrawerFooter = () => {
   const { cart } = useCart();
+  console.log(cart);
 
   const items = cart;
   const subtotal = items.reduce((acc, item) => {
@@ -46,10 +48,7 @@ const DrawerFooter = () => {
         </div>
       </div>
 
-      <button className="w-full mt-4 px-4 py-3 bg-black text-white rounded-lg flex items-center justify-center gap-2 hover:bg-gray-800 transition-colors">
-        Checkout
-        <BiChevronRight className="w-4 h-4" />
-      </button>
+      <Checkout products={cart} amount={total} />
     </div>
   );
 };

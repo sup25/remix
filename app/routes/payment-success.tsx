@@ -1,21 +1,39 @@
-import { Link, useNavigate, useSearchParams } from "@remix-run/react";
+import { Link, useSearchParams } from "@remix-run/react";
 import { useEffect } from "react";
 import { FaCheckCircle } from "react-icons/fa";
+import { useCart } from "~/hooks/useCart";
 
 export default function PaymentSuccess() {
   const [searchParams] = useSearchParams();
+  const { clearCart } = useCart();
 
   useEffect(() => {
     const encodedData = searchParams.get("data");
     const productId = localStorage.getItem("productId");
-    const quanity = localStorage.getItem("quantity");
+    const quantity = localStorage.getItem("quantity");
+    const checkoutSource = localStorage.getItem("checkoutSource");
+    const cartProductsString =
+      checkoutSource === "drawer"
+        ? localStorage.getItem("shopping-cart")
+        : null;
+
+    const cartProducts = cartProductsString
+      ? JSON.parse(cartProductsString)
+      : [];
+
+    const formattedCart = Array.isArray(cartProducts)
+      ? cartProducts.map((item) => ({
+          quantity: item.quantity,
+          productId: item.product.id,
+        }))
+      : [];
 
     if (encodedData) {
       try {
         const decodedString = atob(encodedData);
         const parsedData = JSON.parse(decodedString);
 
-        console.log("Decoded Payment Data:", parsedData);
+        /*  console.log("Decoded Payment Data:", parsedData); */
 
         const { transaction_uuid, total_amount, product_code } = parsedData;
 
@@ -35,19 +53,26 @@ export default function PaymentSuccess() {
               transactionUuid: transaction_uuid,
               totalAmount: total_amount,
               productCode: product_code,
-              productId,
-              quanity,
+              productId: checkoutSource === "drawer" ? null : productId,
+              quantity: checkoutSource === "drawer" ? null : quantity,
+              formattedCart,
             }),
           })
             .then((res) => res.json())
             .then((data) => {
-              console.log("Webhook Response:", data);
+              /* console.log("Webhook Response:", data); */
 
               localStorage.setItem(
                 "processedTransactionUuid",
                 transaction_uuid
               );
+              if (checkoutSource === "drawer") {
+                localStorage.removeItem("shopping-cart");
+                clearCart();
+              }
+              localStorage.removeItem("checkoutSource");
             })
+
             .catch((error) => console.error("Error calling webhook:", error));
         }
       } catch (error) {
