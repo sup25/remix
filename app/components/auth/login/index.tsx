@@ -1,5 +1,5 @@
 import { useForm } from "react-hook-form";
-import { useFetcher, FetcherWithComponents, Link } from "@remix-run/react";
+import { useFetcher, Link } from "@remix-run/react";
 
 interface LoginFormData {
   email: string;
@@ -24,7 +24,7 @@ export default function Login() {
     formState: { errors },
   } = useForm<LoginFormData>();
 
-  const fetcher: FetcherWithComponents<LoginResponse> = useFetcher();
+  const fetcher = useFetcher<LoginResponse>();
 
   const onSubmit = (data: LoginFormData) => {
     const formData = new FormData();
