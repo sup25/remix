@@ -9,7 +9,6 @@ interface LoginFormData {
 }
 
 interface UserData {
-  id: number;
   name: string;
   email: string;
 }
@@ -20,6 +19,8 @@ interface LoginResponse {
 }
 
 export default function Login() {
+  const [showPassword, setShowPassword] = useState(false);
+
   const {
     register,
     handleSubmit,
@@ -38,8 +39,6 @@ export default function Login() {
       action: "/login",
     });
   };
-
-  const [showPassword, setShowPassword] = useState(false);
 
   return (
     <div className="min-h-[calc(100vh-5rem)] section flex items-center justify-center bg-gray-50">
