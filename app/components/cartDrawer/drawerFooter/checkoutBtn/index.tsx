@@ -1,9 +1,11 @@
 import { useEffect, useState, FormEvent } from "react";
-import { useFetcher } from "@remix-run/react";
+import { useFetcher, useNavigate } from "@remix-run/react";
 import { v4 as uuidv4 } from "uuid";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { IProduct } from "~/components/schema/Proudct.schema";
+import { useUser } from "~/hooks/useUser";
+import { useCart } from "~/hooks/useCart";
 
 interface CartItem {
   product: IProduct;
@@ -18,17 +20,24 @@ interface FetcherData {
 interface EsewaPaymentProps {
   amount: number;
   products: CartItem[];
+  onClose?: () => void;
 }
 
-export default function Checkout({ amount, products }: EsewaPaymentProps) {
+export default function Checkout({
+  amount,
+  products,
+  onClose,
+}: EsewaPaymentProps) {
   const fetcher = useFetcher<FetcherData>();
   const [transactionUUID, setTransactionUUID] = useState<string>("");
   const [signature, setSignature] = useState<string>("");
   const [baseUrl, setBaseUrl] = useState<string>("");
   const [isSignatureReady, setIsSignatureReady] = useState(false);
-
+  const { isAuthenticated } = useUser();
   const taxAmount = Math.round(amount * 0); // Assuming 0% VAT
   const totalAmount = amount + taxAmount;
+  const navigate = useNavigate();
+  console.log(isAuthenticated);
 
   useEffect(() => {
     setBaseUrl(window.location.origin);
@@ -42,6 +51,12 @@ export default function Checkout({ amount, products }: EsewaPaymentProps) {
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+
+    if (!isAuthenticated) {
+      onClose!();
+      navigate("/login");
+      return;
+    }
 
     if (totalAmount === 0) {
       toast.error("Your cart is empty. Please add items to proceed.");

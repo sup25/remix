@@ -7,7 +7,7 @@ import { useCart } from "~/hooks/useCart";
 import { DrawerProps } from "../type";
 
 const DrawerBody = ({ onClose }: DrawerProps) => {
-  const { cart, removeFromCart, clearCart, setIsCartOpen } = useCart();
+  const { cart, removeFromCart, clearCart } = useCart();
 
   const hasItems = cart && cart.length > 0;
 

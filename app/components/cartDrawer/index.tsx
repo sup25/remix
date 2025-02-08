@@ -35,7 +35,7 @@ const CartDrawer = ({ onClose }: DrawerProps) => {
       >
         <DrawerNav onClose={onClose} />
         <DrawerBody onClose={onClose} />
-        <DrawerFooter />
+        <DrawerFooter onClose={onClose} />
       </motion.div>
     </motion.div>
   );

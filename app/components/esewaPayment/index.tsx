@@ -1,9 +1,10 @@
 import { useEffect, useState, FormEvent } from "react";
-import { useFetcher } from "@remix-run/react";
+import { useFetcher, useNavigate } from "@remix-run/react";
 import { v4 as uuidv4 } from "uuid";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { IProduct } from "../schema/Proudct.schema";
+import { useUser } from "~/hooks/useUser";
 interface FetcherData {
   signature?: string;
   error?: string;
@@ -35,7 +36,7 @@ export default function EsewaPayment({
   const [signature, setSignature] = useState<string>("");
   const [baseUrl, setBaseUrl] = useState<string>("");
   const [isSignatureReady, setIsSignatureReady] = useState(false);
-
+  const { isAuthenticated } = useUser();
   const taxAmount = Math.round(amount * 0); // 13% VAT
   const totalAmount = amount + taxAmount;
 
@@ -48,9 +49,13 @@ export default function EsewaPayment({
     setTransactionUUID(uniqueUUID);
     return uniqueUUID;
   };
-
+  const navigate = useNavigate();
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    if (!isAuthenticated) {
+      navigate("/login");
+      return;
+    }
 
     if (totalAmount === 0) {
       toast.error("Please select quantity to proceed with payment");
