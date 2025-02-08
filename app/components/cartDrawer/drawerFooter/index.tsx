@@ -1,10 +1,9 @@
-import { BiChevronRight } from "react-icons/bi";
 import { useCart } from "~/hooks/useCart";
 import Checkout from "./checkoutBtn";
+import { DrawerProps } from "../type";
 
-const DrawerFooter = () => {
+const DrawerFooter = ({ onClose }: DrawerProps) => {
   const { cart } = useCart();
-  console.log(cart);
 
   const items = cart;
   const subtotal = items.reduce((acc, item) => {
@@ -48,7 +47,7 @@ const DrawerFooter = () => {
         </div>
       </div>
 
-      <Checkout products={cart} amount={total} />
+      <Checkout products={cart} amount={total} onClose={onClose} />
     </div>
   );
 };
