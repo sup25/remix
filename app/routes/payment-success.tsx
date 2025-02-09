@@ -2,12 +2,15 @@ import { Link, useSearchParams } from "@remix-run/react";
 import { useEffect } from "react";
 import { FaCheckCircle } from "react-icons/fa";
 import { useCart } from "~/hooks/useCart";
+import { useUser } from "~/hooks/useUser";
 
 export default function PaymentSuccess() {
   const [searchParams] = useSearchParams();
   const { clearCart } = useCart();
+  const { user } = useUser();
 
   useEffect(() => {
+    if (!user?.id) return;
     const encodedData = searchParams.get("data");
     const productId = localStorage.getItem("productId");
     const quantity = localStorage.getItem("quantity");
@@ -56,6 +59,7 @@ export default function PaymentSuccess() {
               productId: checkoutSource === "drawer" ? null : productId,
               quantity: checkoutSource === "drawer" ? null : quantity,
               formattedCart,
+              userId: user.id,
             }),
           })
             .then((res) => res.json())
@@ -79,7 +83,7 @@ export default function PaymentSuccess() {
         console.error("Error decoding or parsing payment data:", error);
       }
     }
-  }, [searchParams]);
+  }, [searchParams, user]);
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100 p-4">

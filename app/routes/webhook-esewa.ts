@@ -10,8 +10,14 @@ export const action = async ({ request }: { request: Request }) => {
     const body = await request.json();
     console.log("Incoming eSewa Data:", body);
 
-    const { transactionUuid, totalAmount, productId, quantity, formattedCart } =
-      body;
+    const {
+      transactionUuid,
+      totalAmount,
+      productId,
+      quantity,
+      formattedCart,
+      userId,
+    } = body;
 
     if (!transactionUuid || !totalAmount) {
       console.error("Validation failed:", body);
@@ -76,6 +82,7 @@ export const action = async ({ request }: { request: Request }) => {
       await prisma.$transaction(async (tx) => {
         const order = await tx.order.create({
           data: {
+            userId,
             transactionUuid,
             totalAmount: parseFloat(totalAmount.replace(",", "")),
             status: "completed",
@@ -123,6 +130,7 @@ export const action = async ({ request }: { request: Request }) => {
       await prisma.$transaction(async (tx) => {
         const order = await tx.order.create({
           data: {
+            userId,
             transactionUuid,
             totalAmount: parseFloat(totalAmount.replace(",", "")),
             status: "completed",

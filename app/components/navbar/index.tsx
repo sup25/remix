@@ -6,11 +6,15 @@ import Logo from "./logo";
 import Account from "./components/account";
 import NavCart from "./components/navCart";
 import { AllProducts } from "./components/allProducts";
+import { useUser } from "~/hooks/useUser";
 
 export const NavBar = () => {
   const [isDrawerOpen, setDrawerOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const [hasMounted, setHasMounted] = useState(false);
+  /* const { user } = useUser();
+
+  console.log("hello", user); */
 
   useEffect(() => {
     setHasMounted(true);
