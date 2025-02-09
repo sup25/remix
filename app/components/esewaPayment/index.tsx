@@ -29,7 +29,6 @@ export default function EsewaPayment({
   amount,
   productCode = "EPAYTEST",
   product,
-  quantity,
 }: EsewaPaymentProps) {
   const fetcher = useFetcher<FetcherData>();
   const [transactionUUID, setTransactionUUID] = useState<string>("");
