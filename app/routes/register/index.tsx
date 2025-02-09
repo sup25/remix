@@ -6,14 +6,17 @@ import Register from "~/components/auth/register";
 
 export const action = async ({ request }: ActionFunctionArgs) => {
   const formData = await request.formData();
+  console.log(formData);
   const name = formData.get("name");
   const email = formData.get("email");
   const password = formData.get("password");
+  const address = formData.get("address");
 
   if (
     typeof name !== "string" ||
     typeof email !== "string" ||
-    typeof password !== "string"
+    typeof password !== "string" ||
+    typeof address !== "string"
   ) {
     return json({ error: "Invalid form data" }, { status: 400 });
   }
@@ -25,6 +28,7 @@ export const action = async ({ request }: ActionFunctionArgs) => {
       data: {
         name,
         email,
+        address,
         password: hashedPassword,
       },
     });

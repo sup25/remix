@@ -10,7 +10,9 @@ export const loader: LoaderFunction = async ({ request }) => {
 };
 
 export default function Dashboard() {
-  const { user } = useLoaderData<{ user: { email: string; name: string } }>();
+  const { user } = useLoaderData<{
+    user: { email: string; name: string; address: string };
+  }>();
   const navigate = useNavigate();
 
   const handleLogout = () => {
@@ -49,15 +51,21 @@ export default function Dashboard() {
                       {user.email}
                     </p>
                   </div>
+                  <div className="bg-white rounded-lg p-4 shadow-sm">
+                    <p className="text-sm text-gray-500 mb-1">Address</p>
+                    <p className="text-lg font-medium text-gray-800">
+                      {user.address}
+                    </p>
+                  </div>
                 </div>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <div className="bg-blue-50 rounded-xl p-6">
-                  <h3 className="text-lg font-semibold text-blue-800 mb-2">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="bg-red-50 rounded-xl p-6">
+                  <h3 className="text-lg font-semibold text-red-800 mb-2">
                     Quick Actions
                   </h3>
-                  <p className="text-blue-600">
+                  <p className="text-red-600">
                     Access your most common tasks here
                   </p>
                 </div>
@@ -67,14 +75,6 @@ export default function Dashboard() {
                   </h3>
                   <p className="text-purple-600">
                     View your latest interactions
-                  </p>
-                </div>
-                <div className="bg-green-50 rounded-xl p-6">
-                  <h3 className="text-lg font-semibold text-green-800 mb-2">
-                    Statistics
-                  </h3>
-                  <p className="text-green-600">
-                    Check your performance metrics
                   </p>
                 </div>
               </div>
