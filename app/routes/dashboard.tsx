@@ -1,6 +1,7 @@
 import { LoaderFunction, json } from "@remix-run/node";
 import { useLoaderData, useNavigate } from "@remix-run/react";
 import { authenticator } from "~/.server/auth.server";
+import ShowUserBookmarks from "~/components/bookmarks";
 
 export const loader: LoaderFunction = async ({ request }) => {
   let user = await authenticator.isAuthenticated(request, {
@@ -33,7 +34,7 @@ export default function Dashboard() {
           </div>
 
           {user ? (
-            <div className="space-y-6">
+            <div className="space-y-6 w-full">
               <div className="bg-gray-50 rounded-xl p-6">
                 <h2 className="text-xl font-semibold text-gray-700 mb-4">
                   User Information
@@ -60,23 +61,8 @@ export default function Dashboard() {
                 </div>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div className="bg-red-50 rounded-xl p-6">
-                  <h3 className="text-lg font-semibold text-red-800 mb-2">
-                    Quick Actions
-                  </h3>
-                  <p className="text-red-600">
-                    Access your most common tasks here
-                  </p>
-                </div>
-                <div className="bg-purple-50 rounded-xl p-6">
-                  <h3 className="text-lg font-semibold text-purple-800 mb-2">
-                    Recent Activity
-                  </h3>
-                  <p className="text-purple-600">
-                    View your latest interactions
-                  </p>
-                </div>
+              <div className="flex w-full">
+                <ShowUserBookmarks />
               </div>
             </div>
           ) : (
