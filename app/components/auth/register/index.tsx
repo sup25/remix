@@ -2,10 +2,13 @@ import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useFetcher } from "@remix-run/react";
 import { BsEye, BsEyeSlash } from "react-icons/bs";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 interface RegisterFormData {
   name: string;
   email: string;
+  address: string;
   password: string;
   confirmPassword: string;
 }
@@ -29,6 +32,7 @@ export default function Register() {
     formData.append("name", data.name);
     formData.append("email", data.email);
     formData.append("password", data.password);
+    formData.append("address", data.address);
 
     fetcher.submit(formData, {
       method: "post",
@@ -40,7 +44,6 @@ export default function Register() {
     if (fetcher.state === "submitting") {
       console.log("Submitting form...");
     } else if (fetcher.state === "idle") {
-      console.log("Form submitted, resetting form...");
       reset();
     }
   }, [fetcher.state, reset]);
@@ -80,6 +83,24 @@ export default function Register() {
             {errors.email && (
               <span className="text-sm text-red-500">
                 {errors.email.message}
+              </span>
+            )}
+          </div>
+          <div className="space-y-1">
+            <label className="block text-sm font-medium">Address</label>
+            <input
+              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-200"
+              {...register("address", {
+                required: "Address is required",
+                pattern: {
+                  value: /^[a-zA-Z0-9\s,.'-]{3,}$/,
+                  message: "Please enter a valid address",
+                },
+              })}
+            />
+            {errors.address && (
+              <span className="text-sm text-red-500">
+                {errors.address.message}
               </span>
             )}
           </div>

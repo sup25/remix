@@ -32,7 +32,12 @@ authenticator.use(
       throw new Error("Invalid email or password");
     }
 
-    return { id: user.id, email: user.email, name: user.name };
+    return {
+      id: user.id,
+      email: user.email,
+      name: user.name,
+      address: user.address,
+    };
   })
 );
 
