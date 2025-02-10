@@ -77,7 +77,6 @@ export default function App() {
 
 export function ErrorBoundary() {
   const error = useRouteError();
-
   if (isRouteErrorResponse(error) && error.status === 404) {
     return <Custom404 />;
   }

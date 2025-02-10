@@ -1,20 +1,9 @@
 import { ActionFunction, json, LoaderFunction } from "@remix-run/node";
 import CryptoJS from "crypto-js";
+import { IProduct } from "~/components/schema/Proudct.schema";
 
 interface CartItem {
-  product: {
-    id: number;
-    title: string;
-    brand: string;
-    slug: string;
-    price: number;
-    stock: number;
-    images: string[];
-    discountTag: string | null;
-    categories: string[];
-    createdAt: string;
-    updatedAt: string;
-  };
+  product: IProduct;
   quantity: number;
 }
 export const loader: LoaderFunction = async () => {

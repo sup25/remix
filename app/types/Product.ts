@@ -2,13 +2,13 @@ export interface Product {
   id: number;
   title: string;
   brand: string;
-  price: number; // Use 'number' instead of 'Float' in TypeScript
+  price: number;
   stock: number;
-  discountTag?: number; // Use optional chaining for nullable fields
+  discountTag?: number;
   images: string[];
   description?: string;
-  createdAt: string; // Use 'string' for DateTime representation in TypeScript
-  updatedAt: string; // Use 'string' for DateTime representation in TypeScript
+  createdAt: string;
+  updatedAt: string;
   slug: string;
   categories: string[];
 }
