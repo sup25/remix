@@ -6,6 +6,8 @@ import { RiBookMarkedFill, RiBookMarkedLine } from "react-icons/ri";
 
 import ProductCard from "../productCard";
 import { Loading } from "../loading";
+import { useFetcher } from "@remix-run/react";
+import { handleRemoveBookmark } from "./handler";
 
 interface BookmarkType {
   id: number;
@@ -16,6 +18,7 @@ const ShowUserBookmarks = () => {
   const { user } = useUser();
   const [bookmarks, setBookmarks] = useState<BookmarkType[]>([]);
   const [loading, setLoading] = useState(true);
+  const fetcher = useFetcher();
 
   useEffect(() => {
     if (!user?.id) return;
@@ -41,10 +44,22 @@ const ShowUserBookmarks = () => {
     fetchBookmarks();
   }, [user]);
 
+  useEffect(() => {
+    if (fetcher.data) {
+      const { message, error } = fetcher.data as {
+        message?: string;
+        error?: string;
+      };
+
+      if (message) toast.success(message);
+      if (error) toast.error(error);
+    }
+  }, [fetcher.data]);
+
   if (loading) {
     return (
       <div className="flex w-full justify-center">
-        <Loading />;
+        <Loading />
       </div>
     );
   }
@@ -72,7 +87,22 @@ const ShowUserBookmarks = () => {
       ) : (
         <div className="flex flex-wrap md:flex-row flex-col gap-6">
           {bookmarks.map((bookmark) => (
-            <ProductCard key={bookmark.id} product={bookmark.product} />
+            <div key={bookmark.id} className="flex flex-col">
+              <ProductCard product={bookmark.product} />
+              <div
+                onClick={() =>
+                  handleRemoveBookmark(
+                    bookmark.product.id,
+                    user.id!,
+                    fetcher,
+                    setBookmarks
+                  )
+                }
+                className="my-2 p-2 bg-red-500 flex items-center justify-center text-white rounded-lg cursor-pointer"
+              >
+                Remove
+              </div>
+            </div>
           ))}
         </div>
       )}
