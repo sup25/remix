@@ -1,4 +1,3 @@
-import { CgHeart } from "react-icons/cg";
 import AddToCartButton from "~/components/addtocart";
 import { IProduct } from "~/components/schema/Proudct.schema";
 import ShareButton from "./shareButton";

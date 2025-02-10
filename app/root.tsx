@@ -83,7 +83,12 @@ export function ErrorBoundary() {
 
   return (
     <div className="error-page">
-      {error instanceof Error && <div>{error.message}</div>}
+      {error instanceof Error && (
+        <div>
+          {" "}
+          <SomethingWentWrong />
+        </div>
+      )}
       {isRouteErrorResponse(error) && (
         <div>
           <SomethingWentWrong />
