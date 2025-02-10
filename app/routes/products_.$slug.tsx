@@ -1,5 +1,5 @@
 import { useLoaderData } from "@remix-run/react";
-import { getProduct as loader } from "../Api";
+import { getProduct as loader } from "../api";
 
 import { IProduct } from "../components/schema/Proudct.schema";
 import SingleProduct from "~/modules/singleProduct";
