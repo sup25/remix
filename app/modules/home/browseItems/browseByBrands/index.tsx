@@ -1,29 +1,33 @@
+import { useEffect, useState } from "react";
 import BrowseItems from "..";
-const Brands = [
-  { value: "evercove", label: "EverCove", count: 120 },
-  { value: "brightnest", label: "BrightNest", count: 85 },
-  { value: "lunaluxe", label: "LunaLuxe", count: 45 },
-  { value: "peakaura", label: "PeakAura", count: 67 },
-  { value: "swiftwave", label: "SwiftWave", count: 93 },
-  { value: "truehaven", label: "TrueHaven", count: 38 },
-  { value: "glowforge", label: "GlowForge", count: 72 },
-  { value: "urbanzen", label: "UrbanZen", count: 54 },
-  { value: "noblenest", label: "NobleNest", count: 61 },
-  { value: "skyvibe", label: "SkyVibe", count: 43 },
-  { value: "boldsprout", label: "BoldSprout", count: 89 },
-  { value: "echobloom", label: "EchoBloom", count: 35 },
-  { value: "vividpeak", label: "VividPeak", count: 47 },
-];
+
 interface Props {
   hide: () => void;
 }
+
 const BrowseByBrands = ({ hide }: Props) => {
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const response = await fetch("/browseProducts");
+        const data = await response.json();
+        setProducts(data.products || []);
+      } catch (error) {
+        console.error("Error fetching products:", error);
+      }
+    };
+    fetchProducts();
+  }, []);
+
   return (
     <BrowseItems
       heading="Browse by Brands"
-      products={Brands}
+      products={products}
       handler={hide}
-      link="products"
+      link="brand"
+      type="brand"
     />
   );
 };

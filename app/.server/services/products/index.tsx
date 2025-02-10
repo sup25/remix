@@ -5,6 +5,15 @@ export const LoadProducts = async () => {
   return products;
 };
 
+export const getProductsByBrand = async (brand: string) => {
+  const products = await prisma.product.findMany({
+    where: {
+      brand: brand,
+    },
+  });
+  return products;
+};
+
 export const getProductBySlug = async (slug: string) => {
   const product = await prisma.product.findUnique({
     where: { slug },

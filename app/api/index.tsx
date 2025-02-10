@@ -3,6 +3,7 @@ import { json, LoaderFunction } from "@remix-run/node";
 import {
   getProductByCategory,
   getProductBySlug,
+  getProductsByBrand,
   getSerchBarProducts,
 } from "~/.server/services/products";
 
@@ -20,6 +21,22 @@ export const getProduct: LoaderFunction = async ({ params }) => {
   }
 
   return json(product);
+};
+
+export const GetProductByBrand: LoaderFunction = async ({ params }) => {
+  const { brand } = params;
+  console.log(params);
+  if (!brand) {
+    throw new Response("Not Found", { status: 404 });
+  }
+
+  const products = await getProductsByBrand(brand);
+
+  if (!products || products.length === 0) {
+    throw new Response("Products not found", { status: 404 });
+  }
+
+  return json(products);
 };
 export const GetProductByCategory: LoaderFunction = async ({ params }) => {
   const { category } = params;
