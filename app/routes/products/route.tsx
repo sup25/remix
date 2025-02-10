@@ -4,7 +4,6 @@ import { IProduct } from "../../components/schema/Proudct.schema";
 import Products from "~/modules/products";
 import { LoadProducts } from "~/.server/services/products";
 
-// Define the loader function
 export const loader: LoaderFunction = async () => {
   try {
     const products = await LoadProducts();

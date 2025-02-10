@@ -1,8 +1,4 @@
-export interface IProduct {
-  value: string;
-  label: string;
-  count: number;
-}
+import { IProduct } from "~/components/schema/Proudct.schema";
 
 export interface IBrowseItemsProps {
   heading: string;
