@@ -2,6 +2,7 @@ import { useForm } from "react-hook-form";
 import { useFetcher, Link } from "@remix-run/react";
 import { BsEye, BsEyeSlash } from "react-icons/bs";
 import { useState } from "react";
+import { Loading } from "~/components/loading";
 
 interface LoginFormData {
   email: string;
@@ -104,7 +105,7 @@ export default function Login() {
             disabled={fetcher.state === "submitting"}
             className="w-full py-2 px-4 border border-black rounded-md text-sm font-medium bg-black text-white hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-500 disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            {fetcher.state === "submitting" ? "Logging in..." : "Login"}
+            {fetcher.state === "submitting" ? <Loading size={20} /> : "Login"}
           </button>
 
           {fetcher.data?.error && (

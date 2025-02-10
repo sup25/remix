@@ -4,6 +4,7 @@ import { Link, useFetcher } from "@remix-run/react";
 import { BsEye, BsEyeSlash } from "react-icons/bs";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { Loading } from "~/components/loading";
 
 interface RegisterFormData {
   name: string;
@@ -175,9 +176,13 @@ export default function Register() {
 
           <button
             type="submit"
-            className="w-full py-2 px-4 border border-black rounded-md text-sm font-medium bg-black text-white hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-500 disabled:opacity-50 disabled:cursor-not-allowed"
+            className="w-full h-10 py-2 px-4 border border-black rounded-md text-sm font-medium bg-black text-white hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-500 disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            Register
+            {fetcher.state === "submitting" ? (
+              <Loading size={20} />
+            ) : (
+              "Register"
+            )}
           </button>
         </form>
         <div className="mt-8 text-center">
