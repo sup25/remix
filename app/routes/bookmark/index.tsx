@@ -9,7 +9,7 @@ import {
   deleteBookmark,
   getBookmark,
   getUserBookmarks,
-} from "~/.server/service/bookmarks";
+} from "~/.server/services/bookmarks";
 
 export const loader: LoaderFunction = async ({ request }) => {
   try {
