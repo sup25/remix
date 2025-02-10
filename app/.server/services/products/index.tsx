@@ -8,7 +8,6 @@ export const getProductBySlug = async (slug: string) => {
 };
 
 export const getProductByCategory = async (selectedCategories: string[]) => {
-  console.log(selectedCategories);
   const products = await prisma.product.findMany({
     where: {
       categories: {

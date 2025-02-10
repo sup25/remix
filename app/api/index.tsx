@@ -4,7 +4,7 @@ import {
   getProductByCategory,
   getProductBySlug,
   getSerchBarProducts,
-} from "~/services/products";
+} from "~/.server/services/products";
 
 export const getProduct: LoaderFunction = async ({ params }) => {
   const { slug } = params;
