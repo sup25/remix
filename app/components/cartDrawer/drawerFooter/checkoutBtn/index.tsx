@@ -37,7 +37,6 @@ export default function Checkout({
   const taxAmount = Math.round(amount * 0); // Assuming 0% VAT
   const totalAmount = amount + taxAmount;
   const navigate = useNavigate();
-  console.log(isAuthenticated);
 
   useEffect(() => {
     setBaseUrl(window.location.origin);
@@ -77,7 +76,6 @@ export default function Checkout({
 
       fetcher.submit(formData, { method: "post", action: "/esewa" });
     } catch (error) {
-      console.log(error);
       toast.error("Error processing payment. Please try again.");
     }
   };

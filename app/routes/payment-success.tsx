@@ -35,11 +35,7 @@ export default function PaymentSuccess() {
       try {
         const decodedString = atob(encodedData);
         const parsedData = JSON.parse(decodedString);
-
-        /*  console.log("Decoded Payment Data:", parsedData); */
-
         const { transaction_uuid, total_amount, product_code } = parsedData;
-
         const storedTransaction = localStorage.getItem(
           "processedTransactionUuid"
         );
@@ -64,8 +60,6 @@ export default function PaymentSuccess() {
           })
             .then((res) => res.json())
             .then((data) => {
-              /* console.log("Webhook Response:", data); */
-
               localStorage.setItem(
                 "processedTransactionUuid",
                 transaction_uuid

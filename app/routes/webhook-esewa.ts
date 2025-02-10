@@ -8,7 +8,6 @@ export const action = async ({ request }: { request: Request }) => {
 
   try {
     const body = await request.json();
-    console.log("Incoming eSewa Data:", body);
 
     const {
       transactionUuid,

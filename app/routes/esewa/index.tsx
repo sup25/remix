@@ -12,7 +12,6 @@ export const loader: LoaderFunction = async () => {
 
 export const action: ActionFunction = async ({ request }) => {
   const formData = await request.formData();
-  console.log("form data", formData);
 
   const totalAmount = formData.get("total_amount");
   const transactionUuid = formData.get("transaction_uuid");

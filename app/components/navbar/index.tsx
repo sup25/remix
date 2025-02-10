@@ -12,9 +12,6 @@ export const NavBar = () => {
   const [isDrawerOpen, setDrawerOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const [hasMounted, setHasMounted] = useState(false);
-  /* const { user } = useUser();
-
-  console.log("hello", user); */
 
   useEffect(() => {
     setHasMounted(true);

@@ -92,15 +92,12 @@ export default function EsewaPayment({
       // Explicitly cast to HTMLFormElement
       const formElement = event.target as HTMLFormElement;
       const formData = new FormData(formElement);
-      console.log(formData);
       formData.set("transaction_uuid", newTransactionUUID);
-
       setSignature("");
       setIsSignatureReady(false);
 
       fetcher.submit(formData, { method: "post", action: "/esewa" });
     } catch (error) {
-      console.log(error);
       toast.error("Error reserving stock. Please try again.");
     }
   };
@@ -119,7 +116,6 @@ export default function EsewaPayment({
       const esewaForm = document.getElementById("esewaForm") as HTMLFormElement;
       if (esewaForm) {
         const formData = new FormData(esewaForm);
-        console.log("eSewa Form Data:", Object.fromEntries(formData.entries()));
         esewaForm.submit();
       }
       setIsSignatureReady(false);

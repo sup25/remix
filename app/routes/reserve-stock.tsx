@@ -6,7 +6,6 @@ export const action = async ({ request }: { request: Request }) => {
     const formData = await request.formData();
     const productId = Number(formData.get("productId"));
     const quantity = Number(formData.get("quantity"));
-    console.log(productId, quantity);
 
     if (!productId || !quantity) {
       return json(
