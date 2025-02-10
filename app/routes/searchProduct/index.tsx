@@ -2,27 +2,34 @@ import { useLoaderData } from "@remix-run/react";
 import { ShowProductFromSearchBar as loader } from "../../api";
 import { IProduct } from "~/components/schema/Proudct.schema";
 import ProductCard from "~/components/productCard";
+import { SomethingWentWrong } from "~/components/somethingWentWrong";
 
 export { loader };
 
 export default function SearchProduct() {
-  const searchData = useLoaderData<IProduct[]>();
+  let searchData: IProduct[] | null = null;
+
+  try {
+    searchData = useLoaderData<IProduct[]>();
+  } catch (error) {
+    return <SomethingWentWrong />;
+  }
 
   return (
     <div className="section bg-gray-50 h-screen">
-      <div className="container   py-8">
+      <div className="container py-8">
         <div className="space-y-8">
           <div className="border-b border-gray-200 pb-5">
             <h1 className="text-3xl font-Arima font-bold tracking-tight text-gray-900">
               Search Results
             </h1>
             <p className="mt-2 text-sm text-gray-500">
-              Found {searchData.length}{" "}
-              {searchData.length === 1 ? "product" : "products"}
+              Found {searchData?.length || 0}{" "}
+              {searchData?.length === 1 ? "product" : "products"}
             </p>
           </div>
 
-          {searchData.length > 0 ? (
+          {searchData && searchData.length > 0 ? (
             <div className="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 w-full">
               {searchData.map((product) => (
                 <div
