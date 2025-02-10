@@ -1,5 +1,5 @@
 import { useLoaderData } from "@remix-run/react";
-import { GetProductByCategory as loader } from "../Api";
+import { getProductByCategory as loader } from "~/.server/services/products";
 import { TProduct } from "~/components/schema/types";
 import Collection from "~/modules/collection";
 
