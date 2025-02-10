@@ -107,8 +107,6 @@ export default function EsewaPayment({
 
   useEffect(() => {
     if (fetcher.data?.signature) {
-      console.log("Received Signature:", fetcher.data.signature);
-      console.log("Debug Info:", fetcher.data.debug);
       setSignature(fetcher.data.signature);
       setIsSignatureReady(true);
     } else if (fetcher.data?.error) {

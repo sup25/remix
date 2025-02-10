@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { Link, useFetcher } from "@remix-run/react";
+import { Link, useFetcher, useNavigate } from "@remix-run/react";
 import { BsEye, BsEyeSlash } from "react-icons/bs";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -13,6 +13,10 @@ interface RegisterFormData {
   password: string;
   confirmPassword: string;
 }
+interface RegisterResponse {
+  error?: string;
+  success: string;
+}
 
 export default function Register() {
   const {
@@ -22,8 +26,8 @@ export default function Register() {
     reset,
     watch,
   } = useForm<RegisterFormData>();
-  const fetcher = useFetcher();
 
+  const fetcher = useFetcher<RegisterResponse>();
   const password = watch("password");
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false);
@@ -42,12 +46,15 @@ export default function Register() {
   };
 
   useEffect(() => {
-    if (fetcher.state === "submitting") {
-      console.log("Submitting form...");
-    } else if (fetcher.state === "idle") {
+    if (fetcher.state === "idle") {
       reset();
     }
-  }, [fetcher.state, reset]);
+    if (fetcher.data?.success) {
+      toast.success(fetcher.data.success);
+    } else if (fetcher.data?.error) {
+      toast.error(fetcher.data.error);
+    }
+  }, [fetcher.state, reset, fetcher.data]);
 
   return (
     <div className="min-h-screen section flex items-center justify-center bg-gray-50">
