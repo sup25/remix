@@ -1,7 +1,9 @@
+import { SomethingWentWrong } from "~/components/somethingWentWrong";
+
 export const getFeaturedProducts = async () => {
   const response = await fetch("/featuredProducts");
   if (!response.ok) {
-    throw new Error("Failed to fetch products");
+    <SomethingWentWrong />;
   }
   const data = await response.json();
   return data.products;
