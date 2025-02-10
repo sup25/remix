@@ -1,4 +1,5 @@
 import { json } from "@remix-run/node";
+import { checkExistingOrder } from "~/.server/services/order";
 import prisma from "~/_lib/db";
 
 export const action = async ({ request }: { request: Request }) => {
@@ -24,9 +25,7 @@ export const action = async ({ request }: { request: Request }) => {
     }
 
     // Prevent duplicate transactions
-    const existingOrder = await prisma.order.findUnique({
-      where: { transactionUuid },
-    });
+    const existingOrder = await checkExistingOrder(transactionUuid);
 
     if (existingOrder) {
       console.error("Duplicate transaction detected:", transactionUuid);

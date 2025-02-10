@@ -11,6 +11,7 @@ export default function PaymentSuccess() {
 
   useEffect(() => {
     if (!user?.id) return;
+    if (!user?.email) return;
     const encodedData = searchParams.get("data");
     const productId = localStorage.getItem("productId");
     const quantity = localStorage.getItem("quantity");
@@ -69,6 +70,22 @@ export default function PaymentSuccess() {
                 clearCart();
               }
               localStorage.removeItem("checkoutSource");
+
+              const emailData = new FormData();
+              emailData.append("email", user.email ?? "did not get user email");
+              emailData.append(
+                "username",
+                user.name ?? "did not get user name"
+              );
+              emailData.append("transactionUuid", transaction_uuid);
+
+              fetch("/sendEmail", {
+                method: "POST",
+                body: emailData,
+              })
+                .then((res) => res.json())
+                .then(() => console.log("Email sent successfully"))
+                .catch((error) => console.error("Error sending email:", error));
             })
 
             .catch((error) => console.error("Error calling webhook:", error));
