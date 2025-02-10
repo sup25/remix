@@ -11,7 +11,7 @@ export const getUserBookmarks = async (userId: number) => {
   });
 };
 
-//Get Bookmark
+//Get Bookmark (to check if it exists)
 export const getBookmark = async (userId: number, productId: number) => {
   return prisma.bookMark.findFirst({
     where: { userId, productId },

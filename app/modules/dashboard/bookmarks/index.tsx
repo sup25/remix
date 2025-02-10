@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { useUser } from "~/hooks/useUser";
-import { IProduct } from "../schema/Proudct.schema";
 import { RiBookMarkedFill, RiBookMarkedLine } from "react-icons/ri";
-
-import ProductCard from "../productCard";
-import { Loading } from "../loading";
 import { useFetcher } from "@remix-run/react";
 import { handleRemoveBookmark } from "./handler";
+import { IProduct } from "~/components/schema/Proudct.schema";
+import { Loading } from "~/components/loading";
+import ProductCard from "~/components/productCard";
 
 interface BookmarkType {
   id: number;

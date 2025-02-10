@@ -1,7 +1,7 @@
 import { LoaderFunction, json } from "@remix-run/node";
 import { useLoaderData, useNavigate } from "@remix-run/react";
 import { authenticator } from "~/.server/auth.server";
-import ShowUserBookmarks from "~/components/bookmarks";
+import ShowUserBookmarks from "~/modules/dashboard/bookmarks";
 
 export const loader: LoaderFunction = async ({ request }) => {
   let user = await authenticator.isAuthenticated(request, {
