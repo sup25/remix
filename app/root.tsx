@@ -16,6 +16,7 @@ import store from "./context/store";
 import Footer from "./components/footer";
 import { ToastContainer, Zoom } from "react-toastify";
 import Custom404 from "./components/custom404";
+import { SomethingWentWrong } from "./components/somethingWentWrong";
 
 export const links: LinksFunction = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -83,11 +84,10 @@ export function ErrorBoundary() {
 
   return (
     <div className="error-page">
-      <Custom404 />
       {error instanceof Error && <div>{error.message}</div>}
       {isRouteErrorResponse(error) && (
         <div>
-          {error.status} {error.statusText}
+          <SomethingWentWrong />
         </div>
       )}
     </div>
