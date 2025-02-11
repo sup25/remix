@@ -51,6 +51,8 @@ export const meta: MetaFunction = () => {
       content:
         "https://res.cloudinary.com/dmufwerzv/image/upload/v1739260327/android-chrome-512x512_gje9k9.png",
     },
+    { property: "og:image:width", content: "512" },
+    { property: "og:image:height", content: "512" },
     { property: "og:url", content: "https://remixstore.duckdns.org" },
     { property: "og:type", content: "website" },
   ];
