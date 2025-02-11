@@ -92,7 +92,7 @@ export const DropdownMenu = ({
                         setActiveAccordion(null);
                       }}
                       key={product.id}
-                      to={`/collection/${product.categories}`}
+                      to={`/products/${product.slug}`}
                       onMouseEnter={() => setHighlightedItem(product.id)}
                       onMouseLeave={() => setHighlightedItem(null)}
                       className={`flex items-center px-4 py-2 text-sm rounded-md transition-all duration-200 ${
