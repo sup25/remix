@@ -64,11 +64,11 @@ const ShowUserBookmarks = () => {
   }
 
   return (
-    <div className="container mx-auto px-4 py-8">
+    <div className="container mx-auto px-4 py-8 bg-[#f7f7f7]">
       <div className="flex flex-wrap items-center gap-3 mb-8 w-full">
-        <RiBookMarkedLine size={24} />
-        <h2 className="text-3xl font-bold">Your Bookmarks</h2>
-        <span className="bg-gray-100 px-3 py-1 rounded-full text-sm">
+        <RiBookMarkedLine size={24} className="text-black" />
+        <h2 className="text-3xl text-black font-bold">Your Bookmarks</h2>
+        <span className="bg-gray-100 px-3 py-1 rounded-full text-black text-sm">
           {bookmarks.length} items
         </span>
       </div>
