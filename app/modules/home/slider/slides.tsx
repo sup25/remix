@@ -11,7 +11,7 @@ export const slides = [
   },
   {
     imageUrl:
-      "https://res.cloudinary.com/dmufwerzv/image/upload/v1731517502/oiseieghwzxsbsrno5c7.jpg",
+      "https://res.cloudinary.com/dmufwerzv/image/upload/v1739261015/7xm.xyz829876_k2gxwr.jpg",
     cat: "Bookshelves",
   },
   {
