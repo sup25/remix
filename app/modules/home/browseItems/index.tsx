@@ -3,6 +3,7 @@ import { BiPackage, BiX } from "react-icons/bi";
 import { BsArrowRight } from "react-icons/bs";
 import { IBrowseItemsProps } from "./types";
 import { Loading } from "~/components/loading";
+import { SomethingWentWrong } from "~/components/somethingWentWrong";
 
 const BrowseItems = ({
   heading,
@@ -11,7 +12,10 @@ const BrowseItems = ({
   link,
   type,
 }: IBrowseItemsProps & { type: "category" | "brand" }) => {
-  if (!products || products.length === 0) {
+  if (!products) {
+    return <SomethingWentWrong />;
+  }
+  if (products.length === 0) {
     return (
       <div className="flex w-full items-center justify-center h-screen">
         <Loading />;

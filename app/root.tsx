@@ -47,7 +47,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Meta />
         <Links />
       </head>
-      <body className="min-h-screen  bg-[#f7f7f7]">
+      <body className=" bg-[#f7f7f7]">
         <Provider store={store}>
           <ToastContainer
             position="bottom-right"
