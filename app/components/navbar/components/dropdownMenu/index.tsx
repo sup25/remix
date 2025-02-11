@@ -82,7 +82,7 @@ export const DropdownMenu = ({
           </button>
 
           {activeAccordion === category && (
-            <div className="animate-dropDown absolute z-50 left-0 mt-2 w-64 bg-white rounded-lg shadow-xl ring-1 ring-black ring-opacity-5">
+            <div className="animate-dropDown absolute z-50 left-0 mt-2 w-full bg-white rounded-lg shadow-xl ring-1 ring-black ring-opacity-5">
               <div className="p-3">
                 <div className="flex flex-col space-y-1">
                   {items.map((product) => (
@@ -109,7 +109,7 @@ export const DropdownMenu = ({
                         }`}
                       />
                       <span className="flex-grow">{product.title}</span>
-                      <span className="ml-2 px-2 py-1 text-xs rounded-full bg-gray-100 text-gray-600">
+                      <span className="ml-2 px-2 py-1 text-xs rounded-full bg-gray-100 text-gray-600 whitespace-nowrap">
                         {product.stock} in stock
                       </span>
                     </Link>
