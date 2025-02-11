@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import BrowseItems from "..";
+import { getAllProducts } from "../../api";
 
 interface Props {
   hide: () => void;
@@ -10,13 +11,8 @@ const BrowseByBrands = ({ hide }: Props) => {
 
   useEffect(() => {
     const fetchProducts = async () => {
-      try {
-        const response = await fetch("/browseProducts");
-        const data = await response.json();
-        setProducts(data.products || []);
-      } catch (error) {
-        console.error("Error fetching products:", error);
-      }
+      const GetAllProudct = await getAllProducts();
+      setProducts(GetAllProudct);
     };
     fetchProducts();
   }, []);

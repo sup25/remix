@@ -57,8 +57,8 @@ export default function Register() {
   }, [fetcher.state, reset, fetcher.data]);
 
   return (
-    <div className="min-h-screen section flex items-center justify-center bg-gray-50">
-      <div className="max-w-md w-full p-8 bg-white rounded-lg shadow">
+    <div className="min-h-screen section flex items-center justify-center bg-transparent md:py-20 py-10 ">
+      <div className="max-w-md w-full p-8  bg-white rounded-lg shadow">
         <div className="text-center">
           <h1 className="text-3xl font-bold">Register</h1>
         </div>

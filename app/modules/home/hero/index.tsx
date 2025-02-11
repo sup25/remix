@@ -22,7 +22,7 @@ const Hero: React.FC = () => {
         )}
         {showBrands && <BrowseByBrands hide={hideBrands} />}
 
-        <div className="flex justify-between pt-20 items-center gap-10 flex-wrap">
+        <div className="flex justify-between md:pt-20 pt-10 items-center gap-10 flex-wrap">
           <HeroHeader />
           <BrowseLinks
             onShowCategories={showAllCategories}

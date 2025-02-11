@@ -6,7 +6,7 @@ import Logo from "./logo";
 import Account from "./components/account";
 import NavCart from "./components/navCart";
 import { AllProducts } from "./components/allProducts";
-import { useUser } from "~/hooks/useUser";
+import { Loading } from "../loading";
 
 export const NavBar = () => {
   const [isDrawerOpen, setDrawerOpen] = useState(false);
@@ -21,7 +21,7 @@ export const NavBar = () => {
     if (hasMounted) {
       const updateScreenSize = () => {
         if (window.innerWidth > 1024) {
-          setDrawerOpen(false); // Close drawer on resize
+          setDrawerOpen(false);
           setIsMobile(false);
         } else {
           setIsMobile(true);
@@ -38,13 +38,16 @@ export const NavBar = () => {
     setDrawerOpen((prev) => !prev);
   };
 
-  if (!hasMounted) return null;
+  if (!hasMounted) return <Loading />;
 
   return (
     <nav className="bg-white z-[9999] section fixed top-0 left-0 w-full flex justify-center shadow-sm">
       <div className="container">
         <div className="flex w-full bg-white items-center justify-between py-4">
           <Logo />
+          <div className="hidden show gap-4">
+            <AllProducts />
+          </div>
 
           <div className="hidden show gap-4">
             <SearchBar />
@@ -78,8 +81,8 @@ export const NavBar = () => {
               : "-translate-x-full opacity-0"
           }`}
         >
-          <DropdownMenu isMobile />
-          <AllProducts />
+          <DropdownMenu isMobile setDrawerOpen={setDrawerOpen} />
+          <AllProducts setDrawerOpen={setDrawerOpen} />
           <SearchBar setDrawerOpen={setDrawerOpen} />
         </div>
       )}
