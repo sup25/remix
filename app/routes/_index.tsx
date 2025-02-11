@@ -10,6 +10,7 @@ export const meta: MetaFunction = () => {
   return [
     { title: "Remix | Shopping Made Easy" },
     {
+      name: "description",
       content:
         "Discover a seamless shopping experience with Remix. Enjoy intuitive navigation, real-time product updates, and personalized recommendations.",
     },
