@@ -16,6 +16,7 @@ const ProductDetails = ({ product }: ProductDetailsProps) => {
   const [formattedPrice, setFormattedPrice] = useState("");
   const [formattedOriginalPrice, setFormattedOriginalPrice] = useState("");
   const [formattedSavings, setFormattedSavings] = useState("");
+  const [isExpanded, setIsExpanded] = useState(false);
 
   useEffect(() => {
     setFormattedPrice(
@@ -33,7 +34,7 @@ const ProductDetails = ({ product }: ProductDetailsProps) => {
         <p className="text-sm text-gray-500 uppercase tracking-wide">
           {product.brand}
         </p>
-        <h1 className="text-3xl text-gray-800 font-bold mt-2">
+        <h1 className="text-3xl font-Arima text-gray-800 font-bold mt-2">
           {product.title}
         </h1>
       </div>
@@ -57,9 +58,23 @@ const ProductDetails = ({ product }: ProductDetailsProps) => {
           )}
         </div>
 
-        <p className="text-gray-600 leading-relaxed">
-          {product.description || "No description available"}
-        </p>
+        <div className="relative">
+          <p
+            className={`text-gray-600 leading-relaxed ${
+              !isExpanded ? "line-clamp-2" : ""
+            }`}
+          >
+            {product.description || "No description available"}
+          </p>
+          {product.description && product.description.length > 100 && (
+            <button
+              onClick={() => setIsExpanded(!isExpanded)}
+              className="text-blue-600 hover:text-blue-700 text-sm font-medium mt-1 focus:outline-none"
+            >
+              {isExpanded ? "Show less" : "Show more"}
+            </button>
+          )}
+        </div>
 
         <div className="flex items-center gap-2">
           <span className="px-3 py-1 border text-gray-500 border-gray-300 rounded-full text-sm">
