@@ -14,7 +14,7 @@ const Products = ({
           <h1 className="md:text-3xl font-Arima text-2xl font-bold text-black my-10">
             Proudcts
           </h1>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-6 gap-y-6 px-4 md:px-0 justify-items-center md:justify-items-start">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-6 gap-y-6 px-4 md:px-0 justify-items-center">
             {products.map((product) => (
               <ProductCard key={product.id} product={product} />
             ))}
