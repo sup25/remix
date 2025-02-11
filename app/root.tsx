@@ -35,7 +35,25 @@ export const links: LinksFunction = () => [
   },
 ];
 export const meta: MetaFunction = () => {
-  return [{ title: "Remix" }];
+  return [
+    { title: "Remix Store" },
+    {
+      name: "description",
+      content: "A modern e-commerce store built with Remix",
+    },
+    { property: "og:title", content: "Remix Store" },
+    {
+      property: "og:description",
+      content: "A modern e-commerce store built with Remix",
+    },
+    {
+      property: "og:image",
+      content:
+        "https://res.cloudinary.com/dmufwerzv/image/upload/v1739260327/android-chrome-512x512_gje9k9.png",
+    },
+    { property: "og:url", content: "https://remixstore.duckdns.org" },
+    { property: "og:type", content: "website" },
+  ];
 };
 
 export function Layout({ children }: { children: React.ReactNode }) {
