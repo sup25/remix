@@ -6,39 +6,21 @@ import Logo from "./logo";
 import Account from "./components/account";
 import NavCart from "./components/navCart";
 import { AllProducts } from "./components/allProducts";
-import { Loading } from "../loading";
 
 export const NavBar = () => {
   const [isDrawerOpen, setDrawerOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
-  const [hasMounted, setHasMounted] = useState(false);
 
   useEffect(() => {
-    setHasMounted(true);
+    const updateScreenSize = () => {
+      setIsMobile(window.innerWidth <= 1024);
+      if (window.innerWidth > 1024) setDrawerOpen(false);
+    };
+
+    updateScreenSize();
+    window.addEventListener("resize", updateScreenSize);
+    return () => window.removeEventListener("resize", updateScreenSize);
   }, []);
-
-  useEffect(() => {
-    if (hasMounted) {
-      const updateScreenSize = () => {
-        if (window.innerWidth > 1024) {
-          setDrawerOpen(false);
-          setIsMobile(false);
-        } else {
-          setIsMobile(true);
-        }
-      };
-
-      updateScreenSize();
-      window.addEventListener("resize", updateScreenSize);
-      return () => window.removeEventListener("resize", updateScreenSize);
-    }
-  }, [hasMounted]);
-
-  const toggleDrawer = () => {
-    setDrawerOpen((prev) => !prev);
-  };
-
-  if (!hasMounted) return <Loading />;
 
   return (
     <nav className="bg-white z-[9999] section fixed top-0 left-0 w-full flex justify-center shadow-sm">
@@ -48,7 +30,6 @@ export const NavBar = () => {
           <div className="hidden show gap-4">
             <AllProducts />
           </div>
-
           <div className="hidden show gap-4">
             <SearchBar />
           </div>
@@ -60,7 +41,7 @@ export const NavBar = () => {
             </div>
             <button
               className="text-2xl lg:hidden"
-              onClick={toggleDrawer}
+              onClick={() => setDrawerOpen((prev) => !prev)}
               aria-label="Toggle menu"
             >
               {isDrawerOpen ? (
@@ -73,7 +54,8 @@ export const NavBar = () => {
         </div>
       </div>
 
-      {isMobile && (
+      {/* Render mobile menu only after mount */}
+      {typeof window !== "undefined" && isMobile && (
         <div
           className={`fixed top-[4rem] space-y-4 left-0 z-40 w-full h-[calc(100vh-4rem)] bg-gray-50 p-4 transform transition-transform duration-300 ease-out ${
             isDrawerOpen

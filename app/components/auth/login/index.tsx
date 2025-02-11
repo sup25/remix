@@ -45,13 +45,15 @@ export default function Login() {
     <div className="min-h-[calc(100vh-5rem)] section flex items-center justify-center bg-transparent md:py-20 py-10">
       <div className="max-w-md w-full p-8 bg-white rounded-lg shadow">
         <div className="text-center">
-          <h1 className="text-3xl font-bold">Login</h1>
+          <h1 className="text-3xl text-black font-bold">Login</h1>
         </div>
         <form onSubmit={handleSubmit(onSubmit)} className="mt-8 space-y-6">
           <div className="space-y-1">
-            <label className="block text-sm font-medium">Email</label>
+            <label className="block text-sm text-black font-medium">
+              Email
+            </label>
             <input
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-200"
+              className="w-full px-3 py-2 border bg-gray-200 text-black  border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-200"
               {...register("email", {
                 required: "Email is required",
                 pattern: {
@@ -68,11 +70,13 @@ export default function Login() {
           </div>
 
           <div className="space-y-1">
-            <label className="block text-sm font-medium">Password</label>
+            <label className="block text-sm text-black  font-medium">
+              Password
+            </label>
             <div className="relative">
               <input
                 type={showPassword ? "text" : "password"}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-200"
+                className="w-full px-3 py-2 border bg-gray-200 text-black  border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-200"
                 {...register("password", {
                   required: "Password is required",
                   minLength: {
@@ -116,7 +120,7 @@ export default function Login() {
         </form>
 
         <div className="mt-8 text-center">
-          <Link to="/register" className="text-sm hover:underline">
+          <Link to="/register" className="text-sm text-black  hover:underline">
             Create an account
           </Link>
         </div>

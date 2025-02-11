@@ -31,7 +31,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({ setDrawerOpen }) => {
   return (
     <div className=" relative  md:w-[600px] w-full pl-2">
       <input
-        className="w-full border-2 font-medium transition-all duration-300 ease-in-out border-gray-300 rounded-md outline-none p-2 pl-5"
+        className="w-full bg-gray-200 text-black border-2 font-medium transition-all duration-300 ease-in-out border-gray-300 rounded-md outline-none p-2 pl-5"
         type="text"
         value={query}
         onChange={(e) => setQuery(e.target.value)}

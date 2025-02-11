@@ -3,7 +3,6 @@ import { BiChevronLeft, BiChevronRight } from "react-icons/bi";
 import { AiOutlineLine } from "react-icons/ai";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Autoplay } from "swiper/modules";
-
 import "swiper/css";
 import "swiper/css/navigation";
 import { Link } from "@remix-run/react";
@@ -63,6 +62,7 @@ const Slider = () => {
                     src={slide.imageUrl}
                     className="w-full h-full object-cover"
                     alt={`Slide ${index + 1}`}
+                    loading="lazy"
                   />
                 </div>
                 <p className="text-black font-Arima font-bold text-2xl mt-3">
